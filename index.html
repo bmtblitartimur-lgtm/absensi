@@ -219,6 +219,7 @@ body {
 }
 .form-group {
   margin-bottom: 14px;
+  text-align: left;
 }
 .form-label {
   display: block;
@@ -419,123 +420,119 @@ body {
   background: white;
   padding: 24px;
   border-radius: var(--radius-lg);
-  max-width: 560px;
+  max-width: 500px;
   width: 100%;
   box-shadow: var(--shadow-lg);
   max-height: 90vh;
   overflow-y: auto;
 }
-.smart-card {
-  width: 380px;
-  height: 240px;
+.smart-card-portrait {
+  width: 270px;
+  height: 428px;
   margin: 0 auto 18px auto;
   border-radius: 14px;
-  background: linear-gradient(135deg, #064e3b 0%, #047857 55%, #059669 100%);
+  background: linear-gradient(145deg, #064e3b 0%, #047857 55%, #059669 100%);
   color: white;
-  padding: 14px 16px;
+  padding: 16px 14px;
   position: relative;
   box-shadow: 0 10px 25px rgba(4, 120, 87, 0.3);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
+  text-align: center;
   overflow: hidden;
   box-sizing: border-box;
 }
-.smart-card::before {
+.smart-card-portrait::before {
   content: '';
   position: absolute;
-  top: -40px;
-  right: -40px;
-  width: 130px;
-  height: 130px;
+  top: -50px;
+  right: -50px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.08);
   pointer-events: none;
 }
-.smart-card-top {
+.card-header-portrait {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  padding-bottom: 8px;
+  gap: 10px;
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  padding-bottom: 10px;
+  text-align: left;
 }
-.smart-card-header-left {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.smart-card-logo {
-  width: 32px;
-  height: 32px;
-  border-radius: 6px;
+.card-logo-portrait {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
   object-fit: cover;
   background: white;
+  flex-shrink: 0;
 }
-.smart-card-institution {
-  font-size: 11px;
+.card-title-portrait {
+  font-size: 11.5px;
   font-weight: 700;
-  letter-spacing: 0.5px;
-  line-height: 1.2;
+  line-height: 1.3;
+  letter-spacing: 0.3px;
 }
-.smart-card-chip {
-  width: 30px;
+.card-chip-box {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  margin-top: 6px;
+}
+.card-chip {
+  width: 32px;
   height: 22px;
   background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
   border-radius: 4px;
 }
-.smart-card-body {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: 4px;
-}
-.smart-card-avatar {
-  width: 82px;
-  height: 82px;
-  border-radius: 10px;
+.card-avatar-portrait {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
   object-fit: cover;
-  border: 2px solid rgba(255, 255, 255, 0.9);
+  border: 3px solid rgba(255, 255, 255, 0.9);
   background: white;
-  flex-shrink: 0;
+  margin: 6px 0 8px 0;
 }
-.smart-card-info {
-  flex: 1;
-  text-align: left;
-}
-.smart-card-nama {
+.card-name-portrait {
   font-size: 14px;
   font-weight: 700;
-  margin-bottom: 3px;
+  margin-bottom: 2px;
+  max-width: 230px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 130px;
 }
-.smart-card-detail {
+.card-sub-portrait {
   font-size: 11px;
   opacity: 0.9;
   line-height: 1.4;
 }
-.smart-card-qr-box {
+.card-qr-box {
   background: white;
   padding: 6px;
-  border-radius: 8px;
-  flex-shrink: 0;
+  border-radius: 10px;
+  margin: 8px 0 4px 0;
+  display: inline-flex;
 }
-.smart-card-qr-box img {
-  width: 76px;
-  height: 76px;
+.card-qr-box img {
+  width: 90px;
+  height: 90px;
   display: block;
 }
-.smart-card-footer {
+.card-footer-portrait {
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 6px;
+  font-size: 9px;
+  opacity: 0.8;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  font-size: 9px;
-  opacity: 0.75;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-  padding-top: 6px;
 }
 </style>
 </head>
@@ -546,7 +543,7 @@ body {
     <div class="login-header">
       <img id="loginLogoPondok" class="login-logo-img" src="https://ui-avatars.com/api/?name=Pondok&background=047857&color=fff" alt="Logo">
       <h2 style="font-size: 20px; font-weight: 700;" id="loginJudulInstansi">Ponpes Dahlan Ikhsan</h2>
-      <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Sistem Presensi Santri dan Smartcard</p>
+      <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;" id="loginDeskripsi">Sistem Presensi Santri dan Smartcard</p>
     </div>
     <form onsubmit="prosesLogin(event)">
       <div class="form-group">
@@ -598,7 +595,7 @@ body {
       <div class="panel-header">
         <div>
           <div class="panel-title">Ringkasan Dasbor</div>
-          <div class="panel-desc">Statistik aktivitas santri dan jadwal aktif hari ini</div>
+          <div class="panel-desc" id="dasborDeskripsi">Statistik aktivitas santri dan jadwal aktif hari ini</div>
         </div>
       </div>
       <div class="grid-cards">
@@ -625,43 +622,11 @@ body {
       <div class="panel-header">
         <div>
           <div class="panel-title">Manajemen Data Santri</div>
-          <div class="panel-desc">Tambah, perbarui, dan cetak kartu smartcard QR santri</div>
+          <div class="panel-desc">Kelola dan cetak smartcard kartu identitas santri</div>
         </div>
-      </div>
-      <div id="boxFormSantri" class="form-box">
-        <form id="formSantri" onsubmit="simpanSantri(event)">
-          <input type="hidden" id="santriId">
-          <input type="hidden" id="santriFotoLama">
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px;">
-            <div class="form-group">
-              <label class="form-label">Nomor Induk Santri (NIS)</label>
-              <input type="text" class="form-input" id="santriNis" placeholder="Contoh: 2026001" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Nama Lengkap Santri</label>
-              <input type="text" class="form-input" id="santriNama" placeholder="Nama lengkap santri" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Tingkat Kelas</label>
-              <input type="text" class="form-input" id="santriKelas" placeholder="Contoh: 1 Diniyah" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Jenis Kelamin</label>
-              <select class="form-select" id="santriGender">
-                <option value="Putra">Putra</option>
-                <option value="Putri">Putri</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Unggah Foto Santri</label>
-              <input type="file" class="form-input" id="santriFileFoto" accept="image/*">
-            </div>
-          </div>
-          <div style="display: flex; gap: 8px;">
-            <button type="submit" class="btn btn-primary" id="btnSimpanSantri">Simpan Data Santri</button>
-            <button type="button" class="btn btn-secondary" id="btnBatalSantri" style="display:none;" onclick="resetFormSantri()">Batal</button>
-          </div>
-        </form>
+        <div id="boxBtnTambahSantri">
+          <button class="btn btn-primary" onclick="bukaModalSantriBaru()">+ Tambah Santri</button>
+        </div>
       </div>
       <div class="table-responsive">
         <table class="data-table">
@@ -685,29 +650,11 @@ body {
       <div class="panel-header">
         <div>
           <div class="panel-title">Presensi Sholat Wajib dan Sunnah</div>
-          <div class="panel-desc">Kelola sesi, izin santri sakit, tutup jadwal, lalu buka pemindai kamera</div>
+          <div class="panel-desc">Kelola jadwal, izin santri sakit, dan buka kamera presensi</div>
         </div>
-      </div>
-
-      <div id="boxEditSesiSholat" class="form-box" style="display: none;">
-        <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 12px;">Edit Jadwal Sholat</h4>
-        <form onsubmit="simpanPerubahanSesiSholat(event)">
-          <input type="hidden" id="editSholatId">
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-            <div class="form-group">
-              <label class="form-label">Nama Sholat</label>
-              <input type="text" class="form-input" id="editSholatNama" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Batas Jam Kehadiran</label>
-              <input type="time" class="form-input" id="editSholatBatas" required>
-            </div>
-          </div>
-          <div style="display: flex; gap: 8px;">
-            <button type="submit" class="btn btn-primary">Simpan Jadwal</button>
-            <button type="button" class="btn btn-secondary" onclick="tutupFormEditSholat()">Batal</button>
-          </div>
-        </form>
+        <div id="boxBtnTambahSholat">
+          <button class="btn btn-primary" onclick="bukaModalSholatBaru()">+ Tambah Sholat</button>
+        </div>
       </div>
 
       <div class="sessions-grid" id="kontainerSesiSholat"></div>
@@ -725,7 +672,7 @@ body {
             <div id="readerSholat" style="width: 100%;"></div>
           </div>
           <div class="result-box" id="kotakHasilScanSholat">
-            <p style="color: var(--text-muted); font-size: 13.5px;">Arahkan kartu smartcard QR santri ke kamera untuk mencatat absensi.</p>
+            <p style="color: var(--text-muted); font-size: 13.5px;">Arahkan smartcard potret santri ke kamera untuk mencatat absensi.</p>
           </div>
         </div>
       </div>
@@ -735,20 +682,11 @@ body {
       <div class="panel-header">
         <div>
           <div class="panel-title">Presensi Kegiatan Pengajian</div>
-          <div class="panel-desc">Kelola kegiatan, izin santri sakit, atur status sesi, lalu pindai kartu santri</div>
+          <div class="panel-desc">Kelola jenis kegiatan, izin santri sakit, dan pindai kartu</div>
         </div>
-      </div>
-
-      <div id="boxKelolaKegiatan" class="form-box">
-        <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 12px;">Tambah atau Edit Kegiatan Pengajian</h4>
-        <form onsubmit="simpanKegiatan(event)">
-          <input type="hidden" id="kegiatanId">
-          <div style="display: flex; gap: 10px; margin-bottom: 10px;">
-            <input type="text" class="form-input" id="inputNamaKegiatan" placeholder="Nama kitab atau kegiatan..." required>
-            <button type="submit" class="btn btn-primary" id="btnSimpanKegiatan">Tambah Kegiatan</button>
-            <button type="button" class="btn btn-secondary" id="btnBatalKegiatan" style="display:none;" onclick="resetFormKegiatan()">Batal</button>
-          </div>
-        </form>
+        <div id="boxBtnTambahKegiatan">
+          <button class="btn btn-primary" onclick="bukaModalKegiatanBaru()">+ Tambah Kegiatan</button>
+        </div>
       </div>
 
       <div class="sessions-grid" id="kontainerSesiKegiatan"></div>
@@ -766,7 +704,7 @@ body {
             <div id="readerKegiatan" style="width: 100%;"></div>
           </div>
           <div class="result-box" id="kotakHasilScanKegiatan">
-            <p style="color: var(--text-muted); font-size: 13.5px;">Arahkan kartu smartcard QR santri ke kamera untuk mencatat absensi kegiatan.</p>
+            <p style="color: var(--text-muted); font-size: 13.5px;">Arahkan smartcard potret santri ke kamera untuk mencatat absensi kegiatan.</p>
           </div>
         </div>
       </div>
@@ -776,7 +714,7 @@ body {
       <div class="panel-header">
         <div>
           <div class="panel-title">Laporan Rekapitulasi Presensi</div>
-          <div class="panel-desc">Saring data kehadiran per kelas, sesi sholat, atau pengajian tertentu</div>
+          <div class="panel-desc">Saring data kehadiran per kelas, sesi sholat, atau kegiatan</div>
         </div>
       </div>
       <div class="filter-bar">
@@ -856,12 +794,15 @@ body {
       <div class="panel-header">
         <div>
           <div class="panel-title">Manajemen Akun dan Profil Pondok</div>
-          <div class="panel-desc">Ubah logo dan nama pondok serta kelola hak akses akun</div>
+          <div class="panel-desc">Ubah logo, nama pondok, teks deskripsi, serta hak akses akun</div>
+        </div>
+        <div>
+          <button class="btn btn-primary" onclick="bukaModalPenggunaBaru()">+ Tambah Pengguna</button>
         </div>
       </div>
 
       <div class="form-box" style="margin-bottom: 24px;">
-        <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 12px;">Pengaturan Profil dan Logo Pondok</h4>
+        <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 12px;">Pengaturan Profil, Teks, dan Logo Pondok</h4>
         <form onsubmit="simpanProfilPondok(event)">
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px;">
             <div class="form-group">
@@ -869,43 +810,19 @@ body {
               <input type="text" class="form-input" id="inputNamaPondok" required>
             </div>
             <div class="form-group">
+              <label class="form-label">Deskripsi Halaman Login</label>
+              <input type="text" class="form-input" id="inputDeskripsiLogin" placeholder="Contoh: Sistem Presensi Santri dan Smartcard" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Deskripsi Dasbor</label>
+              <input type="text" class="form-input" id="inputDeskripsiDasbor" placeholder="Contoh: Statistik aktivitas santri dan jadwal aktif hari ini" required>
+            </div>
+            <div class="form-group">
               <label class="form-label">Unggah Logo Pondok Baru</label>
               <input type="file" class="form-input" id="inputFileLogoPondok" accept="image/*">
             </div>
           </div>
-          <button type="submit" class="btn btn-primary">Simpan Profil Pondok</button>
-        </form>
-      </div>
-
-      <div class="form-box">
-        <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 12px;">Tambah Akun Pengguna Baru</h4>
-        <form id="formPengguna" onsubmit="simpanPengguna(event)">
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px;">
-            <div class="form-group">
-              <label class="form-label">Nama Pengguna (Username)</label>
-              <input type="text" class="form-input" id="userInputUsername" placeholder="Contoh: ustadz_ali" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Kata Sandi</label>
-              <input type="password" class="form-input" id="userInputSandi" placeholder="Masukkan kata sandi" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Nama Lengkap</label>
-              <input type="text" class="form-input" id="userInputNama" placeholder="Nama lengkap pengurus" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Tingkat Hak Akses</label>
-              <select class="form-select" id="userInputPeran">
-                <option value="pengurus">Pengurus (Hanya Lihat Laporan)</option>
-                <option value="petugas">Petugas Presensi (Sesi Absensi)</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Unggah Foto Profil</label>
-              <input type="file" class="form-input" id="userFileInputFoto" accept="image/*">
-            </div>
-          </div>
-          <button type="submit" class="btn btn-primary">Tambah Pengguna Baru</button>
+          <button type="submit" class="btn btn-primary">Simpan Profil dan Teks</button>
         </form>
       </div>
 
@@ -929,31 +846,141 @@ body {
 
 </div>
 
+<!-- MODAL FORM SANTRI -->
+<div id="modalFormSantri" class="modal-overlay">
+  <div class="modal-content">
+    <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 14px;" id="judulModalSantri">Tambah Data Santri</h3>
+    <form id="formSantri" onsubmit="simpanSantri(event)">
+      <input type="hidden" id="santriId">
+      <input type="hidden" id="santriFotoLama">
+      <div class="form-group">
+        <label class="form-label">Nomor Induk Santri (NIS)</label>
+        <input type="text" class="form-input" id="santriNis" placeholder="Contoh: 2026001" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Nama Lengkap Santri</label>
+        <input type="text" class="form-input" id="santriNama" placeholder="Nama lengkap santri" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tingkat Kelas</label>
+        <input type="text" class="form-input" id="santriKelas" placeholder="Contoh: 1 Diniyah" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Jenis Kelamin</label>
+        <select class="form-select" id="santriGender">
+          <option value="Putra">Putra</option>
+          <option value="Putri">Putri</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Unggah Foto Santri</label>
+        <input type="file" class="form-input" id="santriFileFoto" accept="image/*">
+      </div>
+      <div style="display: flex; gap: 8px; justify-content: flex-end; margin-top: 18px;">
+        <button type="button" class="btn btn-secondary" onclick="tutupModalSantri()">Batal</button>
+        <button type="submit" class="btn btn-primary" id="btnSubmitModalSantri">Simpan Data</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL FORM SHOLAT -->
+<div id="modalFormSholat" class="modal-overlay">
+  <div class="modal-content">
+    <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 14px;" id="judulModalSholat">Tambah Jadwal Sholat</h3>
+    <form onsubmit="simpanSesiSholat(event)">
+      <input type="hidden" id="formSholatId">
+      <div class="form-group">
+        <label class="form-label">Nama Sholat</label>
+        <input type="text" class="form-input" id="formSholatNama" placeholder="Contoh: Dhuha / Witir" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Batas Jam Kehadiran</label>
+        <input type="time" class="form-input" id="formSholatBatas" required>
+      </div>
+      <div style="display: flex; gap: 8px; justify-content: flex-end; margin-top: 18px;">
+        <button type="button" class="btn btn-secondary" onclick="tutupModalSholat()">Batal</button>
+        <button type="submit" class="btn btn-primary" id="btnSubmitModalSholat">Simpan Jadwal</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL FORM KEGIATAN -->
+<div id="modalFormKegiatan" class="modal-overlay">
+  <div class="modal-content">
+    <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 14px;" id="judulModalKegiatan">Tambah Kegiatan Pengajian</h3>
+    <form onsubmit="simpanSesiKegiatan(event)">
+      <input type="hidden" id="formKegiatanId">
+      <div class="form-group">
+        <label class="form-label">Nama Kitab atau Kegiatan</label>
+        <input type="text" class="form-input" id="formKegiatanNama" placeholder="Nama pengajian..." required>
+      </div>
+      <div style="display: flex; gap: 8px; justify-content: flex-end; margin-top: 18px;">
+        <button type="button" class="btn btn-secondary" onclick="tutupModalKegiatan()">Batal</button>
+        <button type="submit" class="btn btn-primary" id="btnSubmitModalKegiatan">Simpan Kegiatan</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL FORM PENGGUNA -->
+<div id="modalFormPengguna" class="modal-overlay">
+  <div class="modal-content">
+    <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 14px;">Tambah Pengguna Baru</h3>
+    <form onsubmit="simpanPengguna(event)">
+      <div class="form-group">
+        <label class="form-label">Nama Pengguna (Username)</label>
+        <input type="text" class="form-input" id="userInputUsername" placeholder="Contoh: ustadz_ali" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Kata Sandi</label>
+        <input type="password" class="form-input" id="userInputSandi" placeholder="Masukkan kata sandi" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Nama Lengkap</label>
+        <input type="text" class="form-input" id="userInputNama" placeholder="Nama lengkap pengurus" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tingkat Hak Akses</label>
+        <select class="form-select" id="userInputPeran">
+          <option value="pengurus">Pengurus (Hanya Lihat Laporan)</option>
+          <option value="petugas">Petugas Presensi (Sesi Absensi)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Unggah Foto Profil</label>
+        <input type="file" class="form-input" id="userFileInputFoto" accept="image/*">
+      </div>
+      <div style="display: flex; gap: 8px; justify-content: flex-end; margin-top: 18px;">
+        <button type="button" class="btn btn-secondary" onclick="tutupModalPengguna()">Batal</button>
+        <button type="submit" class="btn btn-primary">Tambah Pengguna</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL SMARTCARD POTRET -->
 <div id="modalSmartCard" class="modal-overlay">
   <div class="modal-content" style="text-align: center;">
-    <div class="smart-card" id="areaCetakKartu">
-      <div class="smart-card-top">
-        <div class="smart-card-header-left">
-          <img id="cardLogoPondok" class="smart-card-logo" src="" alt="Logo">
-          <div class="smart-card-institution" id="cardNamaPondok">PONPES DAHLAN IKHSAN</div>
-        </div>
-        <div class="smart-card-chip"></div>
+    <div class="smart-card-portrait" id="areaCetakKartu">
+      <div class="card-header-portrait">
+        <img id="cardLogoPondok" class="card-logo-portrait" src="" alt="Logo">
+        <div class="card-title-portrait" id="cardNamaPondok">PONPES DAHLAN IKHSAN</div>
       </div>
-      <div class="smart-card-body">
-        <img id="cardFotoSantri" class="smart-card-avatar" src="" alt="Foto" crossorigin="anonymous">
-        <div class="smart-card-info">
-          <div class="smart-card-nama" id="cardNamaSantri">Ahmad Dahlan</div>
-          <div class="smart-card-detail" id="cardNisSantri">NIS: 2026001</div>
-          <div class="smart-card-detail" id="cardKelasSantri">Kelas: 1 Diniyah</div>
-          <div class="smart-card-detail" id="cardGenderSantri">Gender: Putra</div>
-        </div>
-        <div class="smart-card-qr-box">
-          <img id="cardQrGambar" src="" alt="QR Santri" crossorigin="anonymous">
-        </div>
+      <div class="card-chip-box">
+        <div class="card-chip"></div>
       </div>
-      <div class="smart-card-footer">
-        <span>KARTU IDENTITAS SANTRI RESMI</span>
-        <span>Ukuran: 8,56 x 5,4 cm</span>
+      <img id="cardFotoSantri" class="card-avatar-portrait" src="" alt="Foto" crossorigin="anonymous">
+      <div class="card-name-portrait" id="cardNamaSantri">Ahmad Dahlan</div>
+      <div class="card-sub-portrait" id="cardNisSantri">NIS: 2026001</div>
+      <div class="card-sub-portrait" id="cardKelasSantri">Kelas: 1 Diniyah | Putra</div>
+      <div class="card-qr-box">
+        <img id="cardQrGambar" src="" alt="QR Santri" crossorigin="anonymous">
+      </div>
+      <div class="card-footer-portrait">
+        <span>SMARTCARD RESMI</span>
+        <span>Ukuran 5,4 x 8,56 cm</span>
       </div>
     </div>
     <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
@@ -965,6 +992,7 @@ body {
   </div>
 </div>
 
+<!-- MODAL KELOLA KEHADIRAN SESI -->
 <div id="modalKelolaKehadiran" class="modal-overlay">
   <div class="modal-content">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
@@ -1005,7 +1033,9 @@ const KUNCI_PROFIL_PONDOK = 'ponpes_profil_pondok_data'
 
 let profilPondok = JSON.parse(localStorage.getItem(KUNCI_PROFIL_PONDOK)) || {
   nama: 'Ponpes Dahlan Ikhsan',
-  logo: 'https://ui-avatars.com/api/?name=Pondok+Dahlan&background=047857&color=fff'
+  logo: 'https://ui-avatars.com/api/?name=Pondok+Dahlan&background=047857&color=fff',
+  deskripsiLogin: 'Sistem Presensi Santri dan Smartcard',
+  deskripsiDasbor: 'Statistik aktivitas santri dan jadwal aktif hari ini'
 }
 
 let daftarPengguna = JSON.parse(localStorage.getItem(KUNCI_PENGGUNA)) || [
@@ -1047,22 +1077,30 @@ let sesiKelolaSedangDipilih = null
 function terapkanProfilPondok() {
   document.getElementById('loginLogoPondok').src = profilPondok.logo
   document.getElementById('loginJudulInstansi').innerText = profilPondok.nama
+  document.getElementById('loginDeskripsi').innerText = profilPondok.deskripsiLogin || 'Sistem Presensi Santri dan Smartcard'
   document.getElementById('headerLogoPondok').src = profilPondok.logo
   document.getElementById('headerNamaInstansi').innerText = profilPondok.nama
+  document.getElementById('dasborDeskripsi').innerText = profilPondok.deskripsiDasbor || 'Statistik aktivitas santri dan jadwal aktif hari ini'
   document.getElementById('inputNamaPondok').value = profilPondok.nama
+  document.getElementById('inputDeskripsiLogin').value = profilPondok.deskripsiLogin || ''
+  document.getElementById('inputDeskripsiDasbor').value = profilPondok.deskripsiDasbor || ''
 }
 
 function simpanProfilPondok(event) {
   event.preventDefault()
   const namaBaru = document.getElementById('inputNamaPondok').value.trim()
+  const deskripsiLoginBaru = document.getElementById('inputDeskripsiLogin').value.trim()
+  const deskripsiDasborBaru = document.getElementById('inputDeskripsiDasbor').value.trim()
   const inputLogo = document.getElementById('inputFileLogoPondok')
 
   perkecilGambar(inputLogo, 300, function(hasilLogo) {
     profilPondok.nama = namaBaru || profilPondok.nama
+    profilPondok.deskripsiLogin = deskripsiLoginBaru || profilPondok.deskripsiLogin
+    profilPondok.deskripsiDasbor = deskripsiDasborBaru || profilPondok.deskripsiDasbor
     if (hasilLogo) profilPondok.logo = hasilLogo
     localStorage.setItem(KUNCI_PROFIL_PONDOK, JSON.stringify(profilPondok))
     terapkanProfilPondok()
-    alert('Profil dan logo pondok berhasil diperbarui.')
+    alert('Profil dan teks pondok berhasil diperbarui.')
   })
 }
 
@@ -1200,9 +1238,10 @@ function terapkanHakAkses() {
   const tabRekap = document.getElementById('btnTabRekap')
   const tabPengguna = document.getElementById('btnTabPengguna')
 
-  const boxFormSantri = document.getElementById('boxFormSantri')
+  const boxBtnTambahSantri = document.getElementById('boxBtnTambahSantri')
+  const boxBtnTambahSholat = document.getElementById('boxBtnTambahSholat')
+  const boxBtnTambahKegiatan = document.getElementById('boxBtnTambahKegiatan')
   const kolomAksiSantri = document.getElementById('kolomAksiSantri')
-  const boxKelolaKegiatan = document.getElementById('boxKelolaKegiatan')
 
   tabDasbor.style.display = 'block'
   tabSantri.style.display = 'block'
@@ -1210,15 +1249,16 @@ function terapkanHakAkses() {
   tabKegiatan.style.display = 'block'
   tabRekap.style.display = 'block'
   tabPengguna.style.display = 'block'
-  boxFormSantri.style.display = 'block'
+  boxBtnTambahSantri.style.display = 'block'
+  boxBtnTambahSholat.style.display = 'block'
+  boxBtnTambahKegiatan.style.display = 'block'
   kolomAksiSantri.style.display = ''
-  boxKelolaKegiatan.style.display = 'block'
 
   if (peran === 'pengurus') {
     tabSholat.style.display = 'none'
     tabKegiatan.style.display = 'none'
     tabPengguna.style.display = 'none'
-    boxFormSantri.style.display = 'none'
+    boxBtnTambahSantri.style.display = 'none'
     kolomAksiSantri.style.display = 'none'
     tabDasbor.click()
   } else if (peran === 'petugas') {
@@ -1226,7 +1266,8 @@ function terapkanHakAkses() {
     tabSantri.style.display = 'none'
     tabRekap.style.display = 'none'
     tabPengguna.style.display = 'none'
-    boxKelolaKegiatan.style.display = 'none'
+    boxBtnTambahSholat.style.display = 'none'
+    boxBtnTambahKegiatan.style.display = 'none'
     tabSholat.click()
   } else {
     tabDasbor.click()
@@ -1242,34 +1283,33 @@ function perbaruiDasbor() {
   document.getElementById('statKegiatanHariIni').innerText = kegiatanToday.length
 }
 
-function muatTabelSantri() {
-  const tbody = document.getElementById('tabelSantriBody')
-  tbody.innerHTML = ''
-  const isAdmin = penggunaMasuk && penggunaMasuk.peran === 'admin'
+/* MODAL SANTRI */
+function bukaModalSantriBaru() {
+  document.getElementById('formSantri').reset()
+  document.getElementById('santriId').value = ''
+  document.getElementById('santriFotoLama').value = ''
+  document.getElementById('judulModalSantri').innerText = 'Tambah Data Santri'
+  document.getElementById('btnSubmitModalSantri').innerText = 'Tambah Santri'
+  document.getElementById('modalFormSantri').style.display = 'flex'
+}
 
-  daftarSantri.forEach(s => {
-    const tr = document.createElement('tr')
-    let aksiHtml = ''
-    if (isAdmin) {
-      aksiHtml = `<td>
-        <button class="btn btn-warning" style="padding: 4px 10px; font-size: 12px;" onclick="editSantri(${s.id})">Edit</button>
-        <button class="btn btn-danger" style="padding: 4px 10px; font-size: 12px;" onclick="hapusSantri(${s.id})">Hapus</button>
-      </td>`
-    } else {
-      aksiHtml = '<td style="display:none;"></td>'
-    }
-    const foto = s.foto || `https://ui-avatars.com/api/?name=${encodeURIComponent(s.nama)}`
-    tr.innerHTML = `
-      <td><img src="${foto}" style="width:38px;height:38px;border-radius:50%;object-fit:cover;"></td>
-      <td><strong>${s.nis}</strong></td>
-      <td>${s.nama}</td>
-      <td>${s.kelas}</td>
-      <td>${s.gender || 'Putra'}</td>
-      <td><button class="btn btn-info" style="padding: 4px 12px; font-size: 12px;" onclick="bukaSmartCard(${s.id})">Lihat Smartcard</button></td>
-      ${aksiHtml}
-    `
-    tbody.appendChild(tr)
-  })
+function bukaModalEditSantri(id) {
+  const santri = daftarSantri.find(s => s.id === id)
+  if (!santri) return
+  document.getElementById('santriId').value = santri.id
+  document.getElementById('santriNis').value = santri.nis
+  document.getElementById('santriNama').value = santri.nama
+  document.getElementById('santriKelas').value = santri.kelas
+  document.getElementById('santriGender').value = santri.gender || 'Putra'
+  document.getElementById('santriFotoLama').value = santri.foto || ''
+  document.getElementById('santriFileFoto').value = ''
+  document.getElementById('judulModalSantri').innerText = 'Edit Data Santri'
+  document.getElementById('btnSubmitModalSantri').innerText = 'Perbarui Santri'
+  document.getElementById('modalFormSantri').style.display = 'flex'
+}
+
+function tutupModalSantri() {
+  document.getElementById('modalFormSantri').style.display = 'none'
 }
 
 function simpanSantri(event) {
@@ -1293,32 +1333,40 @@ function simpanSantri(event) {
       daftarSantri.push({ id: Date.now(), nis, nama, kelas, gender, foto: fotoFinal })
     }
     simpanSemuaData()
-    resetFormSantri()
+    tutupModalSantri()
     muatTabelSantri()
     perbaruiDasbor()
   })
 }
 
-function editSantri(id) {
-  const santri = daftarSantri.find(s => s.id === id)
-  if (!santri) return
-  document.getElementById('santriId').value = santri.id
-  document.getElementById('santriNis').value = santri.nis
-  document.getElementById('santriNama').value = santri.nama
-  document.getElementById('santriKelas').value = santri.kelas
-  document.getElementById('santriGender').value = santri.gender || 'Putra'
-  document.getElementById('santriFotoLama').value = santri.foto || ''
-  document.getElementById('santriFileFoto').value = ''
-  document.getElementById('btnSimpanSantri').innerText = 'Perbarui Data Santri'
-  document.getElementById('btnBatalSantri').style.display = 'inline-flex'
-}
+function muatTabelSantri() {
+  const tbody = document.getElementById('tabelSantriBody')
+  tbody.innerHTML = ''
+  const isAdmin = penggunaMasuk && penggunaMasuk.peran === 'admin'
 
-function resetFormSantri() {
-  document.getElementById('formSantri').reset()
-  document.getElementById('santriId').value = ''
-  document.getElementById('santriFotoLama').value = ''
-  document.getElementById('btnSimpanSantri').innerText = 'Simpan Data Santri'
-  document.getElementById('btnBatalSantri').style.display = 'none'
+  daftarSantri.forEach(s => {
+    const tr = document.createElement('tr')
+    let aksiHtml = ''
+    if (isAdmin) {
+      aksiHtml = `<td>
+        <button class="btn btn-warning" style="padding: 4px 10px; font-size: 12px;" onclick="bukaModalEditSantri(${s.id})">Edit</button>
+        <button class="btn btn-danger" style="padding: 4px 10px; font-size: 12px;" onclick="hapusSantri(${s.id})">Hapus</button>
+      </td>`
+    } else {
+      aksiHtml = '<td style="display:none;"></td>'
+    }
+    const foto = s.foto || `https://ui-avatars.com/api/?name=${encodeURIComponent(s.nama)}`
+    tr.innerHTML = `
+      <td><img src="${foto}" style="width:38px;height:38px;border-radius:50%;object-fit:cover;"></td>
+      <td><strong>${s.nis}</strong></td>
+      <td>${s.nama}</td>
+      <td>${s.kelas}</td>
+      <td>${s.gender || 'Putra'}</td>
+      <td><button class="btn btn-info" style="padding: 4px 12px; font-size: 12px;" onclick="bukaSmartCard(${s.id})">Lihat Smartcard</button></td>
+      ${aksiHtml}
+    `
+    tbody.appendChild(tr)
+  })
 }
 
 function hapusSantri(id) {
@@ -1330,6 +1378,7 @@ function hapusSantri(id) {
   }
 }
 
+/* SMARTCARD POTRET */
 function bukaSmartCard(id) {
   const s = daftarSantri.find(item => item.id === id)
   if (!s) return
@@ -1337,8 +1386,7 @@ function bukaSmartCard(id) {
   document.getElementById('cardLogoPondok').src = profilPondok.logo
   document.getElementById('cardNamaSantri').innerText = s.nama
   document.getElementById('cardNisSantri').innerText = 'NIS: ' + s.nis
-  document.getElementById('cardKelasSantri').innerText = 'Kelas: ' + s.kelas
-  document.getElementById('cardGenderSantri').innerText = 'Gender: ' + (s.gender || 'Putra')
+  document.getElementById('cardKelasSantri').innerText = 'Kelas: ' + s.kelas + ' | ' + (s.gender || 'Putra')
   document.getElementById('cardFotoSantri').src = s.foto || `https://ui-avatars.com/api/?name=${encodeURIComponent(s.nama)}`
   document.getElementById('cardQrGambar').src = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(s.nis)}`
   document.getElementById('modalSmartCard').style.display = 'flex'
@@ -1394,6 +1442,51 @@ function unduhQrCode() {
     })
 }
 
+/* MODAL & SESI SHOLAT */
+function bukaModalSholatBaru() {
+  document.getElementById('formSholatId').value = ''
+  document.getElementById('formSholatNama').value = ''
+  document.getElementById('formSholatBatas').value = ''
+  document.getElementById('judulModalSholat').innerText = 'Tambah Jadwal Sholat'
+  document.getElementById('btnSubmitModalSholat').innerText = 'Tambah Sholat'
+  document.getElementById('modalFormSholat').style.display = 'flex'
+}
+
+function bukaModalEditSholat(id) {
+  const sesi = daftarSesiSholat.find(s => s.id === id)
+  if (!sesi) return
+  document.getElementById('formSholatId').value = sesi.id
+  document.getElementById('formSholatNama').value = sesi.nama
+  document.getElementById('formSholatBatas').value = sesi.batas
+  document.getElementById('judulModalSholat').innerText = 'Edit Jadwal Sholat'
+  document.getElementById('btnSubmitModalSholat').innerText = 'Perbarui Jadwal'
+  document.getElementById('modalFormSholat').style.display = 'flex'
+}
+
+function tutupModalSholat() {
+  document.getElementById('modalFormSholat').style.display = 'none'
+}
+
+function simpanSesiSholat(event) {
+  event.preventDefault()
+  const id = document.getElementById('formSholatId').value
+  const nama = document.getElementById('formSholatNama').value.trim()
+  const batas = document.getElementById('formSholatBatas').value.trim()
+
+  if (id) {
+    const idx = daftarSesiSholat.findIndex(s => s.id === parseInt(id))
+    if (idx !== -1) {
+      daftarSesiSholat[idx].nama = nama
+      daftarSesiSholat[idx].batas = batas
+    }
+  } else {
+    daftarSesiSholat.push({ id: Date.now(), nama: nama, batas: batas, ditutup: false })
+  }
+  simpanSemuaData()
+  tutupModalSholat()
+  muatDaftarSesiSholat()
+}
+
 function muatDaftarSesiSholat() {
   const container = document.getElementById('kontainerSesiSholat')
   container.innerHTML = ''
@@ -1413,8 +1506,9 @@ function muatDaftarSesiSholat() {
     let tombolAdmin = ''
     if (isAdmin) {
       tombolAdmin = `
-        <button class="btn btn-warning" style="padding: 4px 8px; font-size: 11px;" onclick="bukaFormEditSholat(${sesi.id})">Edit</button>
+        <button class="btn btn-warning" style="padding: 4px 8px; font-size: 11px;" onclick="bukaModalEditSholat(${sesi.id})">Edit</button>
         <button class="btn btn-info" style="padding: 4px 8px; font-size: 11px;" onclick="bukaModalKelolaKehadiran('Sholat', '${sesi.nama}')">Izin/Sakit</button>
+        <button class="btn btn-danger" style="padding: 4px 8px; font-size: 11px;" onclick="hapusSesiSholat(${sesi.id})">Hapus</button>
       `
     }
 
@@ -1436,31 +1530,10 @@ function muatDaftarSesiSholat() {
   })
 }
 
-function bukaFormEditSholat(id) {
-  const sesi = daftarSesiSholat.find(s => s.id === id)
-  if (!sesi) return
-  document.getElementById('editSholatId').value = sesi.id
-  document.getElementById('editSholatNama').value = sesi.nama
-  document.getElementById('editSholatBatas').value = sesi.batas
-  document.getElementById('boxEditSesiSholat').style.display = 'block'
-}
-
-function tutupFormEditSholat() {
-  document.getElementById('boxEditSesiSholat').style.display = 'none'
-}
-
-function simpanPerubahanSesiSholat(event) {
-  event.preventDefault()
-  const id = parseInt(document.getElementById('editSholatId').value)
-  const nama = document.getElementById('editSholatNama').value.trim()
-  const batas = document.getElementById('editSholatBatas').value.trim()
-
-  const idx = daftarSesiSholat.findIndex(s => s.id === id)
-  if (idx !== -1) {
-    daftarSesiSholat[idx].nama = nama
-    daftarSesiSholat[idx].batas = batas
+function hapusSesiSholat(id) {
+  if (confirm('Hapus jadwal sholat ini?')) {
+    daftarSesiSholat = daftarSesiSholat.filter(s => s.id !== id)
     simpanSemuaData()
-    tutupFormEditSholat()
     muatDaftarSesiSholat()
   }
 }
@@ -1564,6 +1637,49 @@ function prosesScanSholat(decodedText) {
   `
 }
 
+/* MODAL & SESI KEGIATAN */
+function bukaModalKegiatanBaru() {
+  document.getElementById('formKegiatanId').value = ''
+  document.getElementById('formKegiatanNama').value = ''
+  document.getElementById('judulModalKegiatan').innerText = 'Tambah Kegiatan Pengajian'
+  document.getElementById('btnSubmitModalKegiatan').innerText = 'Tambah Kegiatan'
+  document.getElementById('modalFormKegiatan').style.display = 'flex'
+}
+
+function bukaModalEditKegiatan(id) {
+  const k = daftarKegiatan.find(item => item.id === id)
+  if (!k) return
+  document.getElementById('formKegiatanId').value = k.id
+  document.getElementById('formKegiatanNama').value = k.nama
+  document.getElementById('judulModalKegiatan').innerText = 'Edit Kegiatan Pengajian'
+  document.getElementById('btnSubmitModalKegiatan').innerText = 'Perbarui Nama'
+  document.getElementById('modalFormKegiatan').style.display = 'flex'
+}
+
+function tutupModalKegiatan() {
+  document.getElementById('modalFormKegiatan').style.display = 'none'
+}
+
+function simpanSesiKegiatan(event) {
+  event.preventDefault()
+  const id = document.getElementById('formKegiatanId').value
+  const nama = document.getElementById('formKegiatanNama').value.trim()
+  if (!nama) return
+
+  if (id) {
+    const idx = daftarKegiatan.findIndex(k => k.id === parseInt(id))
+    if (idx !== -1) {
+      daftarKegiatan[idx].nama = nama
+    }
+  } else {
+    daftarKegiatan.push({ id: Date.now(), nama: nama, ditutup: false })
+  }
+  simpanSemuaData()
+  tutupModalKegiatan()
+  muatDaftarSesiKegiatan()
+  perbaruiDasbor()
+}
+
 function muatDaftarSesiKegiatan() {
   const container = document.getElementById('kontainerSesiKegiatan')
   container.innerHTML = ''
@@ -1583,7 +1699,7 @@ function muatDaftarSesiKegiatan() {
     let adminAction = ''
     if (isAdmin) {
       adminAction = `
-        <button class="btn btn-warning" style="padding: 4px 6px; font-size: 11px;" onclick="bukaFormEditKegiatan(${k.id})">Edit</button>
+        <button class="btn btn-warning" style="padding: 4px 6px; font-size: 11px;" onclick="bukaModalEditKegiatan(${k.id})">Edit</button>
         <button class="btn btn-info" style="padding: 4px 6px; font-size: 11px;" onclick="bukaModalKelolaKehadiran('Kegiatan', '${k.nama}')">Izin/Sakit</button>
         <button class="btn btn-danger" style="padding: 4px 6px; font-size: 11px;" onclick="hapusKegiatan(${k.id})">Hapus</button>
       `
@@ -1604,42 +1720,6 @@ function muatDaftarSesiKegiatan() {
     `
     container.appendChild(card)
   })
-}
-
-function simpanKegiatan(event) {
-  event.preventDefault()
-  const id = document.getElementById('kegiatanId').value
-  const nama = document.getElementById('inputNamaKegiatan').value.trim()
-  if (!nama) return
-
-  if (id) {
-    const idx = daftarKegiatan.findIndex(k => k.id === parseInt(id))
-    if (idx !== -1) {
-      daftarKegiatan[idx].nama = nama
-    }
-  } else {
-    daftarKegiatan.push({ id: Date.now(), nama: nama, ditutup: false })
-  }
-  simpanSemuaData()
-  resetFormKegiatan()
-  muatDaftarSesiKegiatan()
-  perbaruiDasbor()
-}
-
-function bukaFormEditKegiatan(id) {
-  const k = daftarKegiatan.find(item => item.id === id)
-  if (!k) return
-  document.getElementById('kegiatanId').value = k.id
-  document.getElementById('inputNamaKegiatan').value = k.nama
-  document.getElementById('btnSimpanKegiatan').innerText = 'Perbarui Nama'
-  document.getElementById('btnBatalKegiatan').style.display = 'inline-flex'
-}
-
-function resetFormKegiatan() {
-  document.getElementById('kegiatanId').value = ''
-  document.getElementById('inputNamaKegiatan').value = ''
-  document.getElementById('btnSimpanKegiatan').innerText = 'Tambah Kegiatan'
-  document.getElementById('btnBatalKegiatan').style.display = 'none'
 }
 
 function hapusKegiatan(id) {
@@ -1746,6 +1826,7 @@ function prosesScanKegiatan(decodedText) {
   `
 }
 
+/* MODAL KELOLA KEHADIRAN SESI */
 function bukaModalKelolaKehadiran(kategori, namaSesi) {
   const tanggalHariIni = new Date().toISOString().split('T')[0]
   sesiKelolaSedangDipilih = { kategori: kategori, namaSesi: namaSesi, tanggal: tanggalHariIni }
@@ -1832,6 +1913,7 @@ function simpanPerubahanKehadiranSesi() {
   alert('Data kehadiran sesi berhasil disimpan dan dikirim ke Google Sheets.')
 }
 
+/* SCANNER STOP */
 function hentikanScanner(callback) {
   if (pemindaiAktif) {
     pemindaiAktif.clear().then(() => {
@@ -1846,6 +1928,7 @@ function hentikanScanner(callback) {
   }
 }
 
+/* REKAPITULASI */
 function muatDropdownSantriRekap() {
   const select = document.getElementById('rekapSantri')
   select.innerHTML = '<option value="semua">Semua Santri</option>'
@@ -1966,6 +2049,15 @@ function muatDataRekap() {
   document.getElementById('rekapSakit').innerText = sakitCount
 }
 
+/* MODAL PENGGUNA */
+function bukaModalPenggunaBaru() {
+  document.getElementById('modalFormPengguna').style.display = 'flex'
+}
+
+function tutupModalPengguna() {
+  document.getElementById('modalFormPengguna').style.display = 'none'
+}
+
 function muatTabelPengguna() {
   const tbody = document.getElementById('tabelPenggunaBody')
   tbody.innerHTML = ''
@@ -2020,7 +2112,7 @@ function simpanPengguna(event) {
       foto
     })
     simpanSemuaData()
-    document.getElementById('formPengguna').reset()
+    tutupModalPengguna()
     muatTabelPengguna()
     alert('Akun pengguna baru berhasil ditambahkan.')
   })
