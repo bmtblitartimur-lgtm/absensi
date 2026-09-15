@@ -7,10 +7,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<!-- Pustaka Pemindai QR & Kanvas Unduh -->
 <script src="https://unpkg.com/html5-qrcode"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<!-- Pustaka Resmi Firebase Database -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
@@ -277,16 +276,6 @@ body {
   gap: 18px;
   margin-bottom: 28px;
 }
-@media (max-width: 900px) {
-  .cards-grid { grid-template-columns: repeat(2, 1fr); }
-  .top-header { padding: 0 16px; }
-  .main-content { padding: 20px 16px; }
-  .banner-welcome { flex-direction: column; text-align: center; }
-  .banner-mosque-img { width: 100%; height: 180px; }
-}
-@media (max-width: 600px) {
-  .cards-grid { grid-template-columns: 1fr; }
-}
 .action-card {
   background: var(--surface);
   border: 1px solid var(--border-color);
@@ -321,6 +310,7 @@ body {
 .bg-santri { background: rgb(124, 58, 237); }
 .bg-rekap-shalat { background: rgb(245, 158, 11); }
 .bg-rekap-kegiatan { background: rgb(8, 145, 178); }
+.bg-persentase { background: rgb(225, 29, 72); }
 .bg-pengaturan { background: rgb(71, 85, 105); }
 .card-texts h3 {
   font-size: 15px;
@@ -573,6 +563,60 @@ body {
   width: 100%;
   max-width: 400px;
 }
+.stat-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.stat-box {
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: white;
+  text-align: center;
+}
+.stat-box-val {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+.stat-box-lbl {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.chart-box-wrap {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  min-height: 280px;
+}
+@media (max-width: 900px) {
+  .cards-grid { grid-template-columns: repeat(2, 1fr); }
+  .top-header { padding: 0 16px; }
+  .main-content { padding: 20px 16px; }
+  .banner-welcome { flex-direction: column; text-align: center; }
+  .banner-mosque-img { width: 100%; height: 180px; }
+}
+@media (max-width: 600px) {
+  .cards-grid { grid-template-columns: 1fr; }
+  .top-header { height: 64px; }
+  .brand-title-text { font-size: 13.5px; }
+  .brand-sub-text { font-size: 10.5px; }
+  .user-badge { padding: 4px 10px 4px 6px; }
+  .user-avatar-circle { width: 28px; height: 28px; font-size: 11px; }
+  .user-name { font-size: 11.5px; }
+  .user-role { font-size: 9.5px; }
+  .panel-card-wrap { padding: 16px; }
+  .panel-heading-title { font-size: 16px; }
+}
 </style>
 </head>
 <body>
@@ -672,6 +716,12 @@ body {
         </span>
         Rekap Kegiatan
       </button>
+      <button class="drawer-item" id="btnNavPersentase" onclick="pilihMenuNav('panelPersentase', this)">
+        <span class="drawer-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/></svg>
+        </span>
+        Persentase Kehadiran
+      </button>
       <button class="drawer-item" id="btnNavPengaturan" onclick="pilihMenuNav('panelPengaturan', this)">
         <span class="drawer-icon">
           <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
@@ -770,6 +820,21 @@ body {
             <div class="card-texts">
               <h3>Rekap Kegiatan</h3>
               <p>Lihat laporan rekap absensi kegiatan santri.</p>
+            </div>
+          </div>
+          <div class="card-arrow-circle">
+            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </div>
+        </div>
+
+        <div class="action-card" onclick="pindahDariCard('panelPersentase', 'btnNavPersentase')">
+          <div class="card-left-box">
+            <div class="card-icon-pill bg-persentase">
+              <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/></svg>
+            </div>
+            <div class="card-texts">
+              <h3>Persentase Kehadiran</h3>
+              <p>Diagram statistik dan tabel rasio kehadiran santri.</p>
             </div>
           </div>
           <div class="card-arrow-circle">
@@ -1064,6 +1129,83 @@ body {
       </div>
     </div>
 
+    <div class="panel" id="panelPersentase">
+      <div class="panel-card-wrap">
+        <div class="panel-top-bar">
+          <div>
+            <div class="panel-heading-title">Persentase & Diagram Kehadiran</div>
+            <div class="panel-heading-sub">Analisis rasio statistik kehadiran santri (Hadir, Terlambat, Izin, Sakit, Alpa)</div>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 20px;">
+          <div>
+            <label class="form-label">Kategori Absensi</label>
+            <select class="form-select" id="filterPersenKategori" onchange="hitungPersentaseKehadiran()">
+              <option value="semua">Semua (Shalat & Kegiatan)</option>
+              <option value="Sholat">Khusus Shalat</option>
+              <option value="Kegiatan">Khusus Kegiatan</option>
+            </select>
+          </div>
+          <div>
+            <label class="form-label">Pilih Kelas</label>
+            <select class="form-select" id="filterPersenKelas" onchange="hitungPersentaseKehadiran()"></select>
+          </div>
+          <div>
+            <label class="form-label">Rentang Waktu</label>
+            <select class="form-select" id="filterPersenRentang" onchange="hitungPersentaseKehadiran()">
+              <option value="semua">Semua Waktu</option>
+              <option value="7">7 Hari Terakhir</option>
+              <option value="30">30 Hari Terakhir</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="stat-summary-grid">
+          <div class="stat-box" style="border-top: 4px solid rgb(21, 128, 61);">
+            <div class="stat-box-val" id="valStatHadir" style="color: rgb(21, 128, 61);">0</div>
+            <div class="stat-box-lbl">HADIR (<span id="pctHadir">0%</span>)</div>
+          </div>
+          <div class="stat-box" style="border-top: 4px solid rgb(194, 65, 12);">
+            <div class="stat-box-val" id="valStatTerlambat" style="color: rgb(194, 65, 12);">0</div>
+            <div class="stat-box-lbl">TERLAMBAT (<span id="pctTerlambat">0%</span>)</div>
+          </div>
+          <div class="stat-box" style="border-top: 4px solid rgb(2, 132, 199);">
+            <div class="stat-box-val" id="valStatIzin" style="color: rgb(2, 132, 199);">0</div>
+            <div class="stat-box-lbl">IZIN (<span id="pctIzin">0%</span>)</div>
+          </div>
+          <div class="stat-box" style="border-top: 4px solid rgb(180, 83, 9);">
+            <div class="stat-box-val" id="valStatSakit" style="color: rgb(180, 83, 9);">0</div>
+            <div class="stat-box-lbl">SAKIT (<span id="pctSakit">0%</span>)</div>
+          </div>
+          <div class="stat-box" style="border-top: 4px solid rgb(220, 38, 38);">
+            <div class="stat-box-val" id="valStatAlpa" style="color: rgb(220, 38, 38);">0</div>
+            <div class="stat-box-lbl">ALPA (<span id="pctAlpa">0%</span>)</div>
+          </div>
+        </div>
+
+        <div class="chart-box-wrap">
+          <div style="max-width: 320px; width: 100%;">
+            <canvas id="chartPersentaseCanvas"></canvas>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Status Kehadiran</th>
+                <th>Jumlah Catatan</th>
+                <th>Persentase Rasio</th>
+                <th>Keterangan</th>
+              </tr>
+            </thead>
+            <tbody id="tabelPersentaseBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
     <div class="panel" id="panelPengaturan">
       <div class="panel-card-wrap">
         <div class="panel-top-bar">
@@ -1234,8 +1376,10 @@ body {
 
 <div id="modalFormPengguna" class="modal-overlay">
   <div class="modal-content">
-    <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 14px;">Tambah Pengguna Baru</h3>
+    <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 14px;" id="judulModalPengguna">Tambah Pengguna Baru</h3>
     <form onsubmit="simpanPengguna(event)">
+      <input type="hidden" id="editUserId">
+      <input type="hidden" id="editUserFotoLama">
       <div class="form-group">
         <label class="form-label">Nama Pengguna (Username)</label>
         <input type="text" class="form-input" id="userInputUsername" placeholder="Contoh: ustadz_ali" required>
@@ -1262,7 +1406,7 @@ body {
       </div>
       <div style="display: flex; gap: 8px; justify-content: flex-end; margin-top: 18px;">
         <button type="button" class="btn btn-secondary" onclick="tutupModalPengguna()">Batal</button>
-        <button type="submit" class="btn btn-primary">Tambah Pengguna</button>
+        <button type="submit" class="btn btn-primary" id="btnSubmitModalPengguna">Simpan Pengguna</button>
       </div>
     </form>
   </div>
@@ -1324,7 +1468,6 @@ body {
 </div>
 
 <script>
-// KONFIGURASI FIREBASE REALTIME DATABASE MILIKMU
 var firebaseConfig = {
   databaseURL: "https://absebsi-santri-default-rtdb.firebaseio.com"
 };
@@ -1378,10 +1521,9 @@ var idSesiSholatAktif = null;
 var idKegiatanAktif = null;
 var sesiKelolaSedangDipilih = null;
 var sesiScanTipeAktif = null;
+var objekChartPersentase = null;
 
-// INISIALISASI PENDENGAR WAKTU NYATA (REAL-TIME LISTENER FIREBASE)
 function pasangListenerFirebase() {
-  // 1. Profil Pondok
   db.ref('profil').on('value', function(snapshot) {
     var data = snapshot.val();
     if (data) {
@@ -1392,7 +1534,6 @@ function pasangListenerFirebase() {
     }
   });
 
-  // 2. Akun Pengguna
   db.ref('pengguna').on('value', function(snapshot) {
     var data = snapshot.val();
     if (data && Array.isArray(data)) {
@@ -1403,18 +1544,17 @@ function pasangListenerFirebase() {
     }
   });
 
-  // 3. Data Santri
   db.ref('santri').on('value', function(snapshot) {
     var data = snapshot.val();
     if (data && Array.isArray(data)) {
       daftarSantri = data;
       muatTabelSantri();
+      isiDropdownKelasPersen();
     } else {
       db.ref('santri').set(daftarSantri);
     }
   });
 
-  // 4. Jadwal Shalat
   db.ref('sholat').on('value', function(snapshot) {
     var data = snapshot.val();
     if (data && Array.isArray(data)) {
@@ -1429,7 +1569,6 @@ function pasangListenerFirebase() {
     }
   });
 
-  // 5. Kegiatan Pengajian
   db.ref('kegiatan').on('value', function(snapshot) {
     var data = snapshot.val();
     if (data && Array.isArray(data)) {
@@ -1444,7 +1583,6 @@ function pasangListenerFirebase() {
     }
   });
 
-  // 6. Data Absensi
   db.ref('absensi').on('value', function(snapshot) {
     var data = snapshot.val();
     if (data && Array.isArray(data)) {
@@ -1462,6 +1600,7 @@ function pasangListenerFirebase() {
     }
     muatDataRekapSholat();
     muatDataRekapKegiatan();
+    hitungPersentaseKehadiran();
   });
 }
 
@@ -1652,6 +1791,10 @@ function bukaTab(panelId, btn) {
       isiFilterRekapKegiatan();
       muatDataRekapKegiatan();
     }
+    if (panelId === 'panelPersentase') {
+      isiDropdownKelasPersen();
+      hitungPersentaseKehadiran();
+    }
     if (panelId === 'panelPengaturan') {
       muatTabelPengguna();
       terapkanProfilPondok();
@@ -1667,6 +1810,7 @@ function terapkanHakAkses() {
   var btnNavKegiatan = document.getElementById('btnNavKegiatan');
   var btnNavRekapSholat = document.getElementById('btnNavRekapSholat');
   var btnNavRekapKegiatan = document.getElementById('btnNavRekapKegiatan');
+  var btnNavPersentase = document.getElementById('btnNavPersentase');
   var btnNavPengaturan = document.getElementById('btnNavPengaturan');
 
   var boxBtnTambahSantri = document.getElementById('boxBtnTambahSantri');
@@ -1683,6 +1827,7 @@ function terapkanHakAkses() {
   btnNavKegiatan.style.display = 'flex';
   btnNavRekapSholat.style.display = 'flex';
   btnNavRekapKegiatan.style.display = 'flex';
+  btnNavPersentase.style.display = 'flex';
   btnNavPengaturan.style.display = 'flex';
 
   boxBtnTambahSantri.style.display = 'block';
@@ -1707,6 +1852,7 @@ function terapkanHakAkses() {
     btnNavSantri.style.display = 'none';
     btnNavRekapSholat.style.display = 'none';
     btnNavRekapKegiatan.style.display = 'none';
+    btnNavPersentase.style.display = 'none';
     btnNavPengaturan.style.display = 'none';
     boxBtnTambahSholat.style.display = 'none';
     boxBtnTambahKegiatan.style.display = 'none';
@@ -2162,7 +2308,7 @@ function prosesScanSholat(decodedText) {
 }
 
 function muatKartuKegiatan() {
-  var container = document.getElementById('kontainerKartuKegiatan')
+  var container = document.getElementById('kontainerKartuKegiatan');
   container.innerHTML = '';
 
   daftarKegiatan.forEach(function(k) {
@@ -2173,7 +2319,7 @@ function muatKartuKegiatan() {
 
     var foto = k.foto || 'https://images.unsplash.com/photo-1609599006353-e629aaabfeae?w=500';
 
-    var card = document.createElement('div');
+    var card = document.createElement('div')
     card.className = 'visual-session-card';
     card.onclick = function() { bukaDetailKegiatan(k.id); };
     card.innerHTML = '' +
@@ -2463,7 +2609,7 @@ function tampilkanModalHasilScan(data) {
     var badgeClass = data.status === 'Hadir' ? 'badge-hadir' : 'badge-terlambat';
     wrap.innerHTML = '' +
       '<img src="' + data.foto + '" style="width: 86px; height: 86px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary); margin: 0 auto 12px auto; display: block;" alt="Foto">' +
-      '<span class="badge-scan " + badgeClass + "" style="margin-bottom: 8px; font-size: 13px; padding: 5px 14px;">' + data.status + '</span>' +
+      '<span class="badge-scan ' + badgeClass + '" style="margin-bottom: 8px; font-size: 13px; padding: 5px 14px;">' + data.status + '</span>' +
       '<h3 style="font-size: 17px; font-weight: 800; color: rgb(15, 23, 42); margin-top: 6px;">' + data.nama + '</h3>' +
       '<div style="font-size: 12.5px; color: rgb(100, 116, 139); margin-top: 4px;">NIS: <strong>' + data.nis + '</strong> | Kelas: <strong>' + data.kelas + '</strong> (' + data.gender + ')</div>' +
       '<div style="font-size: 12px; color: rgb(5, 150, 105); font-weight: 700; margin-top: 10px; background: rgb(236, 253, 245); padding: 8px 12px; border-radius: 8px; border: 1px solid rgb(167, 243, 208);">' +
@@ -2722,7 +2868,154 @@ function muatDataRekapKegiatan() {
   });
 }
 
+function isiDropdownKelasPersen() {
+  var selKelas = document.getElementById('filterPersenKelas');
+  if (!selKelas) return;
+  selKelas.innerHTML = '<option value="semua">Semua Kelas</option>';
+  var kelasUnik = [...new Set(daftarSantri.map(function(s) { return s.kelas; }))].filter(Boolean);
+  kelasUnik.forEach(function(k) {
+    var opt = document.createElement('option');
+    opt.value = k;
+    opt.innerText = k;
+    selKelas.appendChild(opt);
+  });
+}
+
+function hitungPersentaseKehadiran() {
+  var kat = document.getElementById('filterPersenKategori') ? document.getElementById('filterPersenKategori').value : 'semua';
+  var kelas = document.getElementById('filterPersenKelas') ? document.getElementById('filterPersenKelas').value : 'semua';
+  var rentang = document.getElementById('filterPersenRentang') ? document.getElementById('filterPersenRentang').value : 'semua';
+
+  var now = new Date();
+  var dataFilter = daftarAbsensi.filter(function(item) {
+    var lolosKat = (kat === 'semua') || (item.kategori === kat);
+    var santriObj = daftarSantri.find(function(s) { return s.id === item.santriId; });
+    var santriKelas = item.santriKelas || (santriObj ? santriObj.kelas : '');
+    var lolosKelas = (kelas === 'semua') || (santriKelas === kelas);
+
+    var lolosRentang = true;
+    if (rentang !== 'semua') {
+      var tglItem = new Date(item.tanggal);
+      var diffHari = (now - tglItem) / 86400000;
+      lolosRentang = diffHari <= parseInt(rentang) && diffHari >= 0;
+    }
+    return lolosKat && lolosKelas && lolosRentang;
+  });
+
+  var jHadir = 0;
+  var jTerlambat = 0;
+  var jIzin = 0;
+  var jSakit = 0;
+  var jAlpa = 0;
+
+  dataFilter.forEach(function(d) {
+    if (d.status === 'Hadir') jHadir++;
+    else if (d.status === 'Terlambat') jTerlambat++;
+    else if (d.status === 'Izin') jIzin++;
+    else if (d.status === 'Sakit') jSakit++;
+    else if (d.status === 'Alpa') jAlpa++;
+  });
+
+  var total = jHadir + jTerlambat + jIzin + jSakit + jAlpa;
+  var pHadir = total > 0 ? ((jHadir / total) * 100).toFixed(1) : 0;
+  var pTerlambat = total > 0 ? ((jTerlambat / total) * 100).toFixed(1) : 0;
+  var pIzin = total > 0 ? ((jIzin / total) * 100).toFixed(1) : 0;
+  var pSakit = total > 0 ? ((jSakit / total) * 100).toFixed(1) : 0;
+  var pAlpa = total > 0 ? ((jAlpa / total) * 100).toFixed(1) : 0;
+
+  if (document.getElementById('valStatHadir')) {
+    document.getElementById('valStatHadir').innerText = jHadir;
+    document.getElementById('pctHadir').innerText = pHadir + '%';
+    document.getElementById('valStatTerlambat').innerText = jTerlambat;
+    document.getElementById('pctTerlambat').innerText = pTerlambat + '%';
+    document.getElementById('valStatIzin').innerText = jIzin;
+    document.getElementById('pctIzin').innerText = pIzin + '%';
+    document.getElementById('valStatSakit').innerText = jSakit;
+    document.getElementById('pctSakit').innerText = pSakit + '%';
+    document.getElementById('valStatAlpa').innerText = jAlpa;
+    document.getElementById('pctAlpa').innerText = pAlpa + '%';
+  }
+
+  var tbody = document.getElementById('tabelPersentaseBody');
+  if (tbody) {
+    tbody.innerHTML = '' +
+      '<tr><td><span class="badge-scan badge-hadir">Hadir</span></td><td><strong>' + jHadir + '</strong></td><td><strong>' + pHadir + '%</strong></td><td>Tepat Waktu</td></tr>' +
+      '<tr><td><span class="badge-scan badge-terlambat">Terlambat</span></td><td><strong>' + jTerlambat + '</strong></td><td><strong>' + pTerlambat + '%</strong></td><td>Hadir Melebihi Batas Jam</td></tr>' +
+      '<tr><td><span class="badge-scan badge-izin">Izin</span></td><td><strong>' + jIzin + '</strong></td><td><strong>' + pIzin + '%</strong></td><td>Mendapat Surat Izin Pengurus</td></tr>' +
+      '<tr><td><span class="badge-scan badge-sakit">Sakit</span></td><td><strong>' + jSakit + '</strong></td><td><strong>' + pSakit + '%</strong></td><td>Izin Sakit Terkonfirmasi</td></tr>' +
+      '<tr><td><span class="badge-scan badge-alpa">Alpa</span></td><td><strong>' + jAlpa + '</strong></td><td><strong>' + pAlpa + '%</strong></td><td>Tidak Hadir Tanpa Keterangan</td></tr>' +
+      '<tr style="background: #f8fafc; font-weight:800;"><td>Total Catatan</td><td>' + total + '</td><td>100%</td><td>Kumulatif Kehadiran</td></tr>';
+  }
+
+  gambarDiagramPersentase(jHadir, jTerlambat, jIzin, jSakit, jAlpa);
+}
+
+function gambarDiagramPersentase(hadir, terlambat, izin, sakit, alpa) {
+  var canvas = document.getElementById('chartPersentaseCanvas');
+  if (!canvas) return;
+
+  if (objekChartPersentase) {
+    objekChartPersentase.destroy();
+  }
+
+  var ctx = canvas.getContext('2d');
+  objekChartPersentase = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Hadir', 'Terlambat', 'Izin', 'Sakit', 'Alpa'],
+      datasets: [{
+        data: [hadir, terlambat, izin, sakit, alpa],
+        backgroundColor: [
+          'rgb(21, 128, 61)',
+          'rgb(194, 65, 12)',
+          'rgb(2, 132, 199)',
+          'rgb(180, 83, 9)',
+          'rgb(220, 38, 38)'
+        ],
+        borderWidth: 2,
+        borderColor: '#ffffff'
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            boxWidth: 12,
+            font: { size: 11, family: 'Plus Jakarta Sans' }
+          }
+        }
+      }
+    }
+  });
+}
+
 function bukaModalPenggunaBaru() {
+  document.getElementById('modalFormPengguna').reset();
+  document.getElementById('editUserId').value = '';
+  document.getElementById('editUserFotoLama').value = '';
+  document.getElementById('judulModalPengguna').innerText = 'Tambah Pengguna Baru';
+  document.getElementById('btnSubmitModalPengguna').innerText = 'Tambah Pengguna';
+  document.getElementById('userInputUsername').disabled = false;
+  document.getElementById('modalFormPengguna').style.display = 'flex';
+}
+
+function bukaModalEditPengguna(id) {
+  var user = daftarPengguna.find(function(u) { return u.id === id; });
+  if (!user) return;
+  document.getElementById('editUserId').value = user.id;
+  document.getElementById('editUserFotoLama').value = user.foto || '';
+  document.getElementById('userInputUsername').value = user.username;
+  document.getElementById('userInputUsername').disabled = true;
+  document.getElementById('userInputSandi').value = user.sandi;
+  document.getElementById('userInputNama').value = user.nama;
+  document.getElementById('userInputPeran').value = user.peran;
+  document.getElementById('userFileInputFoto').value = '';
+
+  document.getElementById('judulModalPengguna').innerText = 'Edit Akun Pengguna';
+  document.getElementById('btnSubmitModalPengguna').innerText = 'Perbarui Pengguna';
   document.getElementById('modalFormPengguna').style.display = 'flex';
 }
 
@@ -2739,10 +3032,12 @@ function muatTabelPengguna() {
     var tr = document.createElement('tr');
     var action = '';
     if (peran === 'admin') {
-      if (u.id === penggunaMasuk.id) {
-        action = '<span style="color: var(--text-muted); font-size: 11px;">Akun Kamu</span>';
+      action = '' +
+        '<button class="btn btn-warning" style="padding: 4px 8px; font-size: 11px;" onclick="bukaModalEditPengguna(' + u.id + ')">Edit</button> ';
+      if (u.id !== penggunaMasuk.id) {
+        action += '<button class="btn btn-danger" style="padding: 4px 8px; font-size: 11px;" onclick="hapusPengguna(' + u.id + ')">Hapus</button>';
       } else {
-        action = '<button class="btn btn-danger" style="padding: 4px 8px; font-size: 11px;" onclick="hapusPengguna(' + u.id + ')">Hapus</button>';
+        action += '<span style="color: var(--text-muted); font-size: 11px;">(Akun Anda)</span>';
       }
     } else {
       action = '<span style="color: var(--text-muted); font-size: 11px;">Hanya Lihat</span>';
@@ -2765,34 +3060,54 @@ function muatTabelPengguna() {
 
 function simpanPengguna(event) {
   event.preventDefault();
+  var editId = document.getElementById('editUserId').value;
   var username = document.getElementById('userInputUsername').value.trim().toLowerCase();
   var sandi = document.getElementById('userInputSandi').value.trim();
   var nama = document.getElementById('userInputNama').value.trim();
   var peran = document.getElementById('userInputPeran').value;
+  var fotoLama = document.getElementById('editUserFotoLama').value;
   var inputFoto = document.getElementById('userFileInputFoto');
 
-  var adaSama = daftarPengguna.find(function(u) {
-    return String(u.username).toLowerCase() === username;
-  });
-  if (adaSama) {
-    alert('Nama pengguna tersebut sudah terdaftar.');
-    return;
+  if (!editId) {
+    var adaSama = daftarPengguna.find(function(u) {
+      return String(u.username).toLowerCase() === username;
+    });
+    if (adaSama) {
+      alert('Nama pengguna tersebut sudah terdaftar.');
+      return;
+    }
   }
 
   perkecilGambar(inputFoto, 200, function(hasilBase64) {
-    var foto = hasilBase64 || ('https://ui-avatars.com/api/?name=' + encodeURIComponent(nama));
-    daftarPengguna.push({
-      id: Date.now(),
-      username: username,
-      sandi: sandi,
-      nama: nama,
-      peran: peran,
-      foto: foto
-    });
+    var fotoFinal = hasilBase64 || fotoLama || ('https://ui-avatars.com/api/?name=' + encodeURIComponent(nama));
+    if (editId) {
+      var idx = daftarPengguna.findIndex(function(u) { return u.id === parseInt(editId); });
+      if (idx !== -1) {
+        daftarPengguna[idx].nama = nama;
+        daftarPengguna[idx].sandi = sandi;
+        daftarPengguna[idx].peran = peran;
+        daftarPengguna[idx].foto = fotoFinal;
+        if (penggunaMasuk && penggunaMasuk.id === parseInt(editId)) {
+          penggunaMasuk = daftarPengguna[idx];
+          localStorage.setItem(KUNCI_SESI_PENGGUNA, JSON.stringify(penggunaMasuk));
+          periksaStatusLogin();
+        }
+      }
+    } else {
+      daftarPengguna.push({
+        id: Date.now(),
+        username: username,
+        sandi: sandi,
+        nama: nama,
+        peran: peran,
+        foto: fotoFinal
+      });
+    }
+
     db.ref('pengguna').set(daftarPengguna);
     tutupModalPengguna();
     muatTabelPengguna();
-    alert('Pengguna baru berhasil ditambahkan dan disinkronkan.');
+    alert('Data akun pengguna berhasil disimpan.');
   });
 }
 
@@ -2818,7 +3133,6 @@ function hentikanScanner(callback) {
   }
 }
 
-// Mulai jalankan pendengar Firebase dan login
 pasangListenerFirebase();
 terapkanProfilPondok();
 periksaStatusLogin();
