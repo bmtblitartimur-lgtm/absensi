@@ -1085,7 +1085,6 @@ body {
             <tbody id="tabelRekapSholatBody"></tbody>
           </table>
         </div>
-        <!-- Roster / Per-Student Summary Matrix for Class Selection -->
         <div id="wrapRosterRekapSholat" style="margin-top: 24px; display: none;">
           <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 10px; color: rgb(15, 23, 42);" id="judulRosterRekapSholat">Ringkasan Kehadiran per Anak di Kelas</h4>
           <div class="table-responsive">
@@ -1178,11 +1177,14 @@ body {
     </div>
 
     <div class="panel" id="panelPersentase">
-      <div class="panel-card-wrap">
+      <div class="panel-card-wrap" id="areaUnduhPersentase">
         <div class="panel-top-bar">
           <div>
             <div class="panel-heading-title">Persentase & Diagram Kehadiran</div>
             <div class="panel-heading-sub">Analisis rasio statistik kehadiran berdasarkan rentang tanggal</div>
+          </div>
+          <div>
+            <button class="btn btn-primary" onclick="unduhLaporanPersentase()">Unduh Laporan PNG</button>
           </div>
         </div>
 
@@ -1198,6 +1200,12 @@ body {
           <div>
             <label class="form-label">Pilih Kelas</label>
             <select class="form-select" id="filterPersenKelas" onchange="hitungPersentaseKehadiran()"></select>
+          </div>
+          <div>
+            <label class="form-label">Pilih / Cari Santri</label>
+            <select class="form-select" id="filterPersenSantri" onchange="hitungPersentaseKehadiran()">
+              <option value="semua">Semua Santri</option>
+            </select>
           </div>
           <div>
             <label class="form-label">Dari Tanggal</label>
@@ -1252,7 +1260,6 @@ body {
           </table>
         </div>
 
-        <!-- Roster / Per-Student Summary Matrix for Class Selection in Percentage View -->
         <div id="wrapRosterPersen" style="margin-top: 24px;">
           <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 10px; color: rgb(15, 23, 42);" id="judulRosterPersen">Ringkasan Kehadiran per Anak</h4>
           <div class="table-responsive">
@@ -1625,6 +1632,7 @@ function pasangListenerFirebase() {
       daftarSantri = data;
       muatTabelSantri();
       isiDropdownKelasPersen();
+      isiDropdownSantriPersen();
     } else {
       db.ref('santri').set(daftarSantri);
     }
@@ -1881,6 +1889,7 @@ function bukaTab(panelId, btn) {
     }
     if (panelId === 'panelPersentase') {
       isiDropdownKelasPersen();
+      isiDropdownSantriPersen();
       hitungPersentaseKehadiran();
     }
     if (panelId === 'panelPengaturan') {
@@ -3031,9 +3040,22 @@ function isiDropdownKelasPersen() {
   });
 }
 
+function isiDropdownSantriPersen() {
+  var selSantri = document.getElementById('filterPersenSantri');
+  if (!selSantri) return;
+  selSantri.innerHTML = '<option value="semua">Semua Santri</option>';
+  daftarSantri.forEach(function(s) {
+    var opt = document.createElement('option');
+    opt.value = s.id;
+    opt.innerText = s.nama + ' (' + (s.namaPanggilan || s.nis) +)';
+    selSantri.appendChild(opt);
+  });
+}
+
 function hitungPersentaseKehadiran() {
   var kat = document.getElementById('filterPersenKategori') ? document.getElementById('filterPersenKategori').value : 'semua';
   var kelas = document.getElementById('filterPersenKelas') ? document.getElementById('filterPersenKelas').value : 'semua';
+  var santriId = document.getElementById('filterPersenSantri') ? document.getElementById('filterPersenSantri').value : 'semua';
   var mulai = document.getElementById('filterPersenMulai') ? document.getElementById('filterPersenMulai').value : '';
   var sampai = document.getElementById('filterPersenSampai') ? document.getElementById('filterPersenSampai').value : '';
 
@@ -3042,8 +3064,9 @@ function hitungPersentaseKehadiran() {
     var santriObj = daftarSantri.find(function(s) { return s.id === item.santriId; });
     var santriKelas = item.santriKelas || (santriObj ? santriObj.kelas : '');
     var lolosKelas = (kelas === 'semua') || (santriKelas === kelas);
+    var lolosSantri = (santriId === 'semua') || (String(item.santriId) === String(santriId));
     var lolosTgl = cekRentangTgl(item.tanggal, mulai, sampai);
-    return lolosKat && lolosKelas && lolosTgl;
+    return lolosKat && lolosKelas && lolosSantri && lolosTgl;
   });
 
   var jHadir = 0;
@@ -3093,6 +3116,23 @@ function hitungPersentaseKehadiran() {
 
   renderRoster(kelas, 'tabelRosterPersenBody', 'wrapRosterPersen');
   gambarDiagramPersentase(jHadir, jTerlambat, jIzin, jSakit, jAlpa);
+}
+
+function unduhLaporanPersentase() {
+  var area = document.getElementById('areaUnduhPersentase');
+  if (!area) return;
+  html2canvas(area, {
+    scale: 2,
+    useCORS: true,
+    backgroundColor: '#ffffff'
+  }).then(function(canvas) {
+    var link = document.createElement('a');
+    link.download = 'Laporan_Persentase_Kehadiran_' + new Date().toISOString().split('T')[0] + '.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  }).catch(function(err) {
+    alert('Gagal mengunduh laporan: ' + err);
+  });
 }
 
 function gambarDiagramPersentase(hadir, terlambat, izin, sakit, alpa) {
