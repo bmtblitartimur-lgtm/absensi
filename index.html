@@ -570,14 +570,14 @@ body {
   margin-bottom: 20px;
 }
 .stat-box {
-  padding: 14px;
+  padding: 16px;
   border-radius: 12px;
   border: 1px solid var(--border-color);
   background: white;
   text-align: center;
 }
 .stat-box-val {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 800;
   margin-bottom: 4px;
 }
@@ -912,20 +912,12 @@ body {
             </button>
           </div>
 
-          <div style="background: rgb(248, 250, 252); border: 1px solid var(--border-color); padding: 14px 18px; border-radius: 12px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
-            <div style="display: flex; align-items: center; gap: 10px;">
-              <label class="form-label" style="margin-bottom:0;">Pilih Tanggal Sesi:</label>
-              <input type="date" class="form-input" id="inputTanggalSesiSholat" style="width: auto;" onchange="gantiTanggalSesiSholat()">
-            </div>
-            <div style="font-size: 13px; color: var(--text-muted);">
-              Sesi: <strong id="detailNamaSholat">Subuh</strong> | Batas: <strong id="detailBatasSholat">05:00 WIB</strong>
-              <span id="detailStatusSholat" class="status-pill open" style="margin-left: 8px;">Terbuka</span>
-            </div>
-          </div>
-
           <div id="areaScanSholat" style="margin-bottom: 24px;">
             <div style="background: var(--primary-light); padding: 14px 18px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
-              <div>Pemindai QR Code Aktif (Tanggal Dipilih)</div>
+              <div>
+                Sesi: <strong id="detailNamaSholat">Subuh</strong> | Batas: <strong id="detailBatasSholat">05:00 WIB</strong>
+                <span id="detailStatusSholat" class="status-pill open" style="margin-left: 8px;">Terbuka</span>
+              </div>
               <div style="display: flex; gap: 8px;">
                 <button type="button" class="btn btn-primary" id="btnNyalakanKameraSholat" style="display: none;" onclick="nyalakanScannerSholatDetail()">Nyalakan Kamera</button>
                 <button type="button" class="btn btn-danger" id="btnTutupKameraSholat" onclick="matikanKameraSholatManual()">Tutup Kamera</button>
@@ -952,7 +944,7 @@ body {
           </div>
 
           <div>
-            <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 8px; color: rgb(15, 23, 42);">Catatan Absensi Shalat (Tanggal Terpilih)</h4>
+            <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 8px; color: rgb(15, 23, 42);">Catatan Absensi Shalat Hari Ini</h4>
             <div class="table-responsive">
               <table class="data-table">
                 <thead>
@@ -995,20 +987,12 @@ body {
             </button>
           </div>
 
-          <div style="background: rgb(248, 250, 252); border: 1px solid var(--border-color); padding: 14px 18px; border-radius: 12px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
-            <div style="display: flex; align-items: center; gap: 10px;">
-              <label class="form-label" style="margin-bottom:0;">Pilih Tanggal Sesi:</label>
-              <input type="date" class="form-input" id="inputTanggalSesiKegiatan" style="width: auto;" onchange="gantiTanggalSesiKegiatan()">
-            </div>
-            <div style="font-size: 13px; color: var(--text-muted);">
-              Kegiatan: <strong id="detailNamaKegiatan">Tafsir</strong>
-              <span id="detailStatusKegiatan" class="status-pill open" style="margin-left: 8px;">Terbuka</span>
-            </div>
-          </div>
-
           <div id="areaScanKegiatan" style="margin-bottom: 24px;">
             <div style="background: var(--primary-light); padding: 14px 18px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
-              <div>Pemindai QR Code Aktif (Tanggal Dipilih)</div>
+              <div>
+                Kegiatan: <strong id="detailNamaKegiatan">Tafsir</strong>
+                <span id="detailStatusKegiatan" class="status-pill open" style="margin-left: 8px;">Terbuka</span>
+              </div>
               <div style="display: flex; gap: 8px;">
                 <button type="button" class="btn btn-primary" id="btnNyalakanKameraKegiatan" style="display: none;" onclick="nyalakanScannerKegiatanDetail()">Nyalakan Kamera</button>
                 <button type="button" class="btn btn-danger" id="btnTutupKameraKegiatan" onclick="matikanKameraKegiatanManual()">Tutup Kamera</button>
@@ -1035,7 +1019,7 @@ body {
           </div>
 
           <div>
-            <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 8px; color: rgb(15, 23, 42);">Catatan Absensi Kegiatan (Tanggal Terpilih)</h4>
+            <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 8px; color: rgb(15, 23, 42);">Catatan Absensi Kegiatan Hari Ini</h4>
             <div class="table-responsive">
               <table class="data-table">
                 <thead>
@@ -1060,10 +1044,10 @@ body {
         <div class="panel-top-bar">
           <div>
             <div class="panel-heading-title">Laporan Rekapitulasi Shalat</div>
-            <div class="panel-heading-sub">Laporan kehadiran shalat santri per kelas dan per sesi</div>
+            <div class="panel-heading-sub">Laporan kehadiran shalat santri dengan filter rentang tanggal</div>
           </div>
         </div>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-bottom: 16px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 16px;">
           <div>
             <label class="form-label">Pilih Jadwal Shalat</label>
             <select class="form-select" id="filterSesiSholat" onchange="muatDataRekapSholat()"></select>
@@ -1073,12 +1057,12 @@ body {
             <select class="form-select" id="filterKelasSholat" onchange="muatDataRekapSholat()"></select>
           </div>
           <div>
-            <label class="form-label">Rentang Waktu</label>
-            <select class="form-select" id="filterRentangSholat" onchange="muatDataRekapSholat()">
-              <option value="semua">Semua Waktu</option>
-              <option value="7">7 Hari Terakhir</option>
-              <option value="30">30 Hari Terakhir</option>
-            </select>
+            <label class="form-label">Dari Tanggal</label>
+            <input type="date" class="form-input" id="filterTglMulaiSholat" onchange="muatDataRekapSholat()">
+          </div>
+          <div>
+            <label class="form-label">Sampai Tanggal</label>
+            <input type="date" class="form-input" id="filterTglSampaiSholat" onchange="muatDataRekapSholat()">
           </div>
         </div>
         <div class="table-responsive">
@@ -1105,10 +1089,10 @@ body {
         <div class="panel-top-bar">
           <div>
             <div class="panel-heading-title">Laporan Rekapitulasi Kegiatan</div>
-            <div class="panel-heading-sub">Laporan kehadiran pengajian santri per kelas dan kegiatan</div>
+            <div class="panel-heading-sub">Laporan kehadiran pengajian santri dengan filter rentang tanggal</div>
           </div>
         </div>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-bottom: 16px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 16px;">
           <div>
             <label class="form-label">Pilih Kegiatan</label>
             <select class="form-select" id="filterSesiKegiatan" onchange="muatDataRekapKegiatan()"></select>
@@ -1118,12 +1102,12 @@ body {
             <select class="form-select" id="filterKelasKegiatan" onchange="muatDataRekapKegiatan()"></select>
           </div>
           <div>
-            <label class="form-label">Rentang Waktu</label>
-            <select class="form-select" id="filterRentangKegiatan" onchange="muatDataRekapKegiatan()">
-              <option value="semua">Semua Waktu</option>
-              <option value="7">7 Hari Terakhir</option>
-              <option value="30">30 Hari Terakhir</option>
-            </select>
+            <label class="form-label">Dari Tanggal</label>
+            <input type="date" class="form-input" id="filterTglMulaiKeg" onchange="muatDataRekapKegiatan()">
+          </div>
+          <div>
+            <label class="form-label">Sampai Tanggal</label>
+            <input type="date" class="form-input" id="filterTglSampaiKeg" onchange="muatDataRekapKegiatan()">
           </div>
         </div>
         <div class="table-responsive">
@@ -1149,15 +1133,15 @@ body {
       <div class="panel-card-wrap">
         <div class="panel-top-bar">
           <div>
-            <div class="panel-heading-title">Persentase & Diagram Kehadiran per Santri</div>
-            <div class="panel-heading-sub">Analisis rasio statistik kehadiran dan rincian nama santri</div>
+            <div class="panel-heading-title">Persentase & Diagram Kehadiran</div>
+            <div class="panel-heading-sub">Analisis rasio statistik kehadiran berdasarkan rentang tanggal</div>
           </div>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 20px;">
           <div>
             <label class="form-label">Kategori Absensi</label>
-            <select class="form-select" id="filterPersenKategori" onchange="gantiKategoriPersen()">
+            <select class="form-select" id="filterPersenKategori" onchange="hitungPersentaseKehadiran()">
               <option value="semua">Semua (Shalat & Kegiatan)</option>
               <option value="Sholat">Khusus Shalat</option>
               <option value="Kegiatan">Khusus Kegiatan</option>
@@ -1165,19 +1149,15 @@ body {
           </div>
           <div>
             <label class="form-label">Pilih Kelas</label>
-            <select class="form-select" id="filterPersenKelas" onchange="gantiKelasPersen()"></select>
+            <select class="form-select" id="filterPersenKelas" onchange="hitungPersentaseKehadiran()"></select>
           </div>
           <div>
-            <label class="form-label">Pilih Nama Santri / Tampil Semua</label>
-            <select class="form-select" id="filterPersenSantri" onchange="hitungPersentaseKehadiran()"></select>
+            <label class="form-label">Dari Tanggal</label>
+            <input type="date" class="form-input" id="filterPersenMulai" onchange="hitungPersentaseKehadiran()">
           </div>
           <div>
-            <label class="form-label">Rentang Waktu</label>
-            <select class="form-select" id="filterPersenRentang" onchange="hitungPersentaseKehadiran()">
-              <option value="semua">Semua Waktu</option>
-              <option value="7">7 Hari Terakhir</option>
-              <option value="30">30 Hari Terakhir</option>
-            </select>
+            <label class="form-label">Sampai Tanggal</label>
+            <input type="date" class="form-input" id="filterPersenSampai" onchange="hitungPersentaseKehadiran()">
           </div>
         </div>
 
@@ -1205,31 +1185,23 @@ body {
         </div>
 
         <div class="chart-box-wrap">
-          <div style="max-width: 300px; width: 100%;">
+          <div style="max-width: 320px; width: 100%;">
             <canvas id="chartPersentaseCanvas"></canvas>
           </div>
         </div>
 
-        <div style="margin-top: 18px;">
-          <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 8px; color: rgb(15, 23, 42);" id="judulTabelSantriPersen">Rincian Per Santri (Satu Kelas)</h4>
-          <div class="table-responsive">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>NIS</th>
-                  <th>Nama Santri</th>
-                  <th>Kelas</th>
-                  <th>Hadir</th>
-                  <th>Terlambat</th>
-                  <th>Izin</th>
-                  <th>Sakit</th>
-                  <th>Alpa</th>
-                  <th>Rasio Hadir</th>
-                </tr>
-              </thead>
-              <tbody id="tabelPersentaseSantriBody"></tbody>
-            </table>
-          </div>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Status Kehadiran</th>
+                <th>Jumlah Catatan</th>
+                <th>Persentase Rasio</th>
+                <th>Keterangan</th>
+              </tr>
+            </thead>
+            <tbody id="tabelPersentaseBody"></tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -1547,8 +1519,6 @@ var penggunaMasuk = JSON.parse(localStorage.getItem(KUNCI_SESI_PENGGUNA)) || nul
 var pemindaiAktif = null;
 var idSesiSholatAktif = null;
 var idKegiatanAktif = null;
-var tanggalAktifSesiSholat = new Date().toISOString().split('T')[0];
-var tanggalAktifSesiKegiatan = new Date().toISOString().split('T')[0];
 var sesiKelolaSedangDipilih = null;
 var sesiScanTipeAktif = null;
 var objekChartPersentase = null;
@@ -1622,11 +1592,11 @@ function pasangListenerFirebase() {
     }
     if (idSesiSholatAktif) {
       var s = daftarSesiSholat.find(function(item) { return item.id === idSesiSholatAktif; });
-      if (s) muatTabelHadirSholatDetail(s.nama, tanggalAktifSesiSholat);
+      if (s) muatTabelHadirSholatDetail(s.nama);
     }
     if (idKegiatanAktif) {
       var k = daftarKegiatan.find(function(item) { return item.id === idKegiatanAktif; });
-      if (k) muatTabelHadirKegiatanDetail(k.nama, tanggalAktifSesiKegiatan);
+      if (k) muatTabelHadirKegiatanDetail(k.nama);
     }
     muatDataRekapSholat();
     muatDataRekapKegiatan();
@@ -1638,15 +1608,27 @@ function updateJamLive() {
   var sekarang = new Date();
   var opsiTgl = { day: 'numeric', month: 'long', year: 'numeric' };
   var teksTgl = sekarang.toLocaleDateString('id-ID', opsiTgl);
-  var jam = String(nowHourOrMin(sekarang.getHours()));
-  var menit = String(sekarang.getMinutes()).padStart(2, '0');
+  var jam = String(nowHourOrReal()).padStart(2, '0');
+  var now = new Date();
+  var h = String(now.getHours()).padStart(2, '0');
+  var m = String(now.getMinutes()).padStart(2, '0');
   var el = document.getElementById('liveClockWidget');
-  if (el) el.innerText = teksTgl + ' | ' + String(sekarang.getHours()).padStart(2, '0') + ':' + menit;
+  if (el) el.innerText = teksTgl + ' | ' + h + ':' + m;
 }
 setInterval(updateJamLive, 1000);
 updateJamLive();
 
-function nowHourOrMin(h) { return String(h).padStart(2, '0'); }
+function setTanggalDefaultInput() {
+  var today = new Date().toISOString().split('T')[0];
+  var startMonth = today.slice(0, 8) + '01';
+  ['filterTglMulaiSholat', 'filterTglSampaiSholat', 'filterTglMulaiKeg', 'filterTglSampaiKeg', 'filterPersenMulai', 'filterPersenSampai'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el && !el.value) {
+      if (id.includes('Mulai')) el.value = startMonth;
+      else el.value = today;
+    }
+  });
+}
 
 function bukaDrawerMenu() {
   document.getElementById('sidebarDrawer').classList.add('open');
@@ -1800,6 +1782,7 @@ function periksaStatusLogin() {
 }
 
 function bukaTab(panelId, btn) {
+  setTanggalDefaultInput();
   hentikanScanner(function() {
     document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('active'); });
     document.querySelectorAll('.drawer-item').forEach(function(b) { b.classList.remove('active'); });
@@ -1825,7 +1808,7 @@ function bukaTab(panelId, btn) {
     }
     if (panelId === 'panelPersentase') {
       isiDropdownKelasPersen();
-      gantiKelasPersen();
+      hitungPersentaseKehadiran();
     }
     if (panelId === 'panelPengaturan') {
       muatTabelPengguna();
@@ -1878,6 +1861,7 @@ function terapkanHakAkses() {
     kolomAksiSantri.style.display = 'none';
     kolomAksiPengguna.style.display = 'none';
     btnSimpanPengaturan.style.display = 'none';
+    btnNavDasbor.click();
   } else if (peran === 'petugas') {
     btnNavDasbor.style.display = 'none';
     btnNavSantri.style.display = 'none';
@@ -1888,7 +1872,8 @@ function terapkanHakAkses() {
     boxBtnTambahSholat.style.display = 'none';
     boxBtnTambahKegiatan.style.display = 'none';
     btnNavSholat.click();
-    return;
+  } else {
+    btnNavDasbor.click();
   }
 }
 
@@ -2087,9 +2072,8 @@ function bukaDetailSholat(id) {
   document.getElementById('viewListSholat').style.display = 'none';
   document.getElementById('viewDetailSholat').style.display = 'block';
 
-  document.getElementById('detailNamaSholat').innerText = sesi.nama;
+  document.getElementById('detailNamaSholat').innerText = 'Shalat ' + sesi.nama;
   document.getElementById('detailBatasSholat').innerText = sesi.batas + ' WIB';
-  document.getElementById('inputTanggalSesiSholat').value = tanggalAktifSesiSholat;
 
   var isDitutup = sesi.ditutup === true || String(sesi.ditutup).toLowerCase() === 'true';
   var statusEl = document.getElementById('detailStatusSholat');
@@ -2116,17 +2100,8 @@ function bukaDetailSholat(id) {
     btnHapus.style.display = 'none';
   }
 
-  muatTabelHadirSholatDetail(sesi.nama, tanggalAktifSesiSholat);
+  muatTabelHadirSholatDetail(sesi.nama);
   nyalakanScannerSholatDetail();
-}
-
-function gantiTanggalSesiSholat() {
-  var tgl = document.getElementById('inputTanggalSesiSholat').value;
-  if (tgl) {
-    tanggalAktifSesiSholat = tgl;
-    var sesi = daftarSesiSholat.find(function(s) { return s.id === idSesiSholatAktif; });
-    if (sesi) muatTabelHadirSholatDetail(sesi.nama, tanggalAktifSesiSholat);
-  }
 }
 
 function tutupDetailSholat() {
@@ -2136,16 +2111,16 @@ function tutupDetailSholat() {
   muatKartuSholat();
 }
 
-function muatTabelHadirSholatDetail(namaSesi, tglTarget) {
+function muatTabelHadirSholatDetail(namaSesi) {
   var tbody = document.getElementById('tabelHadirSholatBody');
   tbody.innerHTML = '';
-  var target = tglTarget || new Date().toISOString().split('T')[0];
+  var today = new Date().toISOString().split('T')[0];
 
   var dataHariIni = daftarAbsensi.filter(function(a) {
-    return a.kategori === 'Sholat' && a.sesi === namaSesi && a.tanggal === target;
+    return a.kategori === 'Sholat' && a.sesi === namaSesi && a.tanggal === today;
   });
   if (dataHariIni.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:rgb(148, 163, 184); padding:16px;">Belum ada santri yang absen pada sesi dan tanggal ini.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:rgb(148, 163, 184); padding:16px;">Belum ada santri yang absen pada sesi ini hari ini.</td></tr>';
     return;
   }
 
@@ -2179,7 +2154,7 @@ function toggleTutupSesiSholatDetail() {
 function bukaModalIzinSholatDetail() {
   var sesi = daftarSesiSholat.find(function(s) { return s.id === idSesiSholatAktif; });
   if (!sesi) return;
-  bukaModalKelolaKehadiran('Sholat', sesi.nama, tanggalAktifSesiSholat);
+  bukaModalKelolaKehadiran('Sholat', sesi.nama);
 }
 
 function bukaModalEditSholatDetail() {
@@ -2308,7 +2283,7 @@ function prosesScanSholat(decodedText) {
 
   var now = new Date();
   var jamNow = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
-  var tanggalTarget = tanggalAktifSesiSholat;
+  var tanggalHariIni = now.toISOString().split('T')[0];
 
   var isDitutup = sesi.ditutup === true || String(sesi.ditutup).toLowerCase() === 'true';
   var statusKehadiran = 'Hadir';
@@ -2317,14 +2292,14 @@ function prosesScanSholat(decodedText) {
   }
 
   daftarAbsensi = daftarAbsensi.filter(function(a) {
-    return !(a.santriId === santri.id && a.tanggal === tanggalTarget && a.sesi === sesi.nama && a.kategori === 'Sholat');
+    return !(a.santriId === santri.id && a.tanggal === tanggalHariIni && a.sesi === sesi.nama && a.kategori === 'Sholat');
   });
   daftarAbsensi.push({
     id: Date.now(),
     santriId: santri.id,
     santriNama: santri.nama,
     santriKelas: santri.kelas,
-    tanggal: tanggalTarget,
+    tanggal: tanggalHariIni,
     jam: jamNow,
     kategori: 'Sholat',
     sesi: sesi.nama,
@@ -2332,7 +2307,7 @@ function prosesScanSholat(decodedText) {
   });
   db.ref('absensi').set(daftarAbsensi);
 
-  muatTabelHadirSholatDetail(sesi.nama, tanggalTarget);
+  muatTabelHadirSholatDetail(sesi.nama);
 
   tampilkanModalHasilScan({
     sukses: true,
@@ -2343,7 +2318,7 @@ function prosesScanSholat(decodedText) {
     gender: santri.gender || 'Putra',
     jam: jamNow,
     status: statusKehadiran,
-    sesi: 'Sholat ' + sesi.nama + ' (' + tanggalTarget + ')'
+    sesi: 'Sholat ' + sesi.nama
   });
 }
 
@@ -2389,7 +2364,6 @@ function bukaDetailKegiatan(id) {
   document.getElementById('viewDetailKegiatan').style.display = 'block';
 
   document.getElementById('detailNamaKegiatan').innerText = k.nama;
-  document.getElementById('inputTanggalSesiKegiatan').value = tanggalAktifSesiKegiatan;
 
   var isDitutup = k.ditutup === true || String(k.ditutup).toLowerCase() === 'true';
   var statusEl = document.getElementById('detailStatusKegiatan');
@@ -2416,17 +2390,8 @@ function bukaDetailKegiatan(id) {
     btnHapus.style.display = 'none';
   }
 
-  muatTabelHadirKegiatanDetail(k.nama, tanggalAktifSesiKegiatan);
+  muatTabelHadirKegiatanDetail(k.nama);
   nyalakanScannerKegiatanDetail();
-}
-
-function gantiTanggalSesiKegiatan() {
-  var tgl = document.getElementById('inputTanggalSesiKegiatan').value;
-  if (tgl) {
-    tanggalAktifSesiKegiatan = tgl;
-    var k = daftarKegiatan.find(function(item) { return item.id === idKegiatanAktif; });
-    if (k) muatTabelHadirKegiatanDetail(k.nama, tanggalAktifSesiKegiatan);
-  }
 }
 
 function tutupDetailKegiatan() {
@@ -2436,16 +2401,16 @@ function tutupDetailKegiatan() {
   muatKartuKegiatan();
 }
 
-function muatTabelHadirKegiatanDetail(namaKegiatan, tglTarget) {
+function muatTabelHadirKegiatanDetail(namaKegiatan) {
   var tbody = document.getElementById('tabelHadirKegiatanBody');
   tbody.innerHTML = '';
-  var target = tglTarget || new Date().toISOString().split('T')[0];
+  var today = new Date().toISOString().split('T')[0];
 
   var dataHariIni = daftarAbsensi.filter(function(a) {
-    return a.kategori === 'Kegiatan' && a.sesi === namaKegiatan && a.tanggal === target;
+    return a.kategori === 'Kegiatan' && a.sesi === namaKegiatan && a.tanggal === today;
   });
   if (dataHariIni.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:rgb(148, 163, 184); padding:16px;">Belum ada santri yang absen pada kegiatan ini pada tanggal tersebut.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:rgb(148, 163, 184); padding:16px;">Belum ada santri yang absen pada kegiatan ini hari ini.</td></tr>';
     return;
   }
 
@@ -2479,7 +2444,7 @@ function toggleTutupSesiKegiatanDetail() {
 function bukaModalIzinKegiatanDetail() {
   var k = daftarKegiatan.find(function(item) { return item.id === idKegiatanAktif; });
   if (!k) return;
-  bukaModalKelolaKehadiran('Kegiatan', k.nama, tanggalAktifSesiKegiatan);
+  bukaModalKelolaKehadiran('Kegiatan', k.nama);
 }
 
 function bukaModalEditKegiatanDetail() {
@@ -2606,20 +2571,20 @@ function prosesScanKegiatan(decodedText) {
 
   var now = new Date();
   var jamNow = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
-  var tanggalTarget = tanggalAktifSesiKegiatan;
+  var tanggalHariIni = now.toISOString().split('T')[0];
 
   var isDitutup = k.ditutup === true || String(k.ditutup).toLowerCase() === 'true';
   var statusKehadiran = isDitutup ? 'Terlambat' : 'Hadir';
 
   daftarAbsensi = daftarAbsensi.filter(function(a) {
-    return !(a.santriId === santri.id && a.tanggal === tanggalTarget && a.sesi === k.nama && a.kategori === 'Kegiatan');
+    return !(a.santriId === santri.id && a.tanggal === tanggalHariIni && a.sesi === k.nama && a.kategori === 'Kegiatan');
   });
   daftarAbsensi.push({
     id: Date.now(),
     santriId: santri.id,
     santriNama: santri.nama,
     santriKelas: santri.kelas,
-    tanggal: tanggalTarget,
+    tanggal: tanggalHariIni,
     jam: jamNow,
     kategori: 'Kegiatan',
     sesi: k.nama,
@@ -2627,7 +2592,7 @@ function prosesScanKegiatan(decodedText) {
   });
   db.ref('absensi').set(daftarAbsensi);
 
-  muatTabelHadirKegiatanDetail(k.nama, tanggalTarget);
+  muatTabelHadirKegiatanDetail(k.nama);
 
   tampilkanModalHasilScan({
     sukses: true,
@@ -2638,7 +2603,7 @@ function prosesScanKegiatan(decodedText) {
     gender: santri.gender || 'Putra',
     jam: jamNow,
     status: statusKehadiran,
-    sesi: 'Kegiatan ' + k.nama + ' (' + tanggalTarget + ')'
+    sesi: 'Kegiatan ' + k.nama
   });
 }
 
@@ -2684,19 +2649,19 @@ function tutupModalHasilScan(lanjutScan) {
   }
 }
 
-function bukaModalKelolaKehadiran(kategori, namaSesi, targetTgl) {
-  var tanggalTarget = targetTgl || new Date().toISOString().split('T')[0];
-  sesiKelolaSedangDipilih = { kategori: kategori, namaSesi: namaSesi, tanggal: tanggalTarget };
+function bukaModalKelolaKehadiran(kategori, namaSesi) {
+  var tanggalHariIni = new Date().toISOString().split('T')[0];
+  sesiKelolaSedangDipilih = { kategori: kategori, namaSesi: namaSesi, tanggal: tanggalHariIni };
 
   document.getElementById('modalKelolaJudul').innerText = 'Kelola Presensi: ' + namaSesi;
-  document.getElementById('modalKelolaSub').innerText = 'Kategori ' + kategori + ' | Tanggal: ' + tanggalTarget;
+  document.getElementById('modalKelolaSub').innerText = 'Kategori ' + kategori + ' | Tanggal: ' + tanggalHariIni;
 
   var tbody = document.getElementById('tabelModalKelolaBody');
   tbody.innerHTML = '';
 
   daftarSantri.forEach(function(s) {
     var dataAbsen = daftarAbsensi.find(function(a) {
-      return a.santriId === s.id && a.tanggal === tanggalTarget && a.sesi === namaSesi && a.kategori === kategori;
+      return a.santriId === s.id && a.tanggal === tanggalHariIni && a.sesi === namaSesi && a.kategori === kategori;
     });
     var statusSekarang = dataAbsen ? dataAbsen.status : 'Belum';
 
@@ -2764,12 +2729,21 @@ function simpanPerubahanKehadiranSesi() {
   tutupModalKelolaKehadiran();
 
   if (kategori === 'Sholat' && idSesiSholatAktif) {
-    muatTabelHadirSholatDetail(namaSesi, tanggal);
+    muatTabelHadirSholatDetail(namaSesi);
   }
   if (kategori === 'Kegiatan' && idKegiatanAktif) {
-    muatTabelHadirKegiatanDetail(namaSesi, tanggal);
+    muatTabelHadirKegiatanDetail(namaSesi);
   }
   alert('Data kehadiran berhasil disimpan ke Firebase.');
+}
+
+function cekRentangTgl(tglItemStr, mulaiStr, sampaiStr) {
+  if (!tglItemStr) return false;
+  var itemD = tglItemStr;
+  var match = true;
+  if (mulaiStr && itemD < mulaiStr) match = false;
+  if (sampaiStr && itemD > sampaiStr) match = false;
+  return match;
 }
 
 function isiFilterRekapSholat() {
@@ -2796,23 +2770,17 @@ function isiFilterRekapSholat() {
 function muatDataRekapSholat() {
   var sesi = document.getElementById('filterSesiSholat').value;
   var kelas = document.getElementById('filterKelasSholat').value;
-  var rentang = document.getElementById('filterRentangSholat').value;
+  var mulai = document.getElementById('filterTglMulaiSholat') ? document.getElementById('filterTglMulaiSholat').value : '';
+  var sampai = document.getElementById('filterTglSampaiSholat') ? document.getElementById('filterTglSampaiSholat').value : '';
 
-  var now = new Date();
   var hasil = daftarAbsensi.filter(function(item) {
     if (item.kategori !== 'Sholat') return false;
     var lolosSesi = sesi === 'semua' || item.sesi === sesi;
     var santriObj = daftarSantri.find(function(s) { return s.id === item.santriId; });
     var santriKelas = item.santriKelas || (santriObj ? santriObj.kelas : '');
     var lolosKelas = kelas === 'semua' || santriKelas === kelas;
-
-    var lolosRentang = true;
-    if (rentang !== 'semua') {
-      var tglItem = new Date(item.tanggal);
-      var diffHari = (now - tglItem) / 86400000;
-      lolosRentang = diffHari <= parseInt(rentang) && diffHari >= 0;
-    }
-    return lolosSesi && lolosKelas && lolosRentang;
+    var lolosTgl = cekRentangTgl(item.tanggal, mulai, sampai);
+    return lolosSesi && lolosKelas && lolosTgl;
   });
 
   var tbody = document.getElementById('tabelRekapSholatBody');
@@ -2869,23 +2837,17 @@ function isiFilterRekapKegiatan() {
 function muatDataRekapKegiatan() {
   var sesi = document.getElementById('filterSesiKegiatan').value;
   var kelas = document.getElementById('filterKelasKegiatan').value;
-  var rentang = document.getElementById('filterRentangKegiatan').value;
+  var mulai = document.getElementById('filterTglMulaiKeg') ? document.getElementById('filterTglMulaiKeg').value : '';
+  var sampai = document.getElementById('filterTglSampaiKeg') ? document.getElementById('filterTglSampaiKeg').value : '';
 
-  var now = new Date();
   var hasil = daftarAbsensi.filter(function(item) {
     if (item.kategori !== 'Kegiatan') return false;
     var lolosSesi = sesi === 'semua' || item.sesi === sesi;
     var santriObj = daftarSantri.find(function(s) { return s.id === item.santriId; });
     var santriKelas = item.santriKelas || (santriObj ? santriObj.kelas : '');
     var lolosKelas = kelas === 'semua' || santriKelas === kelas;
-
-    var lolosRentang = true;
-    if (rentang !== 'semua') {
-      var tglItem = new Date(item.tanggal);
-      var diffHari = (now - tglItem) / 86400000;
-      lolosRentang = diffHari <= parseInt(rentang) && diffHari >= 0;
-    }
-    return lolosSesi && lolosKelas && lolosRentang;
+    var lolosTgl = cekRentangTgl(item.tanggal, mulai, sampai);
+    return lolosSesi && lolosKelas && lolosTgl;
   });
 
   var tbody = document.getElementById('tabelRekapKegiatanBody');
@@ -2929,53 +2891,21 @@ function isiDropdownKelasPersen() {
     opt.innerText = k;
     selKelas.appendChild(opt);
   });
-  gantiKelasPersen();
-}
-
-function gantiKelasPersen() {
-  var kelas = document.getElementById('filterPersenKelas').value;
-  var selSantri = document.getElementById('filterPersenSantri');
-  if (!selSantri) return;
-  selSantri.innerHTML = '<option value="semua">Semua Nama Santri (Tampil Satu Kelas)</option>';
-  
-  var santriSaring = daftarSantri.filter(function(s) {
-    return kelas === 'semua' || s.kelas === kelas;
-  });
-
-  santriSaring.forEach(function(s) {
-    var opt = document.createElement('option');
-    opt.value = s.id;
-    opt.innerText = s.nama + ' (' + s.nis + ')';
-    selSantri.appendChild(opt);
-  });
-  hitungPersentaseKehadiran();
-}
-
-function gantiKategoriPersen() {
-  hitungPersentaseKehadiran();
 }
 
 function hitungPersentaseKehadiran() {
   var kat = document.getElementById('filterPersenKategori') ? document.getElementById('filterPersenKategori').value : 'semua';
   var kelas = document.getElementById('filterPersenKelas') ? document.getElementById('filterPersenKelas').value : 'semua';
-  var targetSantriId = document.getElementById('filterPersenSantri') ? document.getElementById('filterPersenSantri').value : 'semua';
-  var rentang = document.getElementById('filterPersenRentang') ? document.getElementById('filterPersenRentang').value : 'semua';
+  var mulai = document.getElementById('filterPersenMulai') ? document.getElementById('filterPersenMulai').value : '';
+  var sampai = document.getElementById('filterPersenSampai') ? document.getElementById('filterPersenSampai').value : '';
 
-  var now = new Date();
   var dataFilter = daftarAbsensi.filter(function(item) {
     var lolosKat = (kat === 'semua') || (item.kategori === kat);
     var santriObj = daftarSantri.find(function(s) { return s.id === item.santriId; });
     var santriKelas = item.santriKelas || (santriObj ? santriObj.kelas : '');
     var lolosKelas = (kelas === 'semua') || (santriKelas === kelas);
-    var lolosSantri = (targetSantriId === 'semua') || (item.santriId === parseInt(targetSantriId));
-
-    var lolosRentang = true;
-    if (rentang !== 'semua') {
-      var tglItem = new Date(item.tanggal);
-      var diffHari = (now - tglItem) / 86400000;
-      lolosRentang = diffHari <= parseInt(rentang) && diffHari >= 0;
-    }
-    return lolosKat && lolosKelas && lolosSantri && lolosRentang;
+    var lolosTgl = cekRentangTgl(item.tanggal, mulai, sampai);
+    return lolosKat && lolosKelas && lolosTgl;
   });
 
   var jHadir = 0;
@@ -3012,69 +2942,18 @@ function hitungPersentaseKehadiran() {
     document.getElementById('pctAlpa').innerText = pAlpa + '%';
   }
 
+  var tbody = document.getElementById('tabelPersentaseBody');
+  if (tbody) {
+    tbody.innerHTML = '' +
+      '<tr><td><span class="badge-scan badge-hadir">Hadir</span></td><td><strong>' + jHadir + '</strong></td><td><strong>' + pHadir + '%</strong></td><td>Tepat Waktu</td></tr>' +
+      '<tr><td><span class="badge-scan badge-terlambat">Terlambat</span></td><td><strong>' + jTerlambat + '</strong></td><td><strong>' + pTerlambat + '%</strong></td><td>Hadir Melebihi Batas Jam</td></tr>' +
+      '<tr><td><span class="badge-scan badge-izin">Izin</span></td><td><strong>' + jIzin + '</strong></td><td><strong>' + pIzin + '%</strong></td><td>Mendapat Surat Izin Pengurus</td></tr>' +
+      '<tr><td><span class="badge-scan badge-sakit">Sakit</span></td><td><strong>' + jSakit + '</strong></td><td><strong>' + pSakit + '%</strong></td><td>Izin Sakit Terkonfirmasi</td></tr>' +
+      '<tr><td><span class="badge-scan badge-alpa">Alpa</span></td><td><strong>' + jAlpa + '</strong></td><td><strong>' + pAlpa + '%</strong></td><td>Tidak Hadir Tanpa Keterangan</td></tr>' +
+      '<tr style="background: rgb(248, 250, 252); font-weight:800;"><td>Total Catatan</td><td>' + total + '</td><td>100%</td><td>Kumulatif Kehadiran</td></tr>';
+  }
+
   gambarDiagramPersentase(jHadir, jTerlambat, jIzin, jSakit, jAlpa);
-  muatTabelRasioPerSantri(kelas, kat, rentang);
-}
-
-function muatTabelRasioPerSantri(filterKelas, filterKat, filterRentang) {
-  var tbody = document.getElementById('tabelPersentaseSantriBody');
-  var judul = document.getElementById('judulTabelSantriPersen');
-  if (!tbody) return;
-
-  tbody.innerHTML = '';
-  var now = new Date();
-
-  var daftarSantriFilter = daftarSantri.filter(function(s) {
-    return filterKelas === 'semua' || s.kelas === filterKelas;
-  });
-
-  if (judul) {
-    judul.innerText = filterKelas === 'semua' ? 'Rincian Per Santri (Seluruh Kelas)' : 'Rincian Per Santri (Kelas: ' + filterKelas + ')';
-  }
-
-  if (daftarSantriFilter.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; color:#94a3b8; padding:16px;">Tidak ada data santri pada kriteria kelas ini.</td></tr>';
-    return;
-  }
-
-  daftarSantriFilter.forEach(function(s) {
-    var absensiSantri = daftarAbsensi.filter(function(a) {
-      if (a.santriId !== s.id) return false;
-      var lolosKat = (filterKat === 'semua') || (a.kategori === filterKat);
-      var lolosRentang = true;
-      if (filterRentang !== 'semua') {
-        var tglItem = new Date(a.tanggal);
-        var diffHari = (now - tglItem) / 86400000;
-        lolosRentang = diffHari <= parseInt(filterRentang) && diffHari >= 0;
-      }
-      return lolosKat && lolosRentang;
-    });
-
-    var h = 0, t = 0, i = 0, k = 0, al = 0;
-    absensiSantri.forEach(function(ab) {
-      if (ab.status === 'Hadir') h++;
-      else if (ab.status === 'Terlambat') t++;
-      else if (ab.status === 'Izin') i++;
-      else if (ab.status === 'Sakit') k++;
-      else if (ab.status === 'Alpa') al++;
-    });
-
-    var tot = h + t + i + k + al;
-    var rasio = tot > 0 ? (((h + t) / tot) * 100).toFixed(1) + '%' : '0%';
-
-    var tr = document.createElement('tr');
-    tr.innerHTML = '' +
-      '<td><strong>' + s.nis + '</strong></td>' +
-      '<td>' + s.nama + '</td>' +
-      '<td>' + s.kelas + '</td>' +
-      '<td style="color:rgb(21, 128, 61); font-weight:700;">' + h + '</td>' +
-      '<td style="color:rgb(194, 65, 12); font-weight:700;">' + t + '</td>' +
-      '<td style="color:rgb(2, 132, 199); font-weight:700;">' + i + '</td>' +
-      '<td style="color:rgb(180, 83, 9); font-weight:700;">' + k + '</td>' +
-      '<td style="color:rgb(220, 38, 38); font-weight:700;">' + al + '</td>' +
-      '<td><strong>' + rasio + '</strong></td>';
-    tbody.appendChild(tr);
-  });
 }
 
 function gambarDiagramPersentase(hadir, terlambat, izin, sakit, alpa) {
@@ -3260,6 +3139,7 @@ function hentikanScanner(callback) {
   }
 }
 
+setTanggalDefaultInput();
 pasangListenerFirebase();
 terapkanProfilPondok();
 periksaStatusLogin();
