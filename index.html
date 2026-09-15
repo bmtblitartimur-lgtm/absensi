@@ -3047,7 +3047,7 @@ function isiDropdownSantriPersen() {
   daftarSantri.forEach(function(s) {
     var opt = document.createElement('option');
     opt.value = s.id;
-    opt.innerText = s.nama + ' (' + (s.namaPanggilan || s.nis) +)';
+    opt.innerText = s.nama + ' (' + (s.namaPanggilan || s.nis) + ')';
     selSantri.appendChild(opt);
   });
 }
