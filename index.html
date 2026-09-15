@@ -842,7 +842,7 @@ body {
           </div>
         </div>
 
-        <div class="action-card" onclick="pindahDariCard('panelPengaturan', 'btnNavPengaturan')">
+        <div class="action-card" id="cardNavPengaturan" onclick="pindahDariCard('panelPengaturan', 'btnNavPengaturan')">
           <div class="card-left-box">
             <div class="card-icon-pill bg-pengaturan">
               <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
@@ -1810,12 +1810,13 @@ function perkecilGambar(fileInput, lebarMaks, callback) {
 function prosesLogin(event) {
   event.preventDefault();
   var username = document.getElementById('loginUsername').value.trim().toLowerCase();
-  var sandi = document.getElementById('loginPassword').value.trim();
+  var sandi = String(document.getElementById('loginPassword').value.trim());
   var pesanError = document.getElementById('pesanErrorLogin');
 
   var user = daftarPengguna.find(function(u) {
-    return String(u.username).toLowerCase() === username && String(u.sandi) === sandi;
+    return String(u.username).trim().toLowerCase() === username && String(u.sandi).trim() === sandi;
   });
+
   if (user) {
     pesanError.style.display = 'none';
     penggunaMasuk = user;
@@ -1909,6 +1910,7 @@ function terapkanHakAkses() {
   var btnNavRekapKegiatan = document.getElementById('btnNavRekapKegiatan');
   var btnNavPersentase = document.getElementById('btnNavPersentase');
   var btnNavPengaturan = document.getElementById('btnNavPengaturan');
+  var cardNavPengaturan = document.getElementById('cardNavPengaturan');
 
   var boxBtnTambahSantri = document.getElementById('boxBtnTambahSantri');
   var boxBtnTambahSholat = document.getElementById('boxBtnTambahSholat');
@@ -1925,7 +1927,7 @@ function terapkanHakAkses() {
   btnNavRekapSholat.style.display = 'flex';
   btnNavRekapKegiatan.style.display = 'flex';
   btnNavPersentase.style.display = 'flex';
-  btnNavPengaturan.style.display = 'flex';
+  if (cardNavPengaturan) cardNavPengaturan.style.display = 'flex';
 
   boxBtnTambahSantri.style.display = 'block';
   boxBtnTambahSholat.style.display = 'block';
@@ -1936,6 +1938,8 @@ function terapkanHakAkses() {
   btnSimpanPengaturan.style.display = 'inline-flex';
 
   if (peran === 'pengurus') {
+    btnNavPengaturan.style.display = 'none';
+    if (cardNavPengaturan) cardNavPengaturan.style.display = 'none';
     boxBtnTambahSantri.style.display = 'none';
     boxBtnTambahSholat.style.display = 'none';
     boxBtnTambahKegiatan.style.display = 'none';
@@ -1943,7 +1947,12 @@ function terapkanHakAkses() {
     kolomAksiSantri.style.display = 'none';
     kolomAksiPengguna.style.display = 'none';
     btnSimpanPengaturan.style.display = 'none';
-    btnNavDasbor.click();
+    
+    if (document.getElementById('panelPengaturan').classList.contains('active')) {
+      btnNavDasbor.click();
+    } else {
+      btnNavDasbor.style.display = 'flex';
+    }
   } else if (peran === 'petugas') {
     btnNavDasbor.style.display = 'none';
     btnNavSantri.style.display = 'none';
@@ -1951,6 +1960,7 @@ function terapkanHakAkses() {
     btnNavRekapKegiatan.style.display = 'none';
     btnNavPersentase.style.display = 'none';
     btnNavPengaturan.style.display = 'none';
+    if (cardNavPengaturan) cardNavPengaturan.style.display = 'none';
     boxBtnTambahSholat.style.display = 'none';
     boxBtnTambahKegiatan.style.display = 'none';
     btnNavSholat.click();
