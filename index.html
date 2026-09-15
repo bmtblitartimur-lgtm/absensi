@@ -213,20 +213,12 @@ body {
   margin-bottom: 28px;
 }
 @media (max-width: 1024px) {
-  .cards-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  .cards-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 768px) {
-  .app-wrapper {
-    flex-direction: column;
-  }
-  .sidebar {
-    width: 100%;
-  }
-  .cards-grid {
-    grid-template-columns: 1fr;
-  }
+  .app-wrapper { flex-direction: column; }
+  .sidebar { width: 100%; }
+  .cards-grid { grid-template-columns: 1fr; }
 }
 .action-card {
   background: var(--surface);
@@ -297,15 +289,9 @@ body {
   flex-wrap: wrap;
   gap: 8px;
 }
-.footer-left strong {
-  color: #0f172a;
-}
-.panel {
-  display: none;
-}
-.panel.active {
-  display: block;
-}
+.footer-left strong { color: #0f172a; }
+.panel { display: none; }
+.panel.active { display: block; }
 .panel-card-wrap {
   background: var(--surface);
   border: 1px solid var(--border-color);
@@ -623,7 +609,6 @@ body {
 
     <div class="content-body">
 
-      <!-- PANEL DASHBOARD -->
       <div class="panel active" id="panelDasbor">
         <div class="banner-welcome">
           <div class="banner-text-box">
@@ -723,7 +708,6 @@ body {
         </div>
       </div>
 
-      <!-- PANEL DATA SANTRI -->
       <div class="panel" id="panelSantri">
         <div class="panel-card-wrap">
           <div class="panel-top-bar">
@@ -754,7 +738,6 @@ body {
         </div>
       </div>
 
-      <!-- PANEL ABSENSI SHOLAT -->
       <div class="panel" id="panelSholat">
         <div class="panel-card-wrap">
           <div class="panel-top-bar">
@@ -787,7 +770,6 @@ body {
         </div>
       </div>
 
-      <!-- PANEL ABSENSI KEGIATAN -->
       <div class="panel" id="panelKegiatan">
         <div class="panel-card-wrap">
           <div class="panel-top-bar">
@@ -820,7 +802,6 @@ body {
         </div>
       </div>
 
-      <!-- PANEL REKAP SHOLAT -->
       <div class="panel" id="panelRekapSholat">
         <div class="panel-card-wrap">
           <div class="panel-top-bar">
@@ -866,7 +847,6 @@ body {
         </div>
       </div>
 
-      <!-- PANEL REKAP KEGIATAN -->
       <div class="panel" id="panelRekapKegiatan">
         <div class="panel-card-wrap">
           <div class="panel-top-bar">
@@ -912,7 +892,6 @@ body {
         </div>
       </div>
 
-      <!-- PANEL PENGGUNA & PENGATURAN -->
       <div class="panel" id="panelPengguna">
         <div class="panel-card-wrap">
           <div class="panel-top-bar">
@@ -976,7 +955,6 @@ body {
   </main>
 </div>
 
-<!-- MODAL FORM SANTRI -->
 <div id="modalFormSantri" class="modal-overlay">
   <div class="modal-content">
     <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 14px;" id="judulModalSantri">Tambah Data Santri</h3>
@@ -1014,7 +992,6 @@ body {
   </div>
 </div>
 
-<!-- MODAL FORM SHOLAT -->
 <div id="modalFormSholat" class="modal-overlay">
   <div class="modal-content">
     <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 14px;" id="judulModalSholat">Tambah Jadwal Sholat</h3>
@@ -1036,7 +1013,6 @@ body {
   </div>
 </div>
 
-<!-- MODAL FORM KEGIATAN -->
 <div id="modalFormKegiatan" class="modal-overlay">
   <div class="modal-content">
     <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 14px;" id="judulModalKegiatan">Tambah Kegiatan Pengajian</h3>
@@ -1054,7 +1030,6 @@ body {
   </div>
 </div>
 
-<!-- MODAL FORM PENGGUNA -->
 <div id="modalFormPengguna" class="modal-overlay">
   <div class="modal-content">
     <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 14px;">Tambah Pengguna Baru</h3>
@@ -1090,7 +1065,6 @@ body {
   </div>
 </div>
 
-<!-- MODAL SMARTCARD POTRET -->
 <div id="modalSmartCard" class="modal-overlay">
   <div class="modal-content" style="text-align: center;">
     <div class="smart-card-portrait" id="areaCetakKartu">
@@ -1121,7 +1095,6 @@ body {
   </div>
 </div>
 
-<!-- MODAL KELOLA KEHADIRAN SESI -->
 <div id="modalKelolaKehadiran" class="modal-overlay">
   <div class="modal-content">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
@@ -1204,14 +1177,12 @@ let sesiKelolaSedangDipilih = null
 
 function updateJamLive() {
   const sekarang = new Date()
-  const opsiTgl = { day: 'numeric', month: 'Long', year: 'numeric' }
+  const opsiTgl = { day: 'numeric', month: 'long', year: 'numeric' }
   const teksTgl = sekarang.toLocaleDateString('id-ID', opsiTgl)
   const jam = String(sekarang.getHours()).padStart(2, '0')
   const menit = String(sekarang.getMinutes()).padStart(2, '0')
   const el = document.getElementById('liveClockWidget')
-  if (el) {
-    el.innerText = teksTgl + ' | ' + jam + ':' + menit
-  }
+  if (el) el.innerText = teksTgl + ' | ' + jam + ':' + menit
 }
 setInterval(updateJamLive, 1000)
 updateJamLive()
@@ -1256,6 +1227,34 @@ function kirimKeGoogleSheets(dataPresensi) {
   .catch(function(error) { console.log('Kendala pengiriman:', error) })
 }
 
+function muatDataOnline() {
+  fetch(URL_WEB_APP_GOOGLE)
+    .then(function(respon) { return respon.json() })
+    .then(function(data) {
+      if (data.pengguna && data.pengguna.length > 0) {
+        daftarPengguna = data.pengguna
+        localStorage.setItem(KUNCI_PENGGUNA, JSON.stringify(daftarPengguna))
+        muatTabelPengguna()
+      }
+      if (data.sholat && data.sholat.length > 0) {
+        daftarSesiSholat = data.sholat
+        localStorage.setItem(KUNCI_SESI_SHOLAT, JSON.stringify(daftarSesiSholat))
+        muatDaftarSesiSholat()
+      }
+      if (data.kegiatan && data.kegiatan.length > 0) {
+        daftarKegiatan = data.kegiatan
+        localStorage.setItem(KUNCI_KEGIATAN, JSON.stringify(daftarKegiatan))
+        muatDaftarSesiKegiatan()
+      }
+      if (data.santri && data.santri.length > 0) {
+        daftarSantri = data.santri
+        localStorage.setItem(KUNCI_SANTRI, JSON.stringify(daftarSantri))
+        muatTabelSantri()
+      }
+    })
+    .catch(function(err) { console.log('Gagal memuat data online', err) })
+}
+
 function perkecilGambar(fileInput, lebarMaks, callback) {
   const file = fileInput.files[0]
   if (!file) { callback(null); return }
@@ -1294,7 +1293,7 @@ function prosesLogin(event) {
   const sandi = document.getElementById('loginPassword').value.trim()
   const pesanError = document.getElementById('pesanErrorLogin')
 
-  const user = daftarPengguna.find(u => u.username.toLowerCase() === username && u.sandi === sandi)
+  const user = daftarPengguna.find(u => u.username.toLowerCase() === username && String(u.sandi) === sandi)
   if (user) {
     pesanError.style.display = 'none'
     penggunaMasuk = user
@@ -1414,7 +1413,6 @@ function terapkanHakAkses() {
   }
 }
 
-/* SANTRI */
 function bukaModalSantriBaru() {
   document.getElementById('formSantri').reset()
   document.getElementById('santriId').value = ''
@@ -1464,6 +1462,7 @@ function simpanSantri(event) {
       daftarSantri.push({ id: Date.now(), nis, nama, kelas, gender, foto: fotoFinal })
     }
     simpanSemuaData()
+    kirimKeGoogleSheets({ aksi: 'syncSantri', data: daftarSantri })
     tutupModalSantri()
     muatTabelSantri()
   })
@@ -1503,11 +1502,11 @@ function hapusSantri(id) {
   if (confirm('Hapus santri ini dari sistem?')) {
     daftarSantri = daftarSantri.filter(s => s.id !== id)
     simpanSemuaData()
+    kirimKeGoogleSheets({ aksi: 'syncSantri', data: daftarSantri })
     muatTabelSantri()
   }
 }
 
-/* SMARTCARD */
 function bukaSmartCard(id) {
   const s = daftarSantri.find(item => item.id === id)
   if (!s) return
@@ -1570,7 +1569,6 @@ function unduhQrCode() {
     })
 }
 
-/* SHOLAT */
 function bukaModalSholatBaru() {
   document.getElementById('formSholatId').value = ''
   document.getElementById('formSholatNama').value = ''
@@ -1611,6 +1609,7 @@ function simpanSesiSholat(event) {
     daftarSesiSholat.push({ id: Date.now(), nama: nama, batas: batas, ditutup: false })
   }
   simpanSemuaData()
+  kirimKeGoogleSheets({ aksi: 'syncSholat', data: daftarSesiSholat })
   tutupModalSholat()
   muatDaftarSesiSholat()
 }
@@ -1662,6 +1661,7 @@ function hapusSesiSholat(id) {
   if (confirm('Hapus jadwal sholat ini?')) {
     daftarSesiSholat = daftarSesiSholat.filter(s => s.id !== id)
     simpanSemuaData()
+    kirimKeGoogleSheets({ aksi: 'syncSholat', data: daftarSesiSholat })
     muatDaftarSesiSholat()
   }
 }
@@ -1671,6 +1671,7 @@ function toggleTutupSesiSholat(id) {
   if (!sesi) return
   sesi.ditutup = !sesi.ditutup
   simpanSemuaData()
+  kirimKeGoogleSheets({ aksi: 'syncSholat', data: daftarSesiSholat })
   muatDaftarSesiSholat()
 
   if (idSesiSholatAktif === id) {
@@ -1764,7 +1765,6 @@ function prosesScanSholat(decodedText) {
   `
 }
 
-/* KEGIATAN */
 function bukaModalKegiatanBaru() {
   document.getElementById('formKegiatanId').value = ''
   document.getElementById('formKegiatanNama').value = ''
@@ -1802,6 +1802,7 @@ function simpanSesiKegiatan(event) {
     daftarKegiatan.push({ id: Date.now(), nama: nama, ditutup: false })
   }
   simpanSemuaData()
+  kirimKeGoogleSheets({ aksi: 'syncKegiatan', data: daftarKegiatan })
   tutupModalKegiatan()
   muatDaftarSesiKegiatan()
 }
@@ -1852,6 +1853,7 @@ function hapusKegiatan(id) {
   if (confirm('Hapus kegiatan ini?')) {
     daftarKegiatan = daftarKegiatan.filter(k => k.id !== id)
     simpanSemuaData()
+    kirimKeGoogleSheets({ aksi: 'syncKegiatan', data: daftarKegiatan })
     muatDaftarSesiKegiatan()
   }
 }
@@ -1861,6 +1863,7 @@ function toggleTutupSesiKegiatan(id) {
   if (!k) return
   k.ditutup = !k.ditutup
   simpanSemuaData()
+  kirimKeGoogleSheets({ aksi: 'syncKegiatan', data: daftarKegiatan })
   muatDaftarSesiKegiatan()
 
   if (idKegiatanAktif === id) {
@@ -1950,7 +1953,6 @@ function prosesScanKegiatan(decodedText) {
   `
 }
 
-/* KELOLA SAKIT IZIN */
 function bukaModalKelolaKehadiran(kategori, namaSesi) {
   const tanggalHariIni = new Date().toISOString().split('T')[0]
   sesiKelolaSedangDipilih = { kategori: kategori, namaSesi: namaSesi, tanggal: tanggalHariIni }
@@ -2036,7 +2038,6 @@ function simpanPerubahanKehadiranSesi() {
   alert('Data kehadiran berhasil diperbarui.')
 }
 
-/* REKAP SHOLAT */
 function isiFilterRekapSholat() {
   const selSesi = document.getElementById('filterSesiSholat')
   selSesi.innerHTML = '<option value="semua">Semua Shalat</option>'
@@ -2109,7 +2110,6 @@ function muatDataRekapSholat() {
   })
 }
 
-/* REKAP KEGIATAN */
 function isiFilterRekapKegiatan() {
   const selSesi = document.getElementById('filterSesiKegiatan')
   selSesi.innerHTML = '<option value="semua">Semua Kegiatan</option>'
@@ -2182,7 +2182,6 @@ function muatDataRekapKegiatan() {
   })
 }
 
-/* PENGGUNA */
 function bukaModalPenggunaBaru() {
   document.getElementById('modalFormPengguna').style.display = 'flex'
 }
@@ -2245,6 +2244,7 @@ function simpanPengguna(event) {
       foto
     })
     simpanSemuaData()
+    kirimKeGoogleSheets({ aksi: 'syncPengguna', data: daftarPengguna })
     tutupModalPengguna()
     muatTabelPengguna()
     alert('Pengguna baru berhasil ditambahkan.')
@@ -2255,6 +2255,7 @@ function hapusPengguna(id) {
   if (confirm('Hapus akun ini?')) {
     daftarPengguna = daftarPengguna.filter(u => u.id !== id)
     simpanSemuaData()
+    kirimKeGoogleSheets({ aksi: 'syncPengguna', data: daftarPengguna })
     muatTabelPengguna()
   }
 }
@@ -2275,6 +2276,7 @@ function hentikanScanner(callback) {
 
 terapkanProfilPondok()
 periksaStatusLogin()
+muatDataOnline()
 </script>
 </body>
 </html>
