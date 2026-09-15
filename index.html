@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sistem Absensi Smartcard Ponpes Dahlan Ikhsan</title>
+<title>Aplikasi Absensi Santri Ponpes Dahlan Ikhsan</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/html5-qrcode"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
@@ -14,21 +14,12 @@
   --primary: #059669;
   --primary-dark: #047857;
   --primary-light: #ecfdf5;
-  --primary-border: #a7f3d0;
-  --bg-main: #f8fafc;
+  --bg-page: #f4f7fb;
   --surface: #ffffff;
-  --text-main: #0f172a;
+  --text-main: #1e293b;
   --text-muted: #64748b;
   --border-color: #e2e8f0;
-  --danger: #ef4444;
-  --warning: #f59e0b;
-  --info: #0284c7;
-  --radius-lg: 16px;
-  --radius-md: 10px;
-  --radius-sm: 6px;
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+  --sidebar-w: 260px;
 }
 * {
   box-sizing: border-box;
@@ -37,186 +28,328 @@
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
 body {
-  background-color: var(--bg-main);
+  background-color: var(--bg-page);
   color: var(--text-main);
   min-height: 100vh;
 }
-.header {
-  background: linear-gradient(135deg, #047857 0%, #065f46 100%);
-  color: white;
-  padding: 16px 28px;
+.app-wrapper {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 16px;
-  box-shadow: var(--shadow-md);
+  min-height: 100vh;
 }
-.header-brand {
+.sidebar {
+  width: var(--sidebar-w);
+  background: var(--surface);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+.sidebar-header {
+  padding: 20px 18px;
   display: flex;
   align-items: center;
   gap: 12px;
+  border-bottom: 1px solid var(--border-color);
 }
-.header-logo-img {
-  width: 44px;
-  height: 44px;
+.logo-masjid-icon {
+  width: 40px;
+  height: 40px;
   border-radius: 10px;
-  object-fit: cover;
-  background: white;
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: #059669;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
 }
-.header-title {
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: -0.3px;
+.brand-title {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.2px;
+  line-height: 1.2;
 }
-.header-sub {
-  font-size: 12px;
-  opacity: 0.85;
+.brand-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
 }
-.user-info-box {
+.sidebar-menu {
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+.nav-item {
   display: flex;
   align-items: center;
   gap: 12px;
-  background: rgba(255, 255, 255, 0.1);
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  color: #475569;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: all 0.15s ease;
+}
+.nav-item:hover {
+  background: #f1f5f9;
+  color: var(--primary-dark);
+}
+.nav-item.active {
+  background: #e6f4ea;
+  color: #047857;
+  font-weight: 700;
+}
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.main-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.top-header {
+  height: 70px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+}
+.user-widget {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f8fafc;
   padding: 6px 14px 6px 8px;
   border-radius: 30px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
 }
-.user-avatar-header {
+.user-avatar-circle {
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid white;
-}
-.nav-bar {
-  background-color: var(--surface);
-  border-bottom: 1px solid var(--border-color);
+  background: #2563eb;
+  color: white;
   display: flex;
-  padding: 0 24px;
-  overflow-x: auto;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  object-fit: cover;
+}
+.user-text-box {
+  text-align: left;
+  line-height: 1.2;
+}
+.user-name {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #1e293b;
+}
+.user-role {
+  font-size: 10.5px;
+  color: var(--text-muted);
+}
+.content-body {
+  padding: 28px 32px;
+  flex: 1;
+}
+.banner-welcome {
+  background: linear-gradient(135deg, #eafaf1 0%, #edf9f3 100%);
+  border: 1px solid #c7eed9;
+  border-radius: 18px;
+  padding: 28px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.banner-text-box h1 {
+  font-size: 26px;
+  font-weight: 800;
+  color: #064e3b;
+  margin-bottom: 6px;
+  letter-spacing: -0.5px;
+}
+.banner-text-box h2 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #065f46;
+  margin-bottom: 8px;
+}
+.banner-text-box p {
+  font-size: 13.5px;
+  color: #047857;
+  max-width: 540px;
+}
+.banner-mosque-svg {
+  width: 220px;
+  height: 110px;
+  color: #34d399;
+  opacity: 0.75;
+}
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 28px;
+}
+@media (max-width: 1024px) {
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 768px) {
+  .app-wrapper {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+  }
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.action-card {
+  background: var(--surface);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.action-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.04);
+}
+.card-left-box {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.card-icon-pill {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.bg-shalat { background: #059669; }
+.bg-kegiatan { background: #2563eb; }
+.bg-santri { background: #7c3aed; }
+.bg-rekap-shalat { background: #f59e0b; }
+.bg-rekap-kegiatan { background: #0891b2; }
+.card-texts h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+.card-texts p {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.4;
+  max-width: 200px;
+}
+.card-arrow-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  flex-shrink: 0;
+}
+.footer-bar {
+  background: var(--surface);
+  border-top: 1px solid var(--border-color);
+  padding: 14px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  flex-wrap: wrap;
   gap: 8px;
 }
-.nav-btn {
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  padding: 14px 18px;
-  cursor: pointer;
-  font-size: 13.5px;
-  font-weight: 600;
-  white-space: nowrap;
-  border-bottom: 3px solid transparent;
-  transition: all 0.2s ease;
-}
-.nav-btn:hover {
-  color: var(--primary);
-}
-.nav-btn.active {
-  color: var(--primary);
-  border-bottom-color: var(--primary);
-}
-.container {
-  max-width: 1100px;
-  margin: 24px auto;
-  padding: 0 20px;
+.footer-left strong {
+  color: #0f172a;
 }
 .panel {
   display: none;
-  background: var(--surface);
-  padding: 28px;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border-color);
-  box-shadow: var(--shadow-sm);
 }
 .panel.active {
   display: block;
 }
-.panel-header {
+.panel-card-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+}
+.panel-top-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 12px;
-  margin-bottom: 24px;
-  padding-bottom: 14px;
+  margin-bottom: 20px;
   border-bottom: 1px solid var(--border-color);
+  padding-bottom: 14px;
 }
-.panel-title {
-  font-size: 19px;
-  font-weight: 700;
-  color: var(--text-main);
-  letter-spacing: -0.3px;
+.panel-heading-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #0f172a;
 }
-.panel-desc {
-  font-size: 13px;
+.panel-heading-sub {
+  font-size: 12.5px;
   color: var(--text-muted);
   margin-top: 2px;
 }
-.login-wrap {
-  min-height: 85vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-.login-card {
-  background: var(--surface);
-  padding: 36px 32px;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
-  border: 1px solid var(--border-color);
-  width: 100%;
-  max-width: 420px;
-}
-.login-header {
-  text-align: center;
-  margin-bottom: 28px;
-}
-.login-logo-img {
-  width: 60px;
-  height: 60px;
-  border-radius: 14px;
-  object-fit: cover;
-  margin: 0 auto 14px auto;
-  display: block;
-  box-shadow: var(--shadow-md);
-}
-.grid-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
-  margin-bottom: 24px;
-}
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border-color);
-  padding: 20px;
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.card-val {
-  font-size: 32px;
-  font-weight: 700;
-  color: var(--primary-dark);
-  margin-bottom: 4px;
-}
-.card-desc {
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
   font-size: 13px;
-  color: var(--text-muted);
-  font-weight: 500;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
-.form-box {
-  background: #fdfdfd;
-  padding: 20px;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-color);
-  margin-bottom: 24px;
-}
+.btn-primary { background: var(--primary); color: white; }
+.btn-primary:hover { background: var(--primary-dark); }
+.btn-secondary { background: #e2e8f0; color: #334155; }
+.btn-danger { background: #fee2e2; color: #dc2626; }
+.btn-warning { background: #fef3c7; color: #b45309; }
+.btn-info { background: #e0f2fe; color: #0284c7; }
 .form-group {
   margin-bottom: 14px;
   text-align: left;
@@ -225,101 +358,66 @@ body {
   display: block;
   font-weight: 600;
   margin-bottom: 6px;
-  font-size: 13px;
+  font-size: 12.5px;
   color: #334155;
 }
 .form-input, .form-select {
   width: 100%;
-  padding: 10px 14px;
+  padding: 9px 12px;
   border: 1px solid #cbd5e1;
-  border-radius: var(--radius-sm);
-  font-size: 13.5px;
+  border-radius: 8px;
+  font-size: 13px;
   color: var(--text-main);
   background: white;
   outline: none;
-  transition: border-color 0.2s;
 }
 .form-input:focus, .form-select:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.12);
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
 }
-.btn {
-  padding: 9px 18px;
-  border: none;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  font-size: 13.5px;
+.table-responsive {
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  margin-top: 14px;
+}
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13px;
+}
+.data-table th, .data-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border-color);
+}
+.data-table th {
+  background-color: #f8fafc;
+  color: #475569;
   font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  transition: all 0.15s ease;
 }
-.btn-primary { background-color: var(--primary); color: white; }
-.btn-primary:hover { background-color: var(--primary-dark); }
-.btn-secondary { background-color: #e2e8f0; color: #334155; }
-.btn-secondary:hover { background-color: #cbd5e1; }
-.btn-danger { background-color: #fee2e2; color: var(--danger); }
-.btn-danger:hover { background-color: #fecaca; }
-.btn-warning { background-color: #fef3c7; color: #b45309; }
-.btn-warning:hover { background-color: #fde68a; }
-.btn-info { background-color: #e0f2fe; color: #0369a1; }
-.btn-info:hover { background-color: #bae6fd; }
-.btn-logout {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  border: none;
-  padding: 5px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-}
-.btn-logout:hover { background: rgba(255, 255, 255, 0.35); }
 .sessions-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 14px;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 .session-card {
   background: white;
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
+  border-radius: 12px;
   padding: 16px;
-  box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 12px;
-  transition: all 0.2s ease;
-}
-.session-card.active-session {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 2px var(--primary-border);
-}
-.session-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.session-name {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--text-main);
-}
-.session-time {
-  font-size: 12px;
-  color: var(--text-muted);
 }
 .status-pill {
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 700;
   padding: 3px 8px;
   border-radius: 12px;
   text-transform: uppercase;
-  letter-spacing: 0.3px;
 }
 .status-pill.open { background: #dcfce7; color: #15803d; }
 .status-pill.closed { background: #fee2e2; color: #b91c1c; }
@@ -335,73 +433,33 @@ body {
 .scanner-box {
   background: #f1f5f9;
   padding: 16px;
-  border-radius: var(--radius-md);
+  border-radius: 12px;
   border: 1px solid var(--border-color);
 }
 .result-box {
   background: var(--surface);
-  padding: 24px;
-  border-radius: var(--radius-md);
-  border: 2px dashed var(--primary-border);
+  padding: 20px;
+  border-radius: 12px;
+  border: 2px dashed var(--border-color);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  min-height: 300px;
-}
-.santri-photo {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid var(--primary);
-  margin-bottom: 12px;
+  min-height: 280px;
 }
 .badge-scan {
   display: inline-block;
-  padding: 6px 14px;
+  padding: 4px 12px;
   border-radius: 20px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
-  margin-top: 8px;
 }
-.badge-hadir { background-color: #dcfce7; color: #15803d; }
-.badge-terlambat { background-color: #ffedd5; color: #c2410c; }
-.badge-izin { background-color: #e0f2fe; color: #0369a1; }
-.badge-sakit { background-color: #fef3c7; color: #b45309; }
-.badge-alpa { background-color: #fee2e2; color: #b91c1c; }
-.table-responsive {
-  overflow-x: auto;
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-}
-.data-table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: left;
-  font-size: 13.5px;
-}
-.data-table th, .data-table td {
-  padding: 12px 14px;
-  border-bottom: 1px solid var(--border-color);
-}
-.data-table th {
-  background-color: #f8fafc;
-  color: #475569;
-  font-weight: 600;
-}
-.data-table tr:last-child td { border-bottom: none; }
-.filter-bar {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-  gap: 12px;
-  background: #f8fafc;
-  padding: 16px;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border-color);
-  margin-bottom: 20px;
-}
+.badge-hadir { background: #dcfce7; color: #15803d; }
+.badge-terlambat { background: #ffedd5; color: #c2410c; }
+.badge-izin { background: #e0f2fe; color: #0369a1; }
+.badge-sakit { background: #fef3c7; color: #b45309; }
+.badge-alpa { background: #fee2e2; color: #b91c1c; }
 .modal-overlay {
   display: none;
   position: fixed;
@@ -409,8 +467,8 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(4px);
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(3px);
   justify-content: center;
   align-items: center;
   z-index: 999;
@@ -419,10 +477,10 @@ body {
 .modal-content {
   background: white;
   padding: 24px;
-  border-radius: var(--radius-lg);
+  border-radius: 16px;
   max-width: 500px;
   width: 100%;
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
   max-height: 90vh;
   overflow-y: auto;
 }
@@ -434,105 +492,29 @@ body {
   background: linear-gradient(145deg, #064e3b 0%, #047857 55%, #059669 100%);
   color: white;
   padding: 16px 14px;
-  position: relative;
-  box-shadow: 0 10px 25px rgba(4, 120, 87, 0.3);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  overflow: hidden;
   box-sizing: border-box;
 }
-.smart-card-portrait::before {
-  content: '';
-  position: absolute;
-  top: -50px;
-  right: -50px;
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  pointer-events: none;
-}
-.card-header-portrait {
+.login-wrap {
+  min-height: 100vh;
   display: flex;
   align-items: center;
-  gap: 10px;
-  width: 100%;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
-  padding-bottom: 10px;
-  text-align: left;
+  justify-content: center;
+  padding: 20px;
+  background: #f1f5f9;
 }
-.card-logo-portrait {
-  width: 38px;
-  height: 38px;
-  border-radius: 8px;
-  object-fit: cover;
+.login-card {
   background: white;
-  flex-shrink: 0;
-}
-.card-title-portrait {
-  font-size: 11.5px;
-  font-weight: 700;
-  line-height: 1.3;
-  letter-spacing: 0.3px;
-}
-.card-chip-box {
-  display: flex;
-  justify-content: flex-start;
+  padding: 36px 32px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  border: 1px solid var(--border-color);
   width: 100%;
-  margin-top: 6px;
-}
-.card-chip {
-  width: 32px;
-  height: 22px;
-  background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
-  border-radius: 4px;
-}
-.card-avatar-portrait {
-  width: 96px;
-  height: 96px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid rgba(255, 255, 255, 0.9);
-  background: white;
-  margin: 6px 0 8px 0;
-}
-.card-name-portrait {
-  font-size: 14px;
-  font-weight: 700;
-  margin-bottom: 2px;
-  max-width: 230px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.card-sub-portrait {
-  font-size: 11px;
-  opacity: 0.9;
-  line-height: 1.4;
-}
-.card-qr-box {
-  background: white;
-  padding: 6px;
-  border-radius: 10px;
-  margin: 8px 0 4px 0;
-  display: inline-flex;
-}
-.card-qr-box img {
-  width: 90px;
-  height: 90px;
-  display: block;
-}
-.card-footer-portrait {
-  width: 100%;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  padding-top: 6px;
-  font-size: 9px;
-  opacity: 0.8;
-  display: flex;
-  justify-content: space-between;
+  max-width: 400px;
 }
 </style>
 </head>
@@ -540,10 +522,12 @@ body {
 
 <div id="halamanLogin" class="login-wrap">
   <div class="login-card">
-    <div class="login-header">
-      <img id="loginLogoPondok" class="login-logo-img" src="https://ui-avatars.com/api/?name=Pondok&background=047857&color=fff" alt="Logo">
-      <h2 style="font-size: 20px; font-weight: 700;" id="loginJudulInstansi">Ponpes Dahlan Ikhsan</h2>
-      <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;" id="loginDeskripsi">Sistem Presensi Santri dan Smartcard</p>
+    <div style="text-align: center; margin-bottom: 24px;">
+      <div class="logo-masjid-icon" style="margin: 0 auto 12px auto; width: 50px; height: 50px;">
+        <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+      </div>
+      <h2 style="font-size: 19px; font-weight: 800;" id="loginJudulInstansi">PONPES DAHLAN IKHSAN</h2>
+      <p style="font-size: 12.5px; color: var(--text-muted); margin-top: 4px;" id="loginDeskripsi">Aplikasi Absensi Santri QR PPDI</p>
     </div>
     <form onsubmit="prosesLogin(event)">
       <div class="form-group">
@@ -554,296 +538,442 @@ body {
         <label class="form-label">Kata Sandi</label>
         <input type="password" class="form-input" id="loginPassword" placeholder="Masukkan kata sandi" required>
       </div>
-      <div id="pesanErrorLogin" style="color: var(--danger); font-size: 12.5px; margin-bottom: 14px; display: none;">Nama pengguna atau kata sandi tidak cocok.</div>
-      <button type="submit" class="btn btn-primary" style="width: 100%; padding: 11px;">Masuk Aplikasi</button>
+      <div id="pesanErrorLogin" style="color: #dc2626; font-size: 12px; margin-bottom: 12px; display: none;">Nama pengguna atau kata sandi tidak cocok.</div>
+      <button type="submit" class="btn btn-primary" style="width: 100%; padding: 10px; justify-content: center;">Masuk</button>
     </form>
   </div>
 </div>
 
-<div id="aplikasiUtama" style="display: none;">
+<div id="aplikasiUtama" class="app-wrapper" style="display: none;">
 
-  <div class="header">
-    <div class="header-brand">
-      <img id="headerLogoPondok" class="header-logo-img" src="" alt="Logo">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-masjid-icon">
+        <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+      </div>
       <div>
-        <div class="header-title" id="headerNamaInstansi">Absensi Ponpes Dahlan Ikhsan</div>
-        <div class="header-sub">Manajemen Presensi Berbasis Smartcard</div>
-      </div>
-    </div>
-    <div class="user-info-box">
-      <img id="headerFotoPengguna" class="user-avatar-header" src="" alt="Foto Profil">
-      <div>
-        <div style="font-size: 12.5px; font-weight: 700;" id="labelNamaPenggunaAktif">Administrator</div>
-        <div style="font-size: 11px; opacity: 0.85;" id="labelPeranAktif">Akses Penuh</div>
-      </div>
-      <button class="btn-logout" onclick="prosesLogout()">Keluar</button>
-    </div>
-  </div>
-
-  <div class="nav-bar">
-    <button class="nav-btn active" id="btnTabDasbor" onclick="bukaTab('panelDasbor', this)">Dasbor</button>
-    <button class="nav-btn" id="btnTabSantri" onclick="bukaTab('panelSantri', this)">Data Santri</button>
-    <button class="nav-btn" id="btnTabSholat" onclick="bukaTab('panelSholat', this)">Absensi Sholat</button>
-    <button class="nav-btn" id="btnTabKegiatan" onclick="bukaTab('panelKegiatan', this)">Absensi Kegiatan</button>
-    <button class="nav-btn" id="btnTabRekap" onclick="bukaTab('panelRekap', this)">Rekap Kehadiran</button>
-    <button class="nav-btn" id="btnTabPengguna" onclick="bukaTab('panelPengguna', this)">Kelola Pengguna</button>
-  </div>
-
-  <div class="container">
-
-    <div class="panel active" id="panelDasbor">
-      <div class="panel-header">
-        <div>
-          <div class="panel-title">Ringkasan Dasbor</div>
-          <div class="panel-desc" id="dasborDeskripsi">Statistik aktivitas santri dan jadwal aktif hari ini</div>
-        </div>
-      </div>
-      <div class="grid-cards">
-        <div class="card">
-          <div class="card-val" id="statTotalSantri">0</div>
-          <div class="card-desc">Total Santri Terdaftar</div>
-        </div>
-        <div class="card">
-          <div class="card-val" id="statSholatHariIni">0</div>
-          <div class="card-desc">Catatan Sholat Hari Ini</div>
-        </div>
-        <div class="card">
-          <div class="card-val" id="statKegiatanHariIni">0</div>
-          <div class="card-desc">Catatan Kegiatan Hari Ini</div>
-        </div>
-      </div>
-      <div style="background: var(--primary-light); padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--primary-border);">
-        <h4 style="color: var(--primary-dark); font-size: 14px; margin-bottom: 6px;">Pemberitahuan Sistem Database</h4>
-        <p style="font-size: 13px; color: #334155; line-height: 1.5;">Setiap hasil scan dan data izin sakit santri otomatis terkirim langsung ke Google Sheets milikmu.</p>
+        <div class="brand-title" id="sideNamaInstansi">PONPES DAHLAN IKHSAN</div>
+        <div class="brand-sub">Aplikasi Absensi Santri QR PPDI</div>
       </div>
     </div>
 
-    <div class="panel" id="panelSantri">
-      <div class="panel-header">
-        <div>
-          <div class="panel-title">Manajemen Data Santri</div>
-          <div class="panel-desc">Kelola dan cetak smartcard kartu identitas santri</div>
-        </div>
-        <div id="boxBtnTambahSantri">
-          <button class="btn btn-primary" onclick="bukaModalSantriBaru()">+ Tambah Santri</button>
-        </div>
-      </div>
-      <div class="table-responsive">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>Foto</th>
-              <th>NIS</th>
-              <th>Nama Lengkap</th>
-              <th>Kelas</th>
-              <th>Gender</th>
-              <th>Smartcard</th>
-              <th id="kolomAksiSantri">Tindakan</th>
-            </tr>
-          </thead>
-          <tbody id="tabelSantriBody"></tbody>
-        </table>
-      </div>
-    </div>
+    <nav class="sidebar-menu">
+      <button class="nav-item active" id="btnSideDasbor" onclick="bukaTab('panelDasbor', this)">
+        <span class="nav-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        </span>
+        Dashboard
+      </button>
 
-    <div class="panel" id="panelSholat">
-      <div class="panel-header">
-        <div>
-          <div class="panel-title">Presensi Sholat Wajib dan Sunnah</div>
-          <div class="panel-desc">Kelola jadwal, izin santri sakit, dan buka kamera presensi</div>
+      <button class="nav-item" id="btnSideSholat" onclick="bukaTab('panelSholat', this)">
+        <span class="nav-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        </span>
+        Absensi Shalat
+      </button>
+
+      <button class="nav-item" id="btnSideKegiatan" onclick="bukaTab('panelKegiatan', this)">
+        <span class="nav-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+        </span>
+        Absensi Kegiatan
+      </button>
+
+      <button class="nav-item" id="btnSideSantri" onclick="bukaTab('panelSantri', this)">
+        <span class="nav-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+        </span>
+        Data Santri
+      </button>
+
+      <button class="nav-item" id="btnSideRekapSholat" onclick="bukaTab('panelRekapSholat', this)">
+        <span class="nav-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        </span>
+        Rekap Shalat
+      </button>
+
+      <button class="nav-item" id="btnSideRekapKegiatan" onclick="bukaTab('panelRekapKegiatan', this)">
+        <span class="nav-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        </span>
+        Rekap Kegiatan
+      </button>
+
+      <button class="nav-item" id="btnSidePengguna" onclick="bukaTab('panelPengguna', this)">
+        <span class="nav-icon">
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </span>
+        Kelola Pengguna
+      </button>
+    </nav>
+  </aside>
+
+  <main class="main-area">
+    <header class="top-header">
+      <div class="user-widget" onclick="prosesLogout()" title="Klik untuk keluar">
+        <div class="user-avatar-circle" id="topAvatarLetter">O</div>
+        <div class="user-text-box">
+          <div class="user-name" id="topNamaPengguna">Operator</div>
+          <div class="user-role" id="topPeranPengguna">Admin</div>
         </div>
-        <div id="boxBtnTambahSholat">
-          <button class="btn btn-primary" onclick="bukaModalSholatBaru()">+ Tambah Sholat</button>
-        </div>
+        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
       </div>
+    </header>
 
-      <div class="sessions-grid" id="kontainerSesiSholat"></div>
+    <div class="content-body">
 
-      <div id="areaScanSholat" style="display: none; margin-top: 20px;">
-        <div style="background: var(--primary-light); border: 1px solid var(--primary-border); padding: 14px 18px; border-radius: var(--radius-md); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-          <div>
-            Sesi Sholat: <strong id="teksSesiAktif">Dzuhur</strong> | Batas Jam: <strong id="teksBatasWaktu">12:30</strong>
-            <div style="font-size: 12px; margin-top: 2px;">Status Sesi: <span id="teksStatusSesiAktif" class="status-pill open">Terbuka</span></div>
+      <!-- PANEL DASHBOARD -->
+      <div class="panel active" id="panelDasbor">
+        <div class="banner-welcome">
+          <div class="banner-text-box">
+            <h1>Selamat Datang,</h1>
+            <h2 id="dasborNamaPondok">Di Aplikasi Absensi Santri Ponpes Dahlan Ikhsan</h2>
+            <p id="dasborDeskripsiTeks">Kelola absensi santri dengan mudah, cepat dan akurat melalui QR Code.</p>
           </div>
-          <button type="button" class="btn btn-danger" onclick="hentikanScanner()">Tutup Kamera</button>
+          <svg class="banner-mosque-svg" viewBox="0 0 200 100" fill="currentColor">
+            <path d="M100 15 C95 25 88 35 88 50 L112 50 C112 35 105 25 100 15 Z" />
+            <circle cx="100" cy="10" r="3" />
+            <path d="M80 40 C75 48 70 55 70 70 L90 70 L90 40 Z" />
+            <path d="M120 40 C125 48 130 55 130 70 L110 70 L110 40 Z" />
+            <rect x="50" y="30" width="10" height="70" />
+            <polygon points="55,18 48,30 62,30" />
+            <rect x="140" y="30" width="10" height="70" />
+            <polygon points="145,18 138,30 152,30" />
+            <rect x="30" y="60" width="140" height="40" />
+            <path d="M92 100 C92 88 108 88 108 100 Z" fill="#eafaf1" />
+          </svg>
         </div>
-        <div class="scanner-container">
-          <div class="scanner-box">
-            <div id="readerSholat" style="width: 100%;"></div>
-          </div>
-          <div class="result-box" id="kotakHasilScanSholat">
-            <p style="color: var(--text-muted); font-size: 13.5px;">Arahkan smartcard potret santri ke kamera untuk mencatat absensi.</p>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="panel" id="panelKegiatan">
-      <div class="panel-header">
-        <div>
-          <div class="panel-title">Presensi Kegiatan Pengajian</div>
-          <div class="panel-desc">Kelola jenis kegiatan, izin santri sakit, dan pindai kartu</div>
-        </div>
-        <div id="boxBtnTambahKegiatan">
-          <button class="btn btn-primary" onclick="bukaModalKegiatanBaru()">+ Tambah Kegiatan</button>
-        </div>
-      </div>
-
-      <div class="sessions-grid" id="kontainerSesiKegiatan"></div>
-
-      <div id="areaScanKegiatan" style="display: none; margin-top: 20px;">
-        <div style="background: var(--primary-light); border: 1px solid var(--primary-border); padding: 14px 18px; border-radius: var(--radius-md); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-          <div>
-            Kegiatan Aktif: <strong id="teksKegiatanAktif">Tafsir</strong>
-            <div style="font-size: 12px; margin-top: 2px;">Status Sesi: <span id="teksStatusKegiatanAktif" class="status-pill open">Terbuka</span></div>
-          </div>
-          <button type="button" class="btn btn-danger" onclick="hentikanScanner()">Tutup Kamera</button>
-        </div>
-        <div class="scanner-container">
-          <div class="scanner-box">
-            <div id="readerKegiatan" style="width: 100%;"></div>
-          </div>
-          <div class="result-box" id="kotakHasilScanKegiatan">
-            <p style="color: var(--text-muted); font-size: 13.5px;">Arahkan smartcard potret santri ke kamera untuk mencatat absensi kegiatan.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel" id="panelRekap">
-      <div class="panel-header">
-        <div>
-          <div class="panel-title">Laporan Rekapitulasi Presensi</div>
-          <div class="panel-desc">Saring data kehadiran per kelas, sesi sholat, atau kegiatan</div>
-        </div>
-      </div>
-      <div class="filter-bar">
-        <div>
-          <label class="form-label">Kategori</label>
-          <select class="form-select" id="rekapKategori" onchange="perbaruiFilterSesiDanRekap()">
-            <option value="semua">Semua Kategori</option>
-            <option value="Sholat">Khusus Sholat</option>
-            <option value="Kegiatan">Khusus Kegiatan</option>
-          </select>
-        </div>
-        <div>
-          <label class="form-label">Pilih Sesi Spesifik</label>
-          <select class="form-select" id="rekapSesi" onchange="muatDataRekap()">
-            <option value="semua">Semua Sesi</option>
-          </select>
-        </div>
-        <div>
-          <label class="form-label">Pilih Kelas</label>
-          <select class="form-select" id="rekapKelas" onchange="muatDataRekap()">
-            <option value="semua">Semua Kelas</option>
-          </select>
-        </div>
-        <div>
-          <label class="form-label">Rentang Waktu</label>
-          <select class="form-select" id="rekapRentang" onchange="muatDataRekap()">
-            <option value="semua">Semua Waktu</option>
-            <option value="7">7 Hari Terakhir</option>
-            <option value="30">30 Hari Terakhir</option>
-          </select>
-        </div>
-        <div>
-          <label class="form-label">Santri Tertentu</label>
-          <select class="form-select" id="rekapSantri" onchange="muatDataRekap()">
-            <option value="semua">Semua Santri</option>
-          </select>
-        </div>
-      </div>
-      <div class="grid-cards">
-        <div class="card">
-          <div class="card-val" id="rekapHadir">0</div>
-          <div class="card-desc">Hadir Tepat Waktu</div>
-        </div>
-        <div class="card">
-          <div class="card-val" id="rekapTerlambat">0</div>
-          <div class="card-desc">Hadir Terlambat</div>
-        </div>
-        <div class="card">
-          <div class="card-val" id="rekapIzin">0</div>
-          <div class="card-desc">Total Izin</div>
-        </div>
-        <div class="card">
-          <div class="card-val" id="rekapSakit">0</div>
-          <div class="card-desc">Total Sakit</div>
-        </div>
-      </div>
-      <div class="table-responsive">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>Tanggal</th>
-              <th>Waktu</th>
-              <th>NIS</th>
-              <th>Nama Santri</th>
-              <th>Kelas</th>
-              <th>Kategori</th>
-              <th>Nama Sesi</th>
-              <th>Status Presensi</th>
-            </tr>
-          </thead>
-          <tbody id="tabelRekapBody"></tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="panel" id="panelPengguna">
-      <div class="panel-header">
-        <div>
-          <div class="panel-title">Manajemen Akun dan Profil Pondok</div>
-          <div class="panel-desc">Ubah logo, nama pondok, teks deskripsi, serta hak akses akun</div>
-        </div>
-        <div>
-          <button class="btn btn-primary" onclick="bukaModalPenggunaBaru()">+ Tambah Pengguna</button>
-        </div>
-      </div>
-
-      <div class="form-box" style="margin-bottom: 24px;">
-        <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 12px;">Pengaturan Profil, Teks, dan Logo Pondok</h4>
-        <form onsubmit="simpanProfilPondok(event)">
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px;">
-            <div class="form-group">
-              <label class="form-label">Nama Pondok Pesantren</label>
-              <input type="text" class="form-input" id="inputNamaPondok" required>
+        <div class="cards-grid">
+          <div class="action-card" onclick="pindahTabDariCard('panelSholat', 'btnSideSholat')">
+            <div class="card-left-box">
+              <div class="card-icon-pill bg-shalat">
+                <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+              </div>
+              <div class="card-texts">
+                <h3>Absensi Shalat</h3>
+                <p>Lakukan absensi shalat santri dengan scan QR Code.</p>
+              </div>
             </div>
-            <div class="form-group">
-              <label class="form-label">Deskripsi Halaman Login</label>
-              <input type="text" class="form-input" id="inputDeskripsiLogin" placeholder="Contoh: Sistem Presensi Santri dan Smartcard" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Deskripsi Dasbor</label>
-              <input type="text" class="form-input" id="inputDeskripsiDasbor" placeholder="Contoh: Statistik aktivitas santri dan jadwal aktif hari ini" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Unggah Logo Pondok Baru</label>
-              <input type="file" class="form-input" id="inputFileLogoPondok" accept="image/*">
+            <div class="card-arrow-circle">
+              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary">Simpan Profil dan Teks</button>
-        </form>
+
+          <div class="action-card" onclick="pindahTabDariCard('panelKegiatan', 'btnSideKegiatan')">
+            <div class="card-left-box">
+              <div class="card-icon-pill bg-kegiatan">
+                <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              </div>
+              <div class="card-texts">
+                <h3>Absensi Kegiatan</h3>
+                <p>Lakukan absensi kegiatan santri dengan scan QR Code.</p>
+              </div>
+            </div>
+            <div class="card-arrow-circle">
+              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </div>
+          </div>
+
+          <div class="action-card" onclick="pindahTabDariCard('panelSantri', 'btnSideSantri')">
+            <div class="card-left-box">
+              <div class="card-icon-pill bg-santri">
+                <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+              </div>
+              <div class="card-texts">
+                <h3>Data Santri</h3>
+                <p>Lihat dan kelola data santri pondok pesantren.</p>
+              </div>
+            </div>
+            <div class="card-arrow-circle">
+              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </div>
+          </div>
+
+          <div class="action-card" onclick="pindahTabDariCard('panelRekapSholat', 'btnSideRekapSholat')">
+            <div class="card-left-box">
+              <div class="card-icon-pill bg-rekap-shalat">
+                <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+              </div>
+              <div class="card-texts">
+                <h3>Rekap Shalat</h3>
+                <p>Lihat laporan rekap absensi shalat santri.</p>
+              </div>
+            </div>
+            <div class="card-arrow-circle">
+              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </div>
+          </div>
+
+          <div class="action-card" onclick="pindahTabDariCard('panelRekapKegiatan', 'btnSideRekapKegiatan')">
+            <div class="card-left-box">
+              <div class="card-icon-pill bg-rekap-kegiatan">
+                <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              </div>
+              <div class="card-texts">
+                <h3>Rekap Kegiatan</h3>
+                <p>Lihat laporan rekap absensi kegiatan santri.</p>
+              </div>
+            </div>
+            <div class="card-arrow-circle">
+              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="table-responsive">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>Foto</th>
-              <th>Nama Pengguna</th>
-              <th>Nama Lengkap</th>
-              <th>Peran</th>
-              <th>Tindakan</th>
-            </tr>
-          </thead>
-          <tbody id="tabelPenggunaBody"></tbody>
-        </table>
+      <!-- PANEL DATA SANTRI -->
+      <div class="panel" id="panelSantri">
+        <div class="panel-card-wrap">
+          <div class="panel-top-bar">
+            <div>
+              <div class="panel-heading-title">Manajemen Data Santri</div>
+              <div class="panel-heading-sub">Kelola identitas dan cetak smartcard santri</div>
+            </div>
+            <div id="boxBtnTambahSantri">
+              <button class="btn btn-primary" onclick="bukaModalSantriBaru()">+ Tambah Santri</button>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Foto</th>
+                  <th>NIS</th>
+                  <th>Nama Lengkap</th>
+                  <th>Kelas</th>
+                  <th>Gender</th>
+                  <th>Smartcard</th>
+                  <th id="kolomAksiSantri">Tindakan</th>
+                </tr>
+              </thead>
+              <tbody id="tabelSantriBody"></tbody>
+            </table>
+          </div>
+        </div>
       </div>
+
+      <!-- PANEL ABSENSI SHOLAT -->
+      <div class="panel" id="panelSholat">
+        <div class="panel-card-wrap">
+          <div class="panel-top-bar">
+            <div>
+              <div class="panel-heading-title">Absensi Shalat Santri</div>
+              <div class="panel-heading-sub">Pilih jadwal sholat untuk menyalakan kamera pemindai kartu</div>
+            </div>
+            <div id="boxBtnTambahSholat">
+              <button class="btn btn-primary" onclick="bukaModalSholatBaru()">+ Tambah Sholat</button>
+            </div>
+          </div>
+          <div class="sessions-grid" id="kontainerSesiSholat"></div>
+          <div id="areaScanSholat" style="display: none; margin-top: 20px;">
+            <div style="background: var(--primary-light); padding: 14px 18px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+              <div>
+                Sesi: <strong id="teksSesiAktif">Dzuhur</strong> | Batas: <strong id="teksBatasWaktu">12:30</strong>
+                <span id="teksStatusSesiAktif" class="status-pill open" style="margin-left: 8px;">Terbuka</span>
+              </div>
+              <button type="button" class="btn btn-danger" onclick="hentikanScanner()">Tutup Kamera</button>
+            </div>
+            <div class="scanner-container">
+              <div class="scanner-box">
+                <div id="readerSholat" style="width: 100%;"></div>
+              </div>
+              <div class="result-box" id="kotakHasilScanSholat">
+                <p style="color: var(--text-muted); font-size: 13px;">Arahkan kartu QR santri ke kamera untuk mencatat absensi sholat.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL ABSENSI KEGIATAN -->
+      <div class="panel" id="panelKegiatan">
+        <div class="panel-card-wrap">
+          <div class="panel-top-bar">
+            <div>
+              <div class="panel-heading-title">Absensi Kegiatan Pengajian</div>
+              <div class="panel-heading-sub">Pilih kegiatan untuk membuka kamera pemindai kartu</div>
+            </div>
+            <div id="boxBtnTambahKegiatan">
+              <button class="btn btn-primary" onclick="bukaModalKegiatanBaru()">+ Tambah Kegiatan</button>
+            </div>
+          </div>
+          <div class="sessions-grid" id="kontainerSesiKegiatan"></div>
+          <div id="areaScanKegiatan" style="display: none; margin-top: 20px;">
+            <div style="background: var(--primary-light); padding: 14px 18px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+              <div>
+                Kegiatan: <strong id="teksKegiatanAktif">Tafsir</strong>
+                <span id="teksStatusKegiatanAktif" class="status-pill open" style="margin-left: 8px;">Terbuka</span>
+              </div>
+              <button type="button" class="btn btn-danger" onclick="hentikanScanner()">Tutup Kamera</button>
+            </div>
+            <div class="scanner-container">
+              <div class="scanner-box">
+                <div id="readerKegiatan" style="width: 100%;"></div>
+              </div>
+              <div class="result-box" id="kotakHasilScanKegiatan">
+                <p style="color: var(--text-muted); font-size: 13px;">Arahkan kartu QR santri ke kamera untuk mencatat absensi kegiatan.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL REKAP SHOLAT -->
+      <div class="panel" id="panelRekapSholat">
+        <div class="panel-card-wrap">
+          <div class="panel-top-bar">
+            <div>
+              <div class="panel-heading-title">Laporan Rekapitulasi Shalat</div>
+              <div class="panel-heading-sub">Laporan kehadiran shalat santri per kelas dan per sesi</div>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-bottom: 16px;">
+            <div>
+              <label class="form-label">Pilih Jadwal Shalat</label>
+              <select class="form-select" id="filterSesiSholat" onchange="muatDataRekapSholat()"></select>
+            </div>
+            <div>
+              <label class="form-label">Pilih Kelas</label>
+              <select class="form-select" id="filterKelasSholat" onchange="muatDataRekapSholat()"></select>
+            </div>
+            <div>
+              <label class="form-label">Rentang Waktu</label>
+              <select class="form-select" id="filterRentangSholat" onchange="muatDataRekapSholat()">
+                <option value="semua">Semua Waktu</option>
+                <option value="7">7 Hari Terakhir</option>
+                <option value="30">30 Hari Terakhir</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Tanggal</th>
+                  <th>Waktu</th>
+                  <th>NIS</th>
+                  <th>Nama Santri</th>
+                  <th>Kelas</th>
+                  <th>Sesi Shalat</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="tabelRekapSholatBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL REKAP KEGIATAN -->
+      <div class="panel" id="panelRekapKegiatan">
+        <div class="panel-card-wrap">
+          <div class="panel-top-bar">
+            <div>
+              <div class="panel-heading-title">Laporan Rekapitulasi Kegiatan</div>
+              <div class="panel-heading-sub">Laporan kehadiran pengajian santri per kelas dan kegiatan</div>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-bottom: 16px;">
+            <div>
+              <label class="form-label">Pilih Kegiatan</label>
+              <select class="form-select" id="filterSesiKegiatan" onchange="muatDataRekapKegiatan()"></select>
+            </div>
+            <div>
+              <label class="form-label">Pilih Kelas</label>
+              <select class="form-select" id="filterKelasKegiatan" onchange="muatDataRekapKegiatan()"></select>
+            </div>
+            <div>
+              <label class="form-label">Rentang Waktu</label>
+              <select class="form-select" id="filterRentangKegiatan" onchange="muatDataRekapKegiatan()">
+                <option value="semua">Semua Waktu</option>
+                <option value="7">7 Hari Terakhir</option>
+                <option value="30">30 Hari Terakhir</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Tanggal</th>
+                  <th>Waktu</th>
+                  <th>NIS</th>
+                  <th>Nama Santri</th>
+                  <th>Kelas</th>
+                  <th>Kegiatan</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="tabelRekapKegiatanBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL PENGGUNA & PENGATURAN -->
+      <div class="panel" id="panelPengguna">
+        <div class="panel-card-wrap">
+          <div class="panel-top-bar">
+            <div>
+              <div class="panel-heading-title">Manajemen Akun dan Profil Pondok</div>
+              <div class="panel-heading-sub">Ubah identitas pondok, teks tampilan, serta akun admin</div>
+            </div>
+            <div>
+              <button class="btn btn-primary" onclick="bukaModalPenggunaBaru()">+ Tambah Pengguna</button>
+            </div>
+          </div>
+
+          <div style="background: #f8fafc; border: 1px solid var(--border-color); padding: 20px; border-radius: 12px; margin-bottom: 24px;">
+            <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 12px;">Pengaturan Teks dan Profil Pondok</h4>
+            <form onsubmit="simpanProfilPondok(event)">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
+                <div class="form-group">
+                  <label class="form-label">Nama Pondok Pesantren</label>
+                  <input type="text" class="form-input" id="inputNamaPondok" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Deskripsi Halaman Login</label>
+                  <input type="text" class="form-input" id="inputDeskripsiLogin" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Deskripsi Dasbor</label>
+                  <input type="text" class="form-input" id="inputDeskripsiDasbor" required>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">Simpan Profil dan Teks</button>
+            </form>
+          </div>
+
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Foto</th>
+                  <th>Nama Pengguna</th>
+                  <th>Nama Lengkap</th>
+                  <th>Peran</th>
+                  <th>Tindakan</th>
+                </tr>
+              </thead>
+              <tbody id="tabelPenggunaBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-  </div>
-
+    <footer class="footer-bar">
+      <div class="footer-left">
+        <strong>PONPES DAHLAN IKHSAN</strong> | Disiplin · Berakhlak · Berprestasi
+      </div>
+      <div class="footer-right" id="liveClockWidget">
+        10 Oktober 2026 | 15:32
+      </div>
+    </footer>
+  </main>
 </div>
 
 <!-- MODAL FORM SANTRI -->
@@ -892,7 +1022,7 @@ body {
       <input type="hidden" id="formSholatId">
       <div class="form-group">
         <label class="form-label">Nama Sholat</label>
-        <input type="text" class="form-input" id="formSholatNama" placeholder="Contoh: Dhuha / Witir" required>
+        <input type="text" class="form-input" id="formSholatNama" placeholder="Contoh: Dhuha" required>
       </div>
       <div class="form-group">
         <label class="form-label">Batas Jam Kehadiran</label>
@@ -964,21 +1094,20 @@ body {
 <div id="modalSmartCard" class="modal-overlay">
   <div class="modal-content" style="text-align: center;">
     <div class="smart-card-portrait" id="areaCetakKartu">
-      <div class="card-header-portrait">
-        <img id="cardLogoPondok" class="card-logo-portrait" src="" alt="Logo">
-        <div class="card-title-portrait" id="cardNamaPondok">PONPES DAHLAN IKHSAN</div>
+      <div style="display: flex; align-items: center; gap: 10px; width: 100%; border-bottom: 1px solid rgba(255,255,255,0.25); padding-bottom: 8px; text-align: left;">
+        <div class="logo-masjid-icon" style="width: 32px; height: 32px; background: white; color: #059669;">
+          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+        </div>
+        <div style="font-size: 11px; font-weight: 800; line-height: 1.2;" id="cardNamaPondok">PONPES DAHLAN IKHSAN</div>
       </div>
-      <div class="card-chip-box">
-        <div class="card-chip"></div>
+      <img id="cardFotoSantri" style="width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 3px solid white; margin: 8px 0;" src="" alt="Foto" crossorigin="anonymous">
+      <div style="font-size: 14px; font-weight: 700;" id="cardNamaSantri">Ahmad Dahlan</div>
+      <div style="font-size: 11px; opacity: 0.9;" id="cardNisSantri">NIS: 2026001</div>
+      <div style="font-size: 11px; opacity: 0.9;" id="cardKelasSantri">Kelas: 1 Diniyah | Putra</div>
+      <div style="background: white; padding: 6px; border-radius: 8px; margin: 8px 0;">
+        <img id="cardQrGambar" style="width: 86px; height: 86px; display: block;" src="" alt="QR Santri" crossorigin="anonymous">
       </div>
-      <img id="cardFotoSantri" class="card-avatar-portrait" src="" alt="Foto" crossorigin="anonymous">
-      <div class="card-name-portrait" id="cardNamaSantri">Ahmad Dahlan</div>
-      <div class="card-sub-portrait" id="cardNisSantri">NIS: 2026001</div>
-      <div class="card-sub-portrait" id="cardKelasSantri">Kelas: 1 Diniyah | Putra</div>
-      <div class="card-qr-box">
-        <img id="cardQrGambar" src="" alt="QR Santri" crossorigin="anonymous">
-      </div>
-      <div class="card-footer-portrait">
+      <div style="width: 100%; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 6px; font-size: 9px; opacity: 0.8; display: flex; justify-content: space-between;">
         <span>SMARTCARD RESMI</span>
         <span>Ukuran 5,4 x 8,56 cm</span>
       </div>
@@ -1033,15 +1162,14 @@ const KUNCI_PROFIL_PONDOK = 'ponpes_profil_pondok_data'
 
 let profilPondok = JSON.parse(localStorage.getItem(KUNCI_PROFIL_PONDOK)) || {
   nama: 'Ponpes Dahlan Ikhsan',
-  logo: 'https://ui-avatars.com/api/?name=Pondok+Dahlan&background=047857&color=fff',
-  deskripsiLogin: 'Sistem Presensi Santri dan Smartcard',
-  deskripsiDasbor: 'Statistik aktivitas santri dan jadwal aktif hari ini'
+  deskripsiLogin: 'Aplikasi Absensi Santri QR PPDI',
+  deskripsiDasbor: 'Kelola absensi santri dengan mudah, cepat dan akurat melalui QR Code.'
 }
 
 let daftarPengguna = JSON.parse(localStorage.getItem(KUNCI_PENGGUNA)) || [
-  { id: 1, username: 'admin', sandi: '123', nama: 'Administrator', peran: 'admin', foto: 'https://ui-avatars.com/api/?name=Admin&background=047857&color=fff' },
-  { id: 2, username: 'pengurus', sandi: '123', nama: 'Ustadz Pengurus', peran: 'pengurus', foto: 'https://ui-avatars.com/api/?name=Pengurus&background=0284c7&color=fff' },
-  { id: 3, username: 'petugas', sandi: '123', nama: 'Petugas Piket', peran: 'petugas', foto: 'https://ui-avatars.com/api/?name=Petugas&background=f59e0b&color=fff' }
+  { id: 1, username: 'admin', sandi: '123', nama: 'Operator', peran: 'admin', foto: '' },
+  { id: 2, username: 'pengurus', sandi: '123', nama: 'Ustadz Pengurus', peran: 'pengurus', foto: '' },
+  { id: 3, username: 'petugas', sandi: '123', nama: 'Petugas Piket', peran: 'petugas', foto: '' }
 ]
 
 let daftarSantri = JSON.parse(localStorage.getItem(KUNCI_SANTRI)) || [
@@ -1074,34 +1202,39 @@ let idSesiSholatAktif = null
 let idKegiatanAktif = null
 let sesiKelolaSedangDipilih = null
 
+function updateJamLive() {
+  const sekarang = new Date()
+  const opsiTgl = { day: 'numeric', month: 'Long', year: 'numeric' }
+  const teksTgl = sekarang.toLocaleDateString('id-ID', opsiTgl)
+  const jam = String(sekarang.getHours()).padStart(2, '0')
+  const menit = String(sekarang.getMinutes()).padStart(2, '0')
+  const el = document.getElementById('liveClockWidget')
+  if (el) {
+    el.innerText = teksTgl + ' | ' + jam + ':' + menit
+  }
+}
+setInterval(updateJamLive, 1000)
+updateJamLive()
+
 function terapkanProfilPondok() {
-  document.getElementById('loginLogoPondok').src = profilPondok.logo
-  document.getElementById('loginJudulInstansi').innerText = profilPondok.nama
-  document.getElementById('loginDeskripsi').innerText = profilPondok.deskripsiLogin || 'Sistem Presensi Santri dan Smartcard'
-  document.getElementById('headerLogoPondok').src = profilPondok.logo
-  document.getElementById('headerNamaInstansi').innerText = profilPondok.nama
-  document.getElementById('dasborDeskripsi').innerText = profilPondok.deskripsiDasbor || 'Statistik aktivitas santri dan jadwal aktif hari ini'
+  document.getElementById('loginJudulInstansi').innerText = profilPondok.nama.toUpperCase()
+  document.getElementById('loginDeskripsi').innerText = profilPondok.deskripsiLogin
+  document.getElementById('sideNamaInstansi').innerText = profilPondok.nama.toUpperCase()
+  document.getElementById('dasborNamaPondok').innerText = 'Di Aplikasi Absensi Santri ' + profilPondok.nama
+  document.getElementById('dasborDeskripsiTeks').innerText = profilPondok.deskripsiDasbor
   document.getElementById('inputNamaPondok').value = profilPondok.nama
-  document.getElementById('inputDeskripsiLogin').value = profilPondok.deskripsiLogin || ''
-  document.getElementById('inputDeskripsiDasbor').value = profilPondok.deskripsiDasbor || ''
+  document.getElementById('inputDeskripsiLogin').value = profilPondok.deskripsiLogin
+  document.getElementById('inputDeskripsiDasbor').value = profilPondok.deskripsiDasbor
 }
 
 function simpanProfilPondok(event) {
   event.preventDefault()
-  const namaBaru = document.getElementById('inputNamaPondok').value.trim()
-  const deskripsiLoginBaru = document.getElementById('inputDeskripsiLogin').value.trim()
-  const deskripsiDasborBaru = document.getElementById('inputDeskripsiDasbor').value.trim()
-  const inputLogo = document.getElementById('inputFileLogoPondok')
-
-  perkecilGambar(inputLogo, 300, function(hasilLogo) {
-    profilPondok.nama = namaBaru || profilPondok.nama
-    profilPondok.deskripsiLogin = deskripsiLoginBaru || profilPondok.deskripsiLogin
-    profilPondok.deskripsiDasbor = deskripsiDasborBaru || profilPondok.deskripsiDasbor
-    if (hasilLogo) profilPondok.logo = hasilLogo
-    localStorage.setItem(KUNCI_PROFIL_PONDOK, JSON.stringify(profilPondok))
-    terapkanProfilPondok()
-    alert('Profil dan teks pondok berhasil diperbarui.')
-  })
+  profilPondok.nama = document.getElementById('inputNamaPondok').value.trim() || profilPondok.nama
+  profilPondok.deskripsiLogin = document.getElementById('inputDeskripsiLogin').value.trim() || profilPondok.deskripsiLogin
+  profilPondok.deskripsiDasbor = document.getElementById('inputDeskripsiDasbor').value.trim() || profilPondok.deskripsiDasbor
+  localStorage.setItem(KUNCI_PROFIL_PONDOK, JSON.stringify(profilPondok))
+  terapkanProfilPondok()
+  alert('Profil dan teks berhasil diperbarui.')
 }
 
 function simpanSemuaData() {
@@ -1175,11 +1308,13 @@ function prosesLogin(event) {
 }
 
 function prosesLogout() {
-  hentikanScanner(function() {
-    penggunaMasuk = null
-    localStorage.removeItem(KUNCI_SESI_PENGGUNA)
-    periksaStatusLogin()
-  })
+  if (confirm('Keluar dari aplikasi absensi?')) {
+    hentikanScanner(function() {
+      penggunaMasuk = null
+      localStorage.removeItem(KUNCI_SESI_PENGGUNA)
+      periksaStatusLogin()
+    })
+  }
 }
 
 function periksaStatusLogin() {
@@ -1191,36 +1326,33 @@ function periksaStatusLogin() {
     appView.style.display = 'none'
   } else {
     loginView.style.display = 'none'
-    appView.style.display = 'block'
+    appView.style.display = 'flex'
 
-    const foto = penggunaMasuk.foto || `https://ui-avatars.com/api/?name=${encodeURIComponent(penggunaMasuk.nama)}&background=047857&color=fff`
-    document.getElementById('headerFotoPengguna').src = foto
-    document.getElementById('labelNamaPenggunaAktif').innerText = penggunaMasuk.nama
-    let peranText = 'Admin (Akses Penuh)'
-    if (penggunaMasuk.peran === 'pengurus') peranText = 'Pengurus (Hanya Lihat)'
-    if (penggunaMasuk.peran === 'petugas') peranText = 'Petugas Presensi'
-    document.getElementById('labelPeranAktif').innerText = peranText
+    document.getElementById('topNamaPengguna').innerText = penggunaMasuk.nama
+    document.getElementById('topPeranPengguna').innerText = penggunaMasuk.peran === 'admin' ? 'Admin' : (penggunaMasuk.peran === 'petugas' ? 'Petugas' : 'Pengurus')
+    document.getElementById('topAvatarLetter').innerText = penggunaMasuk.nama.charAt(0).toUpperCase()
 
     terapkanHakAkses()
-    perbaruiDasbor()
   }
 }
 
 function bukaTab(panelId, btn) {
   hentikanScanner(function() {
     document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'))
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'))
+    document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'))
     document.getElementById(panelId).classList.add('active')
-    btn.classList.add('active')
+    if (btn) btn.classList.add('active')
 
-    if (panelId === 'panelDasbor') perbaruiDasbor()
     if (panelId === 'panelSantri') muatTabelSantri()
     if (panelId === 'panelSholat') muatDaftarSesiSholat()
     if (panelId === 'panelKegiatan') muatDaftarSesiKegiatan()
-    if (panelId === 'panelRekap') {
-      muatDropdownSantriRekap()
-      muatDropdownKelasRekap()
-      perbaruiFilterSesiDanRekap()
+    if (panelId === 'panelRekapSholat') {
+      isiFilterRekapSholat()
+      muatDataRekapSholat()
+    }
+    if (panelId === 'panelRekapKegiatan') {
+      isiFilterRekapKegiatan()
+      muatDataRekapKegiatan()
     }
     if (panelId === 'panelPengguna') {
       muatTabelPengguna()
@@ -1229,61 +1361,60 @@ function bukaTab(panelId, btn) {
   })
 }
 
+function pindahTabDariCard(panelId, btnId) {
+  const targetBtn = document.getElementById(btnId)
+  bukaTab(panelId, targetBtn)
+}
+
 function terapkanHakAkses() {
   const peran = penggunaMasuk.peran
-  const tabDasbor = document.getElementById('btnTabDasbor')
-  const tabSantri = document.getElementById('btnTabSantri')
-  const tabSholat = document.getElementById('btnTabSholat')
-  const tabKegiatan = document.getElementById('btnTabKegiatan')
-  const tabRekap = document.getElementById('btnTabRekap')
-  const tabPengguna = document.getElementById('btnTabPengguna')
+  const btnSideDasbor = document.getElementById('btnSideDasbor')
+  const btnSideSantri = document.getElementById('btnSideSantri')
+  const btnSideSholat = document.getElementById('btnSideSholat')
+  const btnSideKegiatan = document.getElementById('btnSideKegiatan')
+  const btnSideRekapSholat = document.getElementById('btnSideRekapSholat')
+  const btnSideRekapKegiatan = document.getElementById('btnSideRekapKegiatan')
+  const btnSidePengguna = document.getElementById('btnSidePengguna')
 
   const boxBtnTambahSantri = document.getElementById('boxBtnTambahSantri')
   const boxBtnTambahSholat = document.getElementById('boxBtnTambahSholat')
   const boxBtnTambahKegiatan = document.getElementById('boxBtnTambahKegiatan')
   const kolomAksiSantri = document.getElementById('kolomAksiSantri')
 
-  tabDasbor.style.display = 'block'
-  tabSantri.style.display = 'block'
-  tabSholat.style.display = 'block'
-  tabKegiatan.style.display = 'block'
-  tabRekap.style.display = 'block'
-  tabPengguna.style.display = 'block'
+  btnSideDasbor.style.display = 'flex'
+  btnSideSantri.style.display = 'flex'
+  btnSideSholat.style.display = 'flex'
+  btnSideKegiatan.style.display = 'flex'
+  btnSideRekapSholat.style.display = 'flex'
+  btnSideRekapKegiatan.style.display = 'flex'
+  btnSidePengguna.style.display = 'flex'
   boxBtnTambahSantri.style.display = 'block'
   boxBtnTambahSholat.style.display = 'block'
   boxBtnTambahKegiatan.style.display = 'block'
   kolomAksiSantri.style.display = ''
 
   if (peran === 'pengurus') {
-    tabSholat.style.display = 'none'
-    tabKegiatan.style.display = 'none'
-    tabPengguna.style.display = 'none'
+    btnSideSholat.style.display = 'none'
+    btnSideKegiatan.style.display = 'none'
+    btnSidePengguna.style.display = 'none'
     boxBtnTambahSantri.style.display = 'none'
     kolomAksiSantri.style.display = 'none'
-    tabDasbor.click()
+    btnSideDasbor.click()
   } else if (peran === 'petugas') {
-    tabDasbor.style.display = 'none'
-    tabSantri.style.display = 'none'
-    tabRekap.style.display = 'none'
-    tabPengguna.style.display = 'none'
+    btnSideDasbor.style.display = 'none'
+    btnSideSantri.style.display = 'none'
+    btnSideRekapSholat.style.display = 'none'
+    btnSideRekapKegiatan.style.display = 'none'
+    btnSidePengguna.style.display = 'none'
     boxBtnTambahSholat.style.display = 'none'
     boxBtnTambahKegiatan.style.display = 'none'
-    tabSholat.click()
+    btnSideSholat.click()
   } else {
-    tabDasbor.click()
+    btnSideDasbor.click()
   }
 }
 
-function perbaruiDasbor() {
-  const today = new Date().toISOString().split('T')[0]
-  document.getElementById('statTotalSantri').innerText = daftarSantri.length
-  const sholatToday = daftarAbsensi.filter(a => a.kategori === 'Sholat' && a.tanggal === today)
-  const kegiatanToday = daftarAbsensi.filter(a => a.kategori === 'Kegiatan' && a.tanggal === today)
-  document.getElementById('statSholatHariIni').innerText = sholatToday.length
-  document.getElementById('statKegiatanHariIni').innerText = kegiatanToday.length
-}
-
-/* MODAL SANTRI */
+/* SANTRI */
 function bukaModalSantriBaru() {
   document.getElementById('formSantri').reset()
   document.getElementById('santriId').value = ''
@@ -1335,7 +1466,6 @@ function simpanSantri(event) {
     simpanSemuaData()
     tutupModalSantri()
     muatTabelSantri()
-    perbaruiDasbor()
   })
 }
 
@@ -1349,20 +1479,20 @@ function muatTabelSantri() {
     let aksiHtml = ''
     if (isAdmin) {
       aksiHtml = `<td>
-        <button class="btn btn-warning" style="padding: 4px 10px; font-size: 12px;" onclick="bukaModalEditSantri(${s.id})">Edit</button>
-        <button class="btn btn-danger" style="padding: 4px 10px; font-size: 12px;" onclick="hapusSantri(${s.id})">Hapus</button>
+        <button class="btn btn-warning" style="padding: 4px 8px; font-size: 11px;" onclick="bukaModalEditSantri(${s.id})">Edit</button>
+        <button class="btn btn-danger" style="padding: 4px 8px; font-size: 11px;" onclick="hapusSantri(${s.id})">Hapus</button>
       </td>`
     } else {
       aksiHtml = '<td style="display:none;"></td>'
     }
     const foto = s.foto || `https://ui-avatars.com/api/?name=${encodeURIComponent(s.nama)}`
     tr.innerHTML = `
-      <td><img src="${foto}" style="width:38px;height:38px;border-radius:50%;object-fit:cover;"></td>
+      <td><img src="${foto}" style="width:34px;height:34px;border-radius:50%;object-fit:cover;"></td>
       <td><strong>${s.nis}</strong></td>
       <td>${s.nama}</td>
       <td>${s.kelas}</td>
       <td>${s.gender || 'Putra'}</td>
-      <td><button class="btn btn-info" style="padding: 4px 12px; font-size: 12px;" onclick="bukaSmartCard(${s.id})">Lihat Smartcard</button></td>
+      <td><button class="btn btn-info" style="padding: 4px 10px; font-size: 11px;" onclick="bukaSmartCard(${s.id})">Lihat Smartcard</button></td>
       ${aksiHtml}
     `
     tbody.appendChild(tr)
@@ -1374,16 +1504,14 @@ function hapusSantri(id) {
     daftarSantri = daftarSantri.filter(s => s.id !== id)
     simpanSemuaData()
     muatTabelSantri()
-    perbaruiDasbor()
   }
 }
 
-/* SMARTCARD POTRET */
+/* SMARTCARD */
 function bukaSmartCard(id) {
   const s = daftarSantri.find(item => item.id === id)
   if (!s) return
   document.getElementById('cardNamaPondok').innerText = profilPondok.nama.toUpperCase()
-  document.getElementById('cardLogoPondok').src = profilPondok.logo
   document.getElementById('cardNamaSantri').innerText = s.nama
   document.getElementById('cardNisSantri').innerText = 'NIS: ' + s.nis
   document.getElementById('cardKelasSantri').innerText = 'Kelas: ' + s.kelas + ' | ' + (s.gender || 'Putra')
@@ -1442,7 +1570,7 @@ function unduhQrCode() {
     })
 }
 
-/* MODAL & SESI SHOLAT */
+/* SHOLAT */
 function bukaModalSholatBaru() {
   document.getElementById('formSholatId').value = ''
   document.getElementById('formSholatNama').value = ''
@@ -1514,11 +1642,11 @@ function muatDaftarSesiSholat() {
 
     card.innerHTML = `
       <div>
-        <div class="session-card-header">
-          <span class="session-name">${sesi.nama}</span>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <strong style="font-size: 14px;">${sesi.nama}</strong>
           ${statusPill}
         </div>
-        <div class="session-time" style="margin-top: 4px;">Batas Waktu: <strong>${sesi.batas} WIB</strong></div>
+        <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Batas: <strong>${sesi.batas} WIB</strong></div>
       </div>
       <div style="display: flex; gap: 6px; flex-wrap: wrap;">
         <button class="btn btn-primary" style="flex: 1; padding: 6px 10px; font-size: 11.5px;" onclick="pilihSesiSholatScanner(${sesi.id})">Buka Kamera</button>
@@ -1588,7 +1716,7 @@ function prosesScanSholat(decodedText) {
   const sesi = daftarSesiSholat.find(s => s.id === idSesiSholatAktif)
 
   if (!santri || !sesi) {
-    kotak.innerHTML = `<p style="color: var(--danger); font-weight: 700;">Kartu NIS ${nis} tidak terdaftar.</p>`
+    kotak.innerHTML = `<p style="color: #dc2626; font-weight: 700;">Kartu NIS ${nis} tidak terdaftar.</p>`
     return
   }
 
@@ -1614,7 +1742,6 @@ function prosesScanSholat(decodedText) {
     status: statusKehadiran
   })
   simpanSemuaData()
-  perbaruiDasbor()
 
   kirimKeGoogleSheets({
     tanggal: tanggalHariIni,
@@ -1629,15 +1756,15 @@ function prosesScanSholat(decodedText) {
 
   const badgeClass = statusKehadiran === 'Hadir' ? 'badge-hadir' : 'badge-terlambat'
   kotak.innerHTML = `
-    <img src="${santri.foto || 'https://via.placeholder.com/100'}" class="santri-photo" alt="Foto">
-    <h3 style="font-size: 16px; margin-bottom: 2px;">${santri.nama}</h3>
-    <div style="font-size: 12.5px; color: var(--text-muted);">NIS: ${santri.nis} | Kelas: ${santri.kelas} (${santri.gender || 'Putra'})</div>
-    <div style="font-size: 12.5px; margin: 8px 0;">Jam Presensi: <strong>${jamNow} WIB</strong></div>
+    <img src="${santri.foto || 'https://via.placeholder.com/100'}" style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid var(--primary);margin-bottom:8px;" alt="Foto">
+    <h3 style="font-size: 15px; margin-bottom: 2px;">${santri.nama}</h3>
+    <div style="font-size: 12px; color: var(--text-muted);">NIS: ${santri.nis} | Kelas: ${santri.kelas}</div>
+    <div style="font-size: 12px; margin: 6px 0;">Jam: <strong>${jamNow} WIB</strong></div>
     <span class="badge-scan ${badgeClass}">${statusKehadiran}</span>
   `
 }
 
-/* MODAL & SESI KEGIATAN */
+/* KEGIATAN */
 function bukaModalKegiatanBaru() {
   document.getElementById('formKegiatanId').value = ''
   document.getElementById('formKegiatanNama').value = ''
@@ -1677,7 +1804,6 @@ function simpanSesiKegiatan(event) {
   simpanSemuaData()
   tutupModalKegiatan()
   muatDaftarSesiKegiatan()
-  perbaruiDasbor()
 }
 
 function muatDaftarSesiKegiatan() {
@@ -1707,8 +1833,8 @@ function muatDaftarSesiKegiatan() {
 
     card.innerHTML = `
       <div>
-        <div class="session-card-header">
-          <span class="session-name">${k.nama}</span>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <strong style="font-size: 14px;">${k.nama}</strong>
           ${statusPill}
         </div>
       </div>
@@ -1727,7 +1853,6 @@ function hapusKegiatan(id) {
     daftarKegiatan = daftarKegiatan.filter(k => k.id !== id)
     simpanSemuaData()
     muatDaftarSesiKegiatan()
-    perbaruiDasbor()
   }
 }
 
@@ -1780,7 +1905,7 @@ function prosesScanKegiatan(decodedText) {
   const k = daftarKegiatan.find(item => item.id === idKegiatanAktif)
 
   if (!santri || !k) {
-    kotak.innerHTML = `<p style="color: var(--danger); font-weight: 700;">Kartu NIS ${nis} tidak terdaftar.</p>`
+    kotak.innerHTML = `<p style="color: #dc2626; font-weight: 700;">Kartu NIS ${nis} tidak terdaftar.</p>`
     return
   }
 
@@ -1803,7 +1928,6 @@ function prosesScanKegiatan(decodedText) {
     status: statusKehadiran
   })
   simpanSemuaData()
-  perbaruiDasbor()
 
   kirimKeGoogleSheets({
     tanggal: tanggalHariIni,
@@ -1818,15 +1942,15 @@ function prosesScanKegiatan(decodedText) {
 
   const badgeClass = statusKehadiran === 'Hadir' ? 'badge-hadir' : 'badge-terlambat'
   kotak.innerHTML = `
-    <img src="${santri.foto || 'https://via.placeholder.com/100'}" class="santri-photo" alt="Foto">
-    <h3 style="font-size: 16px; margin-bottom: 2px;">${santri.nama}</h3>
-    <div style="font-size: 12.5px; color: var(--text-muted);">NIS: ${santri.nis} | Kelas: ${santri.kelas} (${santri.gender || 'Putra'})</div>
-    <div style="font-size: 12.5px; margin: 8px 0;">Jam Presensi: <strong>${jamNow} WIB</strong></div>
+    <img src="${santri.foto || 'https://via.placeholder.com/100'}" style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid var(--primary);margin-bottom:8px;" alt="Foto">
+    <h3 style="font-size: 15px; margin-bottom: 2px;">${santri.nama}</h3>
+    <div style="font-size: 12px; color: var(--text-muted);">NIS: ${santri.nis} | Kelas: ${santri.kelas}</div>
+    <div style="font-size: 12px; margin: 6px 0;">Jam: <strong>${jamNow} WIB</strong></div>
     <span class="badge-scan ${badgeClass}">${statusKehadiran}</span>
   `
 }
 
-/* MODAL KELOLA KEHADIRAN SESI */
+/* KELOLA SAKIT IZIN */
 function bukaModalKelolaKehadiran(kategori, namaSesi) {
   const tanggalHariIni = new Date().toISOString().split('T')[0]
   sesiKelolaSedangDipilih = { kategori: kategori, namaSesi: namaSesi, tanggal: tanggalHariIni }
@@ -1846,7 +1970,7 @@ function bukaModalKelolaKehadiran(kategori, namaSesi) {
       <td><strong>${s.nama}</strong><br><small style="color:#64748b;">NIS: ${s.nis}</small></td>
       <td>${s.kelas}</td>
       <td>
-        <select class="form-select" id="selectStatus_${s.id}" style="padding: 6px 10px; font-size: 12.5px;">
+        <select class="form-select" id="selectStatus_${s.id}" style="padding: 6px 10px; font-size: 12px;">
           <option value="Belum" ${statusSekarang === 'Belum' ? 'selected' : ''}>Belum Presensi</option>
           <option value="Hadir" ${statusSekarang === 'Hadir' ? 'selected' : ''}>Hadir</option>
           <option value="Terlambat" ${statusSekarang === 'Terlambat' ? 'selected' : ''}>Terlambat</option>
@@ -1908,88 +2032,41 @@ function simpanPerubahanKehadiranSesi() {
   })
 
   simpanSemuaData()
-  perbaruiDasbor()
   tutupModalKelolaKehadiran()
-  alert('Data kehadiran sesi berhasil disimpan dan dikirim ke Google Sheets.')
+  alert('Data kehadiran berhasil diperbarui.')
 }
 
-/* SCANNER STOP */
-function hentikanScanner(callback) {
-  if (pemindaiAktif) {
-    pemindaiAktif.clear().then(() => {
-      pemindaiAktif = null
-      if (callback) callback()
-    }).catch(() => {
-      pemindaiAktif = null
-      if (callback) callback()
-    })
-  } else {
-    if (callback) callback()
-  }
-}
-
-/* REKAPITULASI */
-function muatDropdownSantriRekap() {
-  const select = document.getElementById('rekapSantri')
-  select.innerHTML = '<option value="semua">Semua Santri</option>'
-  daftarSantri.forEach(s => {
+/* REKAP SHOLAT */
+function isiFilterRekapSholat() {
+  const selSesi = document.getElementById('filterSesiSholat')
+  selSesi.innerHTML = '<option value="semua">Semua Shalat</option>'
+  daftarSesiSholat.forEach(s => {
     const opt = document.createElement('option')
-    opt.value = s.id
+    opt.value = s.nama
     opt.innerText = s.nama
-    select.appendChild(opt)
+    selSesi.appendChild(opt)
   })
-}
 
-function muatDropdownKelasRekap() {
-  const select = document.getElementById('rekapKelas')
-  select.innerHTML = '<option value="semua">Semua Kelas</option>'
+  const selKelas = document.getElementById('filterKelasSholat')
+  selKelas.innerHTML = '<option value="semua">Semua Kelas</option>'
   const kelasUnik = [...new Set(daftarSantri.map(s => s.kelas))].filter(Boolean)
   kelasUnik.forEach(k => {
     const opt = document.createElement('option')
     opt.value = k
-    opt.innerText = 'Kelas: ' + k
-    select.appendChild(opt)
+    opt.innerText = k
+    selKelas.appendChild(opt)
   })
 }
 
-function perbaruiFilterSesiDanRekap() {
-  const kategori = document.getElementById('rekapKategori').value
-  const selectSesi = document.getElementById('rekapSesi')
-  selectSesi.innerHTML = '<option value="semua">Semua Sesi</option>'
-
-  if (kategori === 'semua' || kategori === 'Sholat') {
-    daftarSesiSholat.forEach(s => {
-      const opt = document.createElement('option')
-      opt.value = s.nama
-      opt.innerText = 'Sholat: ' + s.nama
-      selectSesi.appendChild(opt)
-    })
-  }
-
-  if (kategori === 'semua' || kategori === 'Kegiatan') {
-    daftarKegiatan.forEach(k => {
-      const opt = document.createElement('option')
-      opt.value = k.nama
-      opt.innerText = 'Kegiatan: ' + k.nama
-      selectSesi.appendChild(opt)
-    })
-  }
-  muatDataRekap()
-}
-
-function muatDataRekap() {
-  const kategori = document.getElementById('rekapKategori').value
-  const sesi = document.getElementById('rekapSesi').value
-  const kelas = document.getElementById('rekapKelas').value
-  const rentang = document.getElementById('rekapRentang').value
-  const santriId = document.getElementById('rekapSantri').value
+function muatDataRekapSholat() {
+  const sesi = document.getElementById('filterSesiSholat').value
+  const kelas = document.getElementById('filterKelasSholat').value
+  const rentang = document.getElementById('filterRentangSholat').value
 
   const now = new Date()
   let hasil = daftarAbsensi.filter(item => {
-    let lolosKategori = kategori === 'semua' || item.kategori === kategori
+    if (item.kategori !== 'Sholat') return false
     let lolosSesi = sesi === 'semua' || item.sesi === sesi
-    let lolosSantri = santriId === 'semua' || item.santriId === parseInt(santriId)
-
     const santriObj = daftarSantri.find(s => s.id === item.santriId)
     const santriKelas = item.santriKelas || (santriObj ? santriObj.kelas : '')
     let lolosKelas = kelas === 'semua' || santriKelas === kelas
@@ -2000,25 +2077,14 @@ function muatDataRekap() {
       const diffHari = (now - tglItem) / (1000 * 60 * 60 * 24)
       lolosRentang = diffHari <= parseInt(rentang) && diffHari >= 0
     }
-    return lolosKategori && lolosSesi && lolosSantri && lolosKelas && lolosRentang
+    return lolosSesi && lolosKelas && lolosRentang
   })
 
-  let hadirCount = 0
-  let terlambatCount = 0
-  let izinCount = 0
-  let sakitCount = 0
-
-  const tbody = document.getElementById('tabelRekapBody')
+  const tbody = document.getElementById('tabelRekapSholatBody')
   tbody.innerHTML = ''
-
   hasil.sort((a, b) => new Date(b.tanggal + ' ' + (b.jam || '00:00')) - new Date(a.tanggal + ' ' + (a.jam || '00:00')))
 
   hasil.forEach(r => {
-    if (r.status === 'Hadir') hadirCount++
-    if (r.status === 'Terlambat') terlambatCount++
-    if (r.status === 'Izin') izinCount++
-    if (r.status === 'Sakit') sakitCount++
-
     let badgeClass = 'badge-hadir'
     if (r.status === 'Terlambat') badgeClass = 'badge-terlambat'
     if (r.status === 'Izin') badgeClass = 'badge-izin'
@@ -2036,20 +2102,87 @@ function muatDataRekap() {
       <td><strong>${nisSantri}</strong></td>
       <td>${r.santriNama}</td>
       <td>${namaKelas}</td>
-      <td>${r.kategori}</td>
       <td>${r.sesi}</td>
       <td><span class="badge-scan ${badgeClass}">${r.status}</span></td>
     `
     tbody.appendChild(tr)
   })
-
-  document.getElementById('rekapHadir').innerText = hadirCount
-  document.getElementById('rekapTerlambat').innerText = terlambatCount
-  document.getElementById('rekapIzin').innerText = izinCount
-  document.getElementById('rekapSakit').innerText = sakitCount
 }
 
-/* MODAL PENGGUNA */
+/* REKAP KEGIATAN */
+function isiFilterRekapKegiatan() {
+  const selSesi = document.getElementById('filterSesiKegiatan')
+  selSesi.innerHTML = '<option value="semua">Semua Kegiatan</option>'
+  daftarKegiatan.forEach(k => {
+    const opt = document.createElement('option')
+    opt.value = k.nama
+    opt.innerText = k.nama
+    selSesi.appendChild(opt)
+  })
+
+  const selKelas = document.getElementById('filterKelasKegiatan')
+  selKelas.innerHTML = '<option value="semua">Semua Kelas</option>'
+  const kelasUnik = [...new Set(daftarSantri.map(s => s.kelas))].filter(Boolean)
+  kelasUnik.forEach(k => {
+    const opt = document.createElement('option')
+    opt.value = k
+    opt.innerText = k
+    selKelas.appendChild(opt)
+  })
+}
+
+function muatDataRekapKegiatan() {
+  const sesi = document.getElementById('filterSesiKegiatan').value
+  const kelas = document.getElementById('filterKelasKegiatan').value
+  const rentang = document.getElementById('filterRentangKegiatan').value
+
+  const now = new Date()
+  let hasil = daftarAbsensi.filter(item => {
+    if (item.kategori !== 'Kegiatan') return false
+    let lolosSesi = sesi === 'semua' || item.sesi === sesi
+    const santriObj = daftarSantri.find(s => s.id === item.santriId)
+    const santriKelas = item.santriKelas || (santriObj ? santriObj.kelas : '')
+    let lolosKelas = kelas === 'semua' || santriKelas === kelas
+
+    let lolosRentang = true
+    if (rentang !== 'semua') {
+      const tglItem = new Date(item.tanggal)
+      const diffHari = (now - tglItem) / (1000 * 60 * 60 * 24)
+      lolosRentang = diffHari <= parseInt(rentang) && diffHari >= 0
+    }
+    return lolosSesi && lolosKelas && lolosRentang
+  })
+
+  const tbody = document.getElementById('tabelRekapKegiatanBody')
+  tbody.innerHTML = ''
+  hasil.sort((a, b) => new Date(b.tanggal + ' ' + (b.jam || '00:00')) - new Date(a.tanggal + ' ' + (a.jam || '00:00')))
+
+  hasil.forEach(r => {
+    let badgeClass = 'badge-hadir'
+    if (r.status === 'Terlambat') badgeClass = 'badge-terlambat'
+    if (r.status === 'Izin') badgeClass = 'badge-izin'
+    if (r.status === 'Sakit') badgeClass = 'badge-sakit'
+    if (r.status === 'Alpa') badgeClass = 'badge-alpa'
+
+    const santriObj = daftarSantri.find(s => s.id === r.santriId)
+    const namaKelas = r.santriKelas || (santriObj ? santriObj.kelas : '-')
+    const nisSantri = santriObj ? santriObj.nis : '-'
+
+    const tr = document.createElement('tr')
+    tr.innerHTML = `
+      <td>${r.tanggal}</td>
+      <td>${r.jam || '-'} WIB</td>
+      <td><strong>${nisSantri}</strong></td>
+      <td>${r.santriNama}</td>
+      <td>${namaKelas}</td>
+      <td>${r.sesi}</td>
+      <td><span class="badge-scan ${badgeClass}">${r.status}</span></td>
+    `
+    tbody.appendChild(tr)
+  })
+}
+
+/* PENGGUNA */
 function bukaModalPenggunaBaru() {
   document.getElementById('modalFormPengguna').style.display = 'flex'
 }
@@ -2068,7 +2201,7 @@ function muatTabelPengguna() {
     if (u.username === 'admin') {
       action = '<span style="color: var(--text-muted); font-size: 11px;">Akun Induk</span>'
     } else {
-      action = `<button class="btn btn-danger" style="padding: 4px 10px; font-size: 11.5px;" onclick="hapusPengguna(${u.id})">Hapus</button>`
+      action = `<button class="btn btn-danger" style="padding: 4px 8px; font-size: 11px;" onclick="hapusPengguna(${u.id})">Hapus</button>`
     }
 
     const foto = u.foto || `https://ui-avatars.com/api/?name=${encodeURIComponent(u.nama)}`
@@ -2077,7 +2210,7 @@ function muatTabelPengguna() {
     if (u.peran === 'admin') labelPeran = 'Admin'
 
     tr.innerHTML = `
-      <td><img src="${foto}" style="width:36px;height:36px;border-radius:50%;object-fit:cover;"></td>
+      <td><img src="${foto}" style="width:34px;height:34px;border-radius:50%;object-fit:cover;"></td>
       <td><strong>${u.username}</strong></td>
       <td>${u.nama}</td>
       <td>${labelPeran}</td>
@@ -2114,7 +2247,7 @@ function simpanPengguna(event) {
     simpanSemuaData()
     tutupModalPengguna()
     muatTabelPengguna()
-    alert('Akun pengguna baru berhasil ditambahkan.')
+    alert('Pengguna baru berhasil ditambahkan.')
   })
 }
 
@@ -2123,6 +2256,20 @@ function hapusPengguna(id) {
     daftarPengguna = daftarPengguna.filter(u => u.id !== id)
     simpanSemuaData()
     muatTabelPengguna()
+  }
+}
+
+function hentikanScanner(callback) {
+  if (pemindaiAktif) {
+    pemindaiAktif.clear().then(() => {
+      pemindaiAktif = null
+      if (callback) callback()
+    }).catch(() => {
+      pemindaiAktif = null
+      if (callback) callback()
+    })
+  } else {
+    if (callback) callback()
   }
 }
 
