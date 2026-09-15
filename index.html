@@ -57,17 +57,13 @@ body {
   align-items: center;
   gap: 12px;
 }
-.header-logo {
-  width: 40px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.15);
+.header-logo-img {
+  width: 44px;
+  height: 44px;
   border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  object-fit: cover;
+  background: white;
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 .header-title {
   font-size: 18px;
@@ -178,19 +174,14 @@ body {
   text-align: center;
   margin-bottom: 28px;
 }
-.login-logo {
-  width: 52px;
-  height: 52px;
-  background: var(--primary);
-  color: white;
+.login-logo-img {
+  width: 60px;
+  height: 60px;
   border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  font-weight: 700;
+  object-fit: cover;
   margin: 0 auto 14px auto;
-  box-shadow: 0 4px 10px rgba(5, 150, 105, 0.3);
+  display: block;
+  box-shadow: var(--shadow-md);
 }
 .grid-cards {
   display: grid;
@@ -264,41 +255,16 @@ body {
   gap: 6px;
   transition: all 0.15s ease;
 }
-.btn-primary {
-  background-color: var(--primary);
-  color: white;
-}
-.btn-primary:hover {
-  background-color: var(--primary-dark);
-}
-.btn-secondary {
-  background-color: #e2e8f0;
-  color: #334155;
-}
-.btn-secondary:hover {
-  background-color: #cbd5e1;
-}
-.btn-danger {
-  background-color: #fee2e2;
-  color: var(--danger);
-}
-.btn-danger:hover {
-  background-color: #fecaca;
-}
-.btn-warning {
-  background-color: #fef3c7;
-  color: #b45309;
-}
-.btn-warning:hover {
-  background-color: #fde68a;
-}
-.btn-info {
-  background-color: #e0f2fe;
-  color: #0369a1;
-}
-.btn-info:hover {
-  background-color: #bae6fd;
-}
+.btn-primary { background-color: var(--primary); color: white; }
+.btn-primary:hover { background-color: var(--primary-dark); }
+.btn-secondary { background-color: #e2e8f0; color: #334155; }
+.btn-secondary:hover { background-color: #cbd5e1; }
+.btn-danger { background-color: #fee2e2; color: var(--danger); }
+.btn-danger:hover { background-color: #fecaca; }
+.btn-warning { background-color: #fef3c7; color: #b45309; }
+.btn-warning:hover { background-color: #fde68a; }
+.btn-info { background-color: #e0f2fe; color: #0369a1; }
+.btn-info:hover { background-color: #bae6fd; }
 .btn-logout {
   background: rgba(255, 255, 255, 0.2);
   color: white;
@@ -309,12 +275,10 @@ body {
   font-weight: 600;
   cursor: pointer;
 }
-.btn-logout:hover {
-  background: rgba(255, 255, 255, 0.35);
-}
+.btn-logout:hover { background: rgba(255, 255, 255, 0.35); }
 .sessions-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 14px;
   margin-bottom: 24px;
 }
@@ -356,14 +320,8 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.3px;
 }
-.status-pill.open {
-  background: #dcfce7;
-  color: #15803d;
-}
-.status-pill.closed {
-  background: #fee2e2;
-  color: #b91c1c;
-}
+.status-pill.open { background: #dcfce7; color: #15803d; }
+.status-pill.closed { background: #fee2e2; color: #b91c1c; }
 .scanner-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -371,9 +329,7 @@ body {
   margin-top: 16px;
 }
 @media (max-width: 768px) {
-  .scanner-container {
-    grid-template-columns: 1fr;
-  }
+  .scanner-container { grid-template-columns: 1fr; }
 }
 .scanner-box {
   background: #f1f5f9;
@@ -409,14 +365,11 @@ body {
   font-weight: 700;
   margin-top: 8px;
 }
-.badge-hadir {
-  background-color: #dcfce7;
-  color: #15803d;
-}
-.badge-terlambat {
-  background-color: #ffedd5;
-  color: #c2410c;
-}
+.badge-hadir { background-color: #dcfce7; color: #15803d; }
+.badge-terlambat { background-color: #ffedd5; color: #c2410c; }
+.badge-izin { background-color: #e0f2fe; color: #0369a1; }
+.badge-sakit { background-color: #fef3c7; color: #b45309; }
+.badge-alpa { background-color: #fee2e2; color: #b91c1c; }
 .table-responsive {
   overflow-x: auto;
   border: 1px solid var(--border-color);
@@ -437,12 +390,10 @@ body {
   color: #475569;
   font-weight: 600;
 }
-.data-table tr:last-child td {
-  border-bottom: none;
-}
+.data-table tr:last-child td { border-bottom: none; }
 .filter-bar {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
   gap: 12px;
   background: #f8fafc;
   padding: 16px;
@@ -468,73 +419,123 @@ body {
   background: white;
   padding: 24px;
   border-radius: var(--radius-lg);
-  max-width: 420px;
+  max-width: 560px;
   width: 100%;
   box-shadow: var(--shadow-lg);
+  max-height: 90vh;
+  overflow-y: auto;
 }
 .smart-card {
-  background: linear-gradient(145deg, #065f46 0%, #047857 60%, #059669 100%);
-  border-radius: 16px;
-  padding: 20px;
+  width: 380px;
+  height: 240px;
+  margin: 0 auto 18px auto;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #064e3b 0%, #047857 55%, #059669 100%);
   color: white;
+  padding: 14px 16px;
   position: relative;
-  box-shadow: 0 8px 20px rgba(4, 120, 87, 0.25);
-  margin-bottom: 16px;
+  box-shadow: 0 10px 25px rgba(4, 120, 87, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.smart-card::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  pointer-events: none;
 }
 .smart-card-top {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  justify-content: space-between;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  padding-bottom: 10px;
+  padding-bottom: 8px;
 }
-.smart-card-brand {
-  font-size: 13px;
+.smart-card-header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.smart-card-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  object-fit: cover;
+  background: white;
+}
+.smart-card-institution {
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.5px;
+  line-height: 1.2;
 }
 .smart-card-chip {
-  width: 32px;
-  height: 24px;
-  background: linear-gradient(135deg, #fcd34d 0%, #d97706 100%);
+  width: 30px;
+  height: 22px;
+  background: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
   border-radius: 4px;
 }
 .smart-card-body {
   display: flex;
-  gap: 16px;
   align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 4px;
 }
 .smart-card-avatar {
-  width: 80px;
-  height: 80px;
-  border-radius: 12px;
+  width: 82px;
+  height: 82px;
+  border-radius: 10px;
   object-fit: cover;
-  border: 2px solid rgba(255, 255, 255, 0.8);
+  border: 2px solid rgba(255, 255, 255, 0.9);
   background: white;
+  flex-shrink: 0;
 }
-.smart-card-info h4 {
-  font-size: 15px;
+.smart-card-info {
+  flex: 1;
+  text-align: left;
+}
+.smart-card-nama {
+  font-size: 14px;
   font-weight: 700;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 130px;
 }
-.smart-card-info p {
-  font-size: 12px;
-  opacity: 0.85;
+.smart-card-detail {
+  font-size: 11px;
+  opacity: 0.9;
   line-height: 1.4;
 }
-.smart-card-qr {
-  margin-top: 14px;
+.smart-card-qr-box {
   background: white;
-  padding: 10px;
-  border-radius: 12px;
-  display: flex;
-  justify-content: center;
+  padding: 6px;
+  border-radius: 8px;
+  flex-shrink: 0;
 }
-.smart-card-qr img {
-  width: 140px;
-  height: 140px;
+.smart-card-qr-box img {
+  width: 76px;
+  height: 76px;
   display: block;
+}
+.smart-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 9px;
+  opacity: 0.75;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 6px;
 }
 </style>
 </head>
@@ -543,8 +544,8 @@ body {
 <div id="halamanLogin" class="login-wrap">
   <div class="login-card">
     <div class="login-header">
-      <div class="login-logo">P</div>
-      <h2 style="font-size: 20px; font-weight: 700;">Ponpes Dahlan Ikhsan</h2>
+      <img id="loginLogoPondok" class="login-logo-img" src="https://ui-avatars.com/api/?name=Pondok&background=047857&color=fff" alt="Logo">
+      <h2 style="font-size: 20px; font-weight: 700;" id="loginJudulInstansi">Ponpes Dahlan Ikhsan</h2>
       <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Sistem Presensi Santri dan Smartcard</p>
     </div>
     <form onsubmit="prosesLogin(event)">
@@ -566,9 +567,9 @@ body {
 
   <div class="header">
     <div class="header-brand">
-      <div class="header-logo">P</div>
+      <img id="headerLogoPondok" class="header-logo-img" src="" alt="Logo">
       <div>
-        <div class="header-title">Absensi Ponpes Dahlan Ikhsan</div>
+        <div class="header-title" id="headerNamaInstansi">Absensi Ponpes Dahlan Ikhsan</div>
         <div class="header-sub">Manajemen Presensi Berbasis Smartcard</div>
       </div>
     </div>
@@ -616,7 +617,7 @@ body {
       </div>
       <div style="background: var(--primary-light); padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--primary-border);">
         <h4 style="color: var(--primary-dark); font-size: 14px; margin-bottom: 6px;">Pemberitahuan Sistem Database</h4>
-        <p style="font-size: 13px; color: #334155; line-height: 1.5;">Aplikasi sudah terhubung dengan Google Sheets. Setiap hasil pemindaian kartu langsung terkirim secara otomatis ke database online Google Sheets milikmu.</p>
+        <p style="font-size: 13px; color: #334155; line-height: 1.5;">Setiap hasil scan dan data izin sakit santri otomatis terkirim langsung ke Google Sheets milikmu.</p>
       </div>
     </div>
 
@@ -631,7 +632,7 @@ body {
         <form id="formSantri" onsubmit="simpanSantri(event)">
           <input type="hidden" id="santriId">
           <input type="hidden" id="santriFotoLama">
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px;">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px;">
             <div class="form-group">
               <label class="form-label">Nomor Induk Santri (NIS)</label>
               <input type="text" class="form-input" id="santriNis" placeholder="Contoh: 2026001" required>
@@ -643,6 +644,13 @@ body {
             <div class="form-group">
               <label class="form-label">Tingkat Kelas</label>
               <input type="text" class="form-input" id="santriKelas" placeholder="Contoh: 1 Diniyah" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Jenis Kelamin</label>
+              <select class="form-select" id="santriGender">
+                <option value="Putra">Putra</option>
+                <option value="Putri">Putri</option>
+              </select>
             </div>
             <div class="form-group">
               <label class="form-label">Unggah Foto Santri</label>
@@ -663,7 +671,8 @@ body {
               <th>NIS</th>
               <th>Nama Lengkap</th>
               <th>Kelas</th>
-              <th>Kartu Smartcard</th>
+              <th>Gender</th>
+              <th>Smartcard</th>
               <th id="kolomAksiSantri">Tindakan</th>
             </tr>
           </thead>
@@ -676,7 +685,7 @@ body {
       <div class="panel-header">
         <div>
           <div class="panel-title">Presensi Sholat Wajib dan Sunnah</div>
-          <div class="panel-desc">Kelola sesi, buka atau tutup jadwal, lalu buka pemindai kamera</div>
+          <div class="panel-desc">Kelola sesi, izin santri sakit, tutup jadwal, lalu buka pemindai kamera</div>
         </div>
       </div>
 
@@ -726,7 +735,7 @@ body {
       <div class="panel-header">
         <div>
           <div class="panel-title">Presensi Kegiatan Pengajian</div>
-          <div class="panel-desc">Kelola nama pengajian, atur status sesi, lalu pindai kartu santri</div>
+          <div class="panel-desc">Kelola kegiatan, izin santri sakit, atur status sesi, lalu pindai kartu santri</div>
         </div>
       </div>
 
@@ -767,7 +776,7 @@ body {
       <div class="panel-header">
         <div>
           <div class="panel-title">Laporan Rekapitulasi Presensi</div>
-          <div class="panel-desc">Saring data berdasarkan sesi sholat atau kegiatan tertentu</div>
+          <div class="panel-desc">Saring data kehadiran per kelas, sesi sholat, atau pengajian tertentu</div>
         </div>
       </div>
       <div class="filter-bar">
@@ -783,6 +792,12 @@ body {
           <label class="form-label">Pilih Sesi Spesifik</label>
           <select class="form-select" id="rekapSesi" onchange="muatDataRekap()">
             <option value="semua">Semua Sesi</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">Pilih Kelas</label>
+          <select class="form-select" id="rekapKelas" onchange="muatDataRekap()">
+            <option value="semua">Semua Kelas</option>
           </select>
         </div>
         <div>
@@ -803,11 +818,19 @@ body {
       <div class="grid-cards">
         <div class="card">
           <div class="card-val" id="rekapHadir">0</div>
-          <div class="card-desc">Total Kehadiran Tepat Waktu</div>
+          <div class="card-desc">Hadir Tepat Waktu</div>
         </div>
         <div class="card">
           <div class="card-val" id="rekapTerlambat">0</div>
-          <div class="card-desc">Total Kehadiran Terlambat</div>
+          <div class="card-desc">Hadir Terlambat</div>
+        </div>
+        <div class="card">
+          <div class="card-val" id="rekapIzin">0</div>
+          <div class="card-desc">Total Izin</div>
+        </div>
+        <div class="card">
+          <div class="card-val" id="rekapSakit">0</div>
+          <div class="card-desc">Total Sakit</div>
         </div>
       </div>
       <div class="table-responsive">
@@ -816,7 +839,9 @@ body {
             <tr>
               <th>Tanggal</th>
               <th>Waktu</th>
+              <th>NIS</th>
               <th>Nama Santri</th>
+              <th>Kelas</th>
               <th>Kategori</th>
               <th>Nama Sesi</th>
               <th>Status Presensi</th>
@@ -830,11 +855,30 @@ body {
     <div class="panel" id="panelPengguna">
       <div class="panel-header">
         <div>
-          <div class="panel-title">Manajemen Akun Pengguna</div>
-          <div class="panel-desc">Kelola hak akses admin, pengurus, dan petugas presensi</div>
+          <div class="panel-title">Manajemen Akun dan Profil Pondok</div>
+          <div class="panel-desc">Ubah logo dan nama pondok serta kelola hak akses akun</div>
         </div>
       </div>
+
+      <div class="form-box" style="margin-bottom: 24px;">
+        <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 12px;">Pengaturan Profil dan Logo Pondok</h4>
+        <form onsubmit="simpanProfilPondok(event)">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px;">
+            <div class="form-group">
+              <label class="form-label">Nama Pondok Pesantren</label>
+              <input type="text" class="form-input" id="inputNamaPondok" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Unggah Logo Pondok Baru</label>
+              <input type="file" class="form-input" id="inputFileLogoPondok" accept="image/*">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Simpan Profil Pondok</button>
+        </form>
+      </div>
+
       <div class="form-box">
+        <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 12px;">Tambah Akun Pengguna Baru</h4>
         <form id="formPengguna" onsubmit="simpanPengguna(event)">
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px;">
             <div class="form-group">
@@ -864,6 +908,7 @@ body {
           <button type="submit" class="btn btn-primary">Tambah Pengguna Baru</button>
         </form>
       </div>
+
       <div class="table-responsive">
         <table class="data-table">
           <thead>
@@ -885,29 +930,64 @@ body {
 </div>
 
 <div id="modalSmartCard" class="modal-overlay">
-  <div class="modal-content">
+  <div class="modal-content" style="text-align: center;">
     <div class="smart-card" id="areaCetakKartu">
       <div class="smart-card-top">
-        <span class="smart-card-brand">PONPES DAHLAN IKHSAN</span>
+        <div class="smart-card-header-left">
+          <img id="cardLogoPondok" class="smart-card-logo" src="" alt="Logo">
+          <div class="smart-card-institution" id="cardNamaPondok">PONPES DAHLAN IKHSAN</div>
+        </div>
         <div class="smart-card-chip"></div>
       </div>
       <div class="smart-card-body">
         <img id="cardFotoSantri" class="smart-card-avatar" src="" alt="Foto" crossorigin="anonymous">
         <div class="smart-card-info">
-          <h4 id="cardNamaSantri">Ahmad Dahlan</h4>
-          <p id="cardNisSantri">NIS: 2026001</p>
-          <p id="cardKelasSantri">Kelas: 1 Diniyah</p>
+          <div class="smart-card-nama" id="cardNamaSantri">Ahmad Dahlan</div>
+          <div class="smart-card-detail" id="cardNisSantri">NIS: 2026001</div>
+          <div class="smart-card-detail" id="cardKelasSantri">Kelas: 1 Diniyah</div>
+          <div class="smart-card-detail" id="cardGenderSantri">Gender: Putra</div>
+        </div>
+        <div class="smart-card-qr-box">
+          <img id="cardQrGambar" src="" alt="QR Santri" crossorigin="anonymous">
         </div>
       </div>
-      <div class="smart-card-qr">
-        <img id="cardQrGambar" src="" alt="QR Santri" crossorigin="anonymous">
+      <div class="smart-card-footer">
+        <span>KARTU IDENTITAS SANTRI RESMI</span>
+        <span>Ukuran: 8,56 x 5,4 cm</span>
       </div>
     </div>
-    <div style="display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap;">
+    <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
       <button class="btn btn-primary" onclick="unduhKartuSantri()">Unduh Kartu</button>
       <button class="btn btn-info" onclick="unduhQrCode()">Unduh QR</button>
       <button class="btn btn-secondary" onclick="cetakKartuSantri()">Cetak</button>
       <button class="btn btn-danger" onclick="tutupModalSmartCard()">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<div id="modalKelolaKehadiran" class="modal-overlay">
+  <div class="modal-content">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
+      <div>
+        <h3 style="font-size: 16px; font-weight: 700;" id="modalKelolaJudul">Kelola Presensi Sesi</h3>
+        <p style="font-size: 12px; color: var(--text-muted);" id="modalKelolaSub">Ubah status santri yang berhalangan atau sakit</p>
+      </div>
+      <button class="btn btn-secondary" style="padding: 4px 8px;" onclick="tutupModalKelolaKehadiran()">Tutup</button>
+    </div>
+    <div class="table-responsive" style="max-height: 50vh;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Santri</th>
+            <th>Kelas</th>
+            <th>Status Kehadiran</th>
+          </tr>
+        </thead>
+        <tbody id="tabelModalKelolaBody"></tbody>
+      </table>
+    </div>
+    <div style="margin-top: 16px; display: flex; justify-content: flex-end; gap: 8px;">
+      <button class="btn btn-primary" onclick="simpanPerubahanKehadiranSesi()">Simpan Perubahan Presensi</button>
     </div>
   </div>
 </div>
@@ -921,6 +1001,12 @@ const KUNCI_KEGIATAN = 'ponpes_kegiatan_data'
 const KUNCI_ABSENSI = 'ponpes_absensi_data'
 const KUNCI_PENGGUNA = 'ponpes_pengguna_data'
 const KUNCI_SESI_PENGGUNA = 'ponpes_sesi_pengguna'
+const KUNCI_PROFIL_PONDOK = 'ponpes_profil_pondok_data'
+
+let profilPondok = JSON.parse(localStorage.getItem(KUNCI_PROFIL_PONDOK)) || {
+  nama: 'Ponpes Dahlan Ikhsan',
+  logo: 'https://ui-avatars.com/api/?name=Pondok+Dahlan&background=047857&color=fff'
+}
 
 let daftarPengguna = JSON.parse(localStorage.getItem(KUNCI_PENGGUNA)) || [
   { id: 1, username: 'admin', sandi: '123', nama: 'Administrator', peran: 'admin', foto: 'https://ui-avatars.com/api/?name=Admin&background=047857&color=fff' },
@@ -929,9 +1015,9 @@ let daftarPengguna = JSON.parse(localStorage.getItem(KUNCI_PENGGUNA)) || [
 ]
 
 let daftarSantri = JSON.parse(localStorage.getItem(KUNCI_SANTRI)) || [
-  { id: 1, nis: '2026001', nama: 'Ahmad Dahlan', kelas: '1 Diniyah', foto: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150' },
-  { id: 2, nis: '2026002', nama: 'Muhammad Ikhsan', kelas: '2 Wustha', foto: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=150' },
-  { id: 3, nis: '2026003', nama: 'Zaid bin Tsabit', kelas: '3 Ulya', foto: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=150' }
+  { id: 1, nis: '2026001', nama: 'Ahmad Dahlan', kelas: '1 Diniyah', gender: 'Putra', foto: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150' },
+  { id: 2, nis: '2026002', nama: 'Muhammad Ikhsan', kelas: '2 Wustha', gender: 'Putra', foto: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=150' },
+  { id: 3, nis: '2026003', nama: 'Fatimah Az Zahra', kelas: '1 Diniyah', gender: 'Putri', foto: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150' }
 ]
 
 let daftarSesiSholat = JSON.parse(localStorage.getItem(KUNCI_SESI_SHOLAT)) || [
@@ -956,6 +1042,29 @@ let penggunaMasuk = JSON.parse(localStorage.getItem(KUNCI_SESI_PENGGUNA)) || nul
 let pemindaiAktif = null
 let idSesiSholatAktif = null
 let idKegiatanAktif = null
+let sesiKelolaSedangDipilih = null
+
+function terapkanProfilPondok() {
+  document.getElementById('loginLogoPondok').src = profilPondok.logo
+  document.getElementById('loginJudulInstansi').innerText = profilPondok.nama
+  document.getElementById('headerLogoPondok').src = profilPondok.logo
+  document.getElementById('headerNamaInstansi').innerText = profilPondok.nama
+  document.getElementById('inputNamaPondok').value = profilPondok.nama
+}
+
+function simpanProfilPondok(event) {
+  event.preventDefault()
+  const namaBaru = document.getElementById('inputNamaPondok').value.trim()
+  const inputLogo = document.getElementById('inputFileLogoPondok')
+
+  perkecilGambar(inputLogo, 300, function(hasilLogo) {
+    profilPondok.nama = namaBaru || profilPondok.nama
+    if (hasilLogo) profilPondok.logo = hasilLogo
+    localStorage.setItem(KUNCI_PROFIL_PONDOK, JSON.stringify(profilPondok))
+    terapkanProfilPondok()
+    alert('Profil dan logo pondok berhasil diperbarui.')
+  })
+}
 
 function simpanSemuaData() {
   localStorage.setItem(KUNCI_SANTRI, JSON.stringify(daftarSantri))
@@ -969,25 +1078,16 @@ function kirimKeGoogleSheets(dataPresensi) {
   fetch(URL_WEB_APP_GOOGLE, {
     method: 'POST',
     mode: 'no-cors',
-    headers: {
-      'Content-Type': 'application/json'
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(dataPresensi)
   })
-  .then(function() {
-    console.log('Data presensi berhasil terkirim ke Google Sheets')
-  })
-  .catch(function(error) {
-    console.log('Kendala saat mengirim data:', error)
-  })
+  .then(function() { console.log('Terkirim ke Google Sheets') })
+  .catch(function(error) { console.log('Kendala pengiriman:', error) })
 }
 
 function perkecilGambar(fileInput, lebarMaks, callback) {
   const file = fileInput.files[0]
-  if (!file) {
-    callback(null)
-    return
-  }
+  if (!file) { callback(null); return }
   const reader = new FileReader()
   reader.onload = function(e) {
     const img = new Image()
@@ -996,7 +1096,6 @@ function perkecilGambar(fileInput, lebarMaks, callback) {
       const ctx = canvas.getContext('2d')
       let lebar = img.width
       let tinggi = img.height
-
       if (lebar > tinggi) {
         if (lebar > lebarMaks) {
           tinggi = Math.round((tinggi * lebarMaks) / lebar)
@@ -1038,10 +1137,11 @@ function prosesLogin(event) {
 }
 
 function prosesLogout() {
-  hentikanScanner()
-  penggunaMasuk = null
-  localStorage.removeItem(KUNCI_SESI_PENGGUNA)
-  periksaStatusLogin()
+  hentikanScanner(function() {
+    penggunaMasuk = null
+    localStorage.removeItem(KUNCI_SESI_PENGGUNA)
+    periksaStatusLogin()
+  })
 }
 
 function periksaStatusLogin() {
@@ -1069,21 +1169,26 @@ function periksaStatusLogin() {
 }
 
 function bukaTab(panelId, btn) {
-  hentikanScanner()
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'))
-  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'))
-  document.getElementById(panelId).classList.add('active')
-  btn.classList.add('active')
+  hentikanScanner(function() {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'))
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'))
+    document.getElementById(panelId).classList.add('active')
+    btn.classList.add('active')
 
-  if (panelId === 'panelDasbor') perbaruiDasbor()
-  if (panelId === 'panelSantri') muatTabelSantri()
-  if (panelId === 'panelSholat') muatDaftarSesiSholat()
-  if (panelId === 'panelKegiatan') muatDaftarSesiKegiatan()
-  if (panelId === 'panelRekap') {
-    muatDropdownSantriRekap()
-    perbaruiFilterSesiDanRekap()
-  }
-  if (panelId === 'panelPengguna') muatTabelPengguna()
+    if (panelId === 'panelDasbor') perbaruiDasbor()
+    if (panelId === 'panelSantri') muatTabelSantri()
+    if (panelId === 'panelSholat') muatDaftarSesiSholat()
+    if (panelId === 'panelKegiatan') muatDaftarSesiKegiatan()
+    if (panelId === 'panelRekap') {
+      muatDropdownSantriRekap()
+      muatDropdownKelasRekap()
+      perbaruiFilterSesiDanRekap()
+    }
+    if (panelId === 'panelPengguna') {
+      muatTabelPengguna()
+      terapkanProfilPondok()
+    }
+  })
 }
 
 function terapkanHakAkses() {
@@ -1159,6 +1264,7 @@ function muatTabelSantri() {
       <td><strong>${s.nis}</strong></td>
       <td>${s.nama}</td>
       <td>${s.kelas}</td>
+      <td>${s.gender || 'Putra'}</td>
       <td><button class="btn btn-info" style="padding: 4px 12px; font-size: 12px;" onclick="bukaSmartCard(${s.id})">Lihat Smartcard</button></td>
       ${aksiHtml}
     `
@@ -1172,6 +1278,7 @@ function simpanSantri(event) {
   const nis = document.getElementById('santriNis').value.trim()
   const nama = document.getElementById('santriNama').value.trim()
   const kelas = document.getElementById('santriKelas').value.trim()
+  const gender = document.getElementById('santriGender').value
   const fotoLama = document.getElementById('santriFotoLama').value
   const inputFoto = document.getElementById('santriFileFoto')
 
@@ -1180,10 +1287,10 @@ function simpanSantri(event) {
     if (id) {
       const idx = daftarSantri.findIndex(s => s.id === parseInt(id))
       if (idx !== -1) {
-        daftarSantri[idx] = { id: parseInt(id), nis, nama, kelas, foto: fotoFinal }
+        daftarSantri[idx] = { id: parseInt(id), nis, nama, kelas, gender, foto: fotoFinal }
       }
     } else {
-      daftarSantri.push({ id: Date.now(), nis, nama, kelas, foto: fotoFinal })
+      daftarSantri.push({ id: Date.now(), nis, nama, kelas, gender, foto: fotoFinal })
     }
     simpanSemuaData()
     resetFormSantri()
@@ -1199,6 +1306,7 @@ function editSantri(id) {
   document.getElementById('santriNis').value = santri.nis
   document.getElementById('santriNama').value = santri.nama
   document.getElementById('santriKelas').value = santri.kelas
+  document.getElementById('santriGender').value = santri.gender || 'Putra'
   document.getElementById('santriFotoLama').value = santri.foto || ''
   document.getElementById('santriFileFoto').value = ''
   document.getElementById('btnSimpanSantri').innerText = 'Perbarui Data Santri'
@@ -1225,9 +1333,12 @@ function hapusSantri(id) {
 function bukaSmartCard(id) {
   const s = daftarSantri.find(item => item.id === id)
   if (!s) return
+  document.getElementById('cardNamaPondok').innerText = profilPondok.nama.toUpperCase()
+  document.getElementById('cardLogoPondok').src = profilPondok.logo
   document.getElementById('cardNamaSantri').innerText = s.nama
   document.getElementById('cardNisSantri').innerText = 'NIS: ' + s.nis
   document.getElementById('cardKelasSantri').innerText = 'Kelas: ' + s.kelas
+  document.getElementById('cardGenderSantri').innerText = 'Gender: ' + (s.gender || 'Putra')
   document.getElementById('cardFotoSantri').src = s.foto || `https://ui-avatars.com/api/?name=${encodeURIComponent(s.nama)}`
   document.getElementById('cardQrGambar').src = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(s.nis)}`
   document.getElementById('modalSmartCard').style.display = 'flex'
@@ -1296,12 +1407,15 @@ function muatDaftarSesiSholat() {
       ? '<span class="status-pill closed">Ditutup</span>'
       : '<span class="status-pill open">Terbuka</span>'
 
-    const tombolTutupText = sesi.ditutup ? 'Buka Sesi' : 'Tutup Sesi'
+    const tombolTutupText = sesi.ditutup ? 'Buka' : 'Tutup'
     const tombolTutupClass = sesi.ditutup ? 'btn-secondary' : 'btn-danger'
 
-    let editTombol = ''
+    let tombolAdmin = ''
     if (isAdmin) {
-      editTombol = `<button class="btn btn-warning" style="padding: 4px 10px; font-size: 11.5px;" onclick="bukaFormEditSholat(${sesi.id})">Edit</button>`
+      tombolAdmin = `
+        <button class="btn btn-warning" style="padding: 4px 8px; font-size: 11px;" onclick="bukaFormEditSholat(${sesi.id})">Edit</button>
+        <button class="btn btn-info" style="padding: 4px 8px; font-size: 11px;" onclick="bukaModalKelolaKehadiran('Sholat', '${sesi.nama}')">Izin/Sakit</button>
+      `
     }
 
     card.innerHTML = `
@@ -1313,9 +1427,9 @@ function muatDaftarSesiSholat() {
         <div class="session-time" style="margin-top: 4px;">Batas Waktu: <strong>${sesi.batas} WIB</strong></div>
       </div>
       <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-        <button class="btn btn-primary" style="flex: 1; padding: 6px 10px; font-size: 12px;" onclick="pilihSesiSholatScanner(${sesi.id})">Buka Kamera</button>
-        <button class="btn ${tombolTutupClass}" style="padding: 6px 10px; font-size: 12px;" onclick="toggleTutupSesiSholat(${sesi.id})">${tombolTutupText}</button>
-        ${editTombol}
+        <button class="btn btn-primary" style="flex: 1; padding: 6px 10px; font-size: 11.5px;" onclick="pilihSesiSholatScanner(${sesi.id})">Buka Kamera</button>
+        <button class="btn ${tombolTutupClass}" style="padding: 6px 8px; font-size: 11.5px;" onclick="toggleTutupSesiSholat(${sesi.id})">${tombolTutupText}</button>
+        ${tombolAdmin}
       </div>
     `
     container.appendChild(card)
@@ -1380,12 +1494,18 @@ function pilihSesiSholatScanner(id) {
   el.innerText = sesi.ditutup ? 'Ditutup' : 'Terbuka'
   document.getElementById('areaScanSholat').style.display = 'block'
 
-  hentikanScanner()
-  pemindaiAktif = new Html5QrcodeScanner('readerSholat', {
-    fps: 10,
-    qrbox: { width: 220, height: 220 }
+  hentikanScanner(function() {
+    pemindaiAktif = new Html5QrcodeScanner(
+      'readerSholat',
+      {
+        fps: 10,
+        qrbox: { width: 220, height: 220 },
+        facingMode: 'environment'
+      },
+      false
+    )
+    pemindaiAktif.render(prosesScanSholat, function(err) {})
   })
-  pemindaiAktif.render(prosesScanSholat)
 }
 
 function prosesScanSholat(decodedText) {
@@ -1413,6 +1533,7 @@ function prosesScanSholat(decodedText) {
     id: Date.now(),
     santriId: santri.id,
     santriNama: santri.nama,
+    santriKelas: santri.kelas,
     tanggal: tanggalHariIni,
     jam: jamNow,
     kategori: 'Sholat',
@@ -1427,6 +1548,7 @@ function prosesScanSholat(decodedText) {
     jam: jamNow,
     nis: santri.nis,
     nama: santri.nama,
+    kelas: santri.kelas,
     kategori: 'Sholat',
     sesi: sesi.nama,
     status: statusKehadiran
@@ -1436,7 +1558,7 @@ function prosesScanSholat(decodedText) {
   kotak.innerHTML = `
     <img src="${santri.foto || 'https://via.placeholder.com/100'}" class="santri-photo" alt="Foto">
     <h3 style="font-size: 16px; margin-bottom: 2px;">${santri.nama}</h3>
-    <div style="font-size: 12.5px; color: var(--text-muted);">NIS: ${santri.nis} | Kelas: ${santri.kelas}</div>
+    <div style="font-size: 12.5px; color: var(--text-muted);">NIS: ${santri.nis} | Kelas: ${santri.kelas} (${santri.gender || 'Putra'})</div>
     <div style="font-size: 12.5px; margin: 8px 0;">Jam Presensi: <strong>${jamNow} WIB</strong></div>
     <span class="badge-scan ${badgeClass}">${statusKehadiran}</span>
   `
@@ -1455,14 +1577,15 @@ function muatDaftarSesiKegiatan() {
       ? '<span class="status-pill closed">Ditutup</span>'
       : '<span class="status-pill open">Terbuka</span>'
 
-    const tombolTutupText = k.ditutup ? 'Buka Sesi' : 'Tutup Sesi'
+    const tombolTutupText = k.ditutup ? 'Buka' : 'Tutup'
     const tombolTutupClass = k.ditutup ? 'btn-secondary' : 'btn-danger'
 
     let adminAction = ''
     if (isAdmin) {
       adminAction = `
-        <button class="btn btn-warning" style="padding: 4px 8px; font-size: 11.5px;" onclick="bukaFormEditKegiatan(${k.id})">Edit</button>
-        <button class="btn btn-danger" style="padding: 4px 8px; font-size: 11.5px;" onclick="hapusKegiatan(${k.id})">Hapus</button>
+        <button class="btn btn-warning" style="padding: 4px 6px; font-size: 11px;" onclick="bukaFormEditKegiatan(${k.id})">Edit</button>
+        <button class="btn btn-info" style="padding: 4px 6px; font-size: 11px;" onclick="bukaModalKelolaKehadiran('Kegiatan', '${k.nama}')">Izin/Sakit</button>
+        <button class="btn btn-danger" style="padding: 4px 6px; font-size: 11px;" onclick="hapusKegiatan(${k.id})">Hapus</button>
       `
     }
 
@@ -1474,8 +1597,8 @@ function muatDaftarSesiKegiatan() {
         </div>
       </div>
       <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-        <button class="btn btn-primary" style="flex: 1; padding: 6px 10px; font-size: 12px;" onclick="pilihKegiatanScanner(${k.id})">Buka Kamera</button>
-        <button class="btn ${tombolTutupClass}" style="padding: 6px 10px; font-size: 12px;" onclick="toggleTutupSesiKegiatan(${k.id})">${tombolTutupText}</button>
+        <button class="btn btn-primary" style="flex: 1; padding: 6px 10px; font-size: 11.5px;" onclick="pilihKegiatanScanner(${k.id})">Buka Kamera</button>
+        <button class="btn ${tombolTutupClass}" style="padding: 6px 8px; font-size: 11.5px;" onclick="toggleTutupSesiKegiatan(${k.id})">${tombolTutupText}</button>
         ${adminAction}
       </div>
     `
@@ -1556,12 +1679,18 @@ function pilihKegiatanScanner(id) {
   el.innerText = k.ditutup ? 'Ditutup' : 'Terbuka'
   document.getElementById('areaScanKegiatan').style.display = 'block'
 
-  hentikanScanner()
-  pemindaiAktif = new Html5QrcodeScanner('readerKegiatan', {
-    fps: 10,
-    qrbox: { width: 220, height: 220 }
+  hentikanScanner(function() {
+    pemindaiAktif = new Html5QrcodeScanner(
+      'readerKegiatan',
+      {
+        fps: 10,
+        qrbox: { width: 220, height: 220 },
+        facingMode: 'environment'
+      },
+      false
+    )
+    pemindaiAktif.render(prosesScanKegiatan, function(err) {})
   })
-  pemindaiAktif.render(prosesScanKegiatan)
 }
 
 function prosesScanKegiatan(decodedText) {
@@ -1586,6 +1715,7 @@ function prosesScanKegiatan(decodedText) {
     id: Date.now(),
     santriId: santri.id,
     santriNama: santri.nama,
+    santriKelas: santri.kelas,
     tanggal: tanggalHariIni,
     jam: jamNow,
     kategori: 'Kegiatan',
@@ -1600,6 +1730,7 @@ function prosesScanKegiatan(decodedText) {
     jam: jamNow,
     nis: santri.nis,
     nama: santri.nama,
+    kelas: santri.kelas,
     kategori: 'Kegiatan',
     sesi: k.nama,
     status: statusKehadiran
@@ -1609,16 +1740,109 @@ function prosesScanKegiatan(decodedText) {
   kotak.innerHTML = `
     <img src="${santri.foto || 'https://via.placeholder.com/100'}" class="santri-photo" alt="Foto">
     <h3 style="font-size: 16px; margin-bottom: 2px;">${santri.nama}</h3>
-    <div style="font-size: 12.5px; color: var(--text-muted);">NIS: ${santri.nis} | Kelas: ${santri.kelas}</div>
+    <div style="font-size: 12.5px; color: var(--text-muted);">NIS: ${santri.nis} | Kelas: ${santri.kelas} (${santri.gender || 'Putra'})</div>
     <div style="font-size: 12.5px; margin: 8px 0;">Jam Presensi: <strong>${jamNow} WIB</strong></div>
     <span class="badge-scan ${badgeClass}">${statusKehadiran}</span>
   `
 }
 
-function hentikanScanner() {
+function bukaModalKelolaKehadiran(kategori, namaSesi) {
+  const tanggalHariIni = new Date().toISOString().split('T')[0]
+  sesiKelolaSedangDipilih = { kategori: kategori, namaSesi: namaSesi, tanggal: tanggalHariIni }
+
+  document.getElementById('modalKelolaJudul').innerText = 'Kelola Presensi: ' + namaSesi
+  document.getElementById('modalKelolaSub').innerText = 'Kategori ' + kategori + ' | Tanggal: ' + tanggalHariIni
+
+  const tbody = document.getElementById('tabelModalKelolaBody')
+  tbody.innerHTML = ''
+
+  daftarSantri.forEach(s => {
+    const dataAbsen = daftarAbsensi.find(a => a.santriId === s.id && a.tanggal === tanggalHariIni && a.sesi === namaSesi && a.kategori === kategori)
+    const statusSekarang = dataAbsen ? dataAbsen.status : 'Belum'
+
+    const tr = document.createElement('tr')
+    tr.innerHTML = `
+      <td><strong>${s.nama}</strong><br><small style="color:#64748b;">NIS: ${s.nis}</small></td>
+      <td>${s.kelas}</td>
+      <td>
+        <select class="form-select" id="selectStatus_${s.id}" style="padding: 6px 10px; font-size: 12.5px;">
+          <option value="Belum" ${statusSekarang === 'Belum' ? 'selected' : ''}>Belum Presensi</option>
+          <option value="Hadir" ${statusSekarang === 'Hadir' ? 'selected' : ''}>Hadir</option>
+          <option value="Terlambat" ${statusSekarang === 'Terlambat' ? 'selected' : ''}>Terlambat</option>
+          <option value="Izin" ${statusSekarang === 'Izin' ? 'selected' : ''}>Izin</option>
+          <option value="Sakit" ${statusSekarang === 'Sakit' ? 'selected' : ''}>Sakit</option>
+          <option value="Alpa" ${statusSekarang === 'Alpa' ? 'selected' : ''}>Alpa</option>
+        </select>
+      </td>
+    `
+    tbody.appendChild(tr)
+  })
+
+  document.getElementById('modalKelolaKehadiran').style.display = 'flex'
+}
+
+function tutupModalKelolaKehadiran() {
+  document.getElementById('modalKelolaKehadiran').style.display = 'none'
+  sesiKelolaSedangDipilih = null
+}
+
+function simpanPerubahanKehadiranSesi() {
+  if (!sesiKelolaSedangDipilih) return
+  const now = new Date()
+  const jamNow = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0')
+  const { kategori, namaSesi, tanggal } = sesiKelolaSedangDipilih
+
+  daftarSantri.forEach(s => {
+    const el = document.getElementById('selectStatus_' + s.id)
+    if (!el) return
+    const statusDipilih = el.value
+
+    if (statusDipilih === 'Belum') {
+      daftarAbsensi = daftarAbsensi.filter(a => !(a.santriId === s.id && a.tanggal === tanggal && a.sesi === namaSesi && a.kategori === kategori))
+    } else {
+      daftarAbsensi = daftarAbsensi.filter(a => !(a.santriId === s.id && a.tanggal === tanggal && a.sesi === namaSesi && a.kategori === kategori))
+      daftarAbsensi.push({
+        id: Date.now() + Math.random(),
+        santriId: s.id,
+        santriNama: s.nama,
+        santriKelas: s.kelas,
+        tanggal: tanggal,
+        jam: jamNow,
+        kategori: kategori,
+        sesi: namaSesi,
+        status: statusDipilih
+      })
+
+      kirimKeGoogleSheets({
+        tanggal: tanggal,
+        jam: jamNow,
+        nis: s.nis,
+        nama: s.nama,
+        kelas: s.kelas,
+        kategori: kategori,
+        sesi: namaSesi,
+        status: statusDipilih
+      })
+    }
+  })
+
+  simpanSemuaData()
+  perbaruiDasbor()
+  tutupModalKelolaKehadiran()
+  alert('Data kehadiran sesi berhasil disimpan dan dikirim ke Google Sheets.')
+}
+
+function hentikanScanner(callback) {
   if (pemindaiAktif) {
-    pemindaiAktif.clear().catch(() => {})
-    pemindaiAktif = null
+    pemindaiAktif.clear().then(() => {
+      pemindaiAktif = null
+      if (callback) callback()
+    }).catch(() => {
+      pemindaiAktif = null
+      if (callback) callback()
+    })
+  } else {
+    if (callback) callback()
   }
 }
 
@@ -1629,6 +1853,18 @@ function muatDropdownSantriRekap() {
     const opt = document.createElement('option')
     opt.value = s.id
     opt.innerText = s.nama
+    select.appendChild(opt)
+  })
+}
+
+function muatDropdownKelasRekap() {
+  const select = document.getElementById('rekapKelas')
+  select.innerHTML = '<option value="semua">Semua Kelas</option>'
+  const kelasUnik = [...new Set(daftarSantri.map(s => s.kelas))].filter(Boolean)
+  kelasUnik.forEach(k => {
+    const opt = document.createElement('option')
+    opt.value = k
+    opt.innerText = 'Kelas: ' + k
     select.appendChild(opt)
   })
 }
@@ -1661,6 +1897,7 @@ function perbaruiFilterSesiDanRekap() {
 function muatDataRekap() {
   const kategori = document.getElementById('rekapKategori').value
   const sesi = document.getElementById('rekapSesi').value
+  const kelas = document.getElementById('rekapKelas').value
   const rentang = document.getElementById('rekapRentang').value
   const santriId = document.getElementById('rekapSantri').value
 
@@ -1669,18 +1906,24 @@ function muatDataRekap() {
     let lolosKategori = kategori === 'semua' || item.kategori === kategori
     let lolosSesi = sesi === 'semua' || item.sesi === sesi
     let lolosSantri = santriId === 'semua' || item.santriId === parseInt(santriId)
-    let lolosRentang = true
 
+    const santriObj = daftarSantri.find(s => s.id === item.santriId)
+    const santriKelas = item.santriKelas || (santriObj ? santriObj.kelas : '')
+    let lolosKelas = kelas === 'semua' || santriKelas === kelas
+
+    let lolosRentang = true
     if (rentang !== 'semua') {
       const tglItem = new Date(item.tanggal)
       const diffHari = (now - tglItem) / (1000 * 60 * 60 * 24)
       lolosRentang = diffHari <= parseInt(rentang) && diffHari >= 0
     }
-    return lolosKategori && lolosSesi && lolosSantri && lolosRentang
+    return lolosKategori && lolosSesi && lolosSantri && lolosKelas && lolosRentang
   })
 
   let hadirCount = 0
   let terlambatCount = 0
+  let izinCount = 0
+  let sakitCount = 0
 
   const tbody = document.getElementById('tabelRekapBody')
   tbody.innerHTML = ''
@@ -1690,22 +1933,37 @@ function muatDataRekap() {
   hasil.forEach(r => {
     if (r.status === 'Hadir') hadirCount++
     if (r.status === 'Terlambat') terlambatCount++
+    if (r.status === 'Izin') izinCount++
+    if (r.status === 'Sakit') sakitCount++
 
-    const badge = r.status === 'Hadir' ? 'badge-hadir' : 'badge-terlambat'
+    let badgeClass = 'badge-hadir'
+    if (r.status === 'Terlambat') badgeClass = 'badge-terlambat'
+    if (r.status === 'Izin') badgeClass = 'badge-izin'
+    if (r.status === 'Sakit') badgeClass = 'badge-sakit'
+    if (r.status === 'Alpa') badgeClass = 'badge-alpa'
+
+    const santriObj = daftarSantri.find(s => s.id === r.santriId)
+    const namaKelas = r.santriKelas || (santriObj ? santriObj.kelas : '-')
+    const nisSantri = santriObj ? santriObj.nis : '-'
+
     const tr = document.createElement('tr')
     tr.innerHTML = `
       <td>${r.tanggal}</td>
       <td>${r.jam || '-'} WIB</td>
-      <td><strong>${r.santriNama}</strong></td>
+      <td><strong>${nisSantri}</strong></td>
+      <td>${r.santriNama}</td>
+      <td>${namaKelas}</td>
       <td>${r.kategori}</td>
       <td>${r.sesi}</td>
-      <td><span class="badge-scan ${badge}">${r.status}</span></td>
+      <td><span class="badge-scan ${badgeClass}">${r.status}</span></td>
     `
     tbody.appendChild(tr)
   })
 
   document.getElementById('rekapHadir').innerText = hadirCount
   document.getElementById('rekapTerlambat').innerText = terlambatCount
+  document.getElementById('rekapIzin').innerText = izinCount
+  document.getElementById('rekapSakit').innerText = sakitCount
 }
 
 function muatTabelPengguna() {
@@ -1776,6 +2034,7 @@ function hapusPengguna(id) {
   }
 }
 
+terapkanProfilPondok()
 periksaStatusLogin()
 </script>
 </body>
