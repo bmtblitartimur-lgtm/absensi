@@ -877,6 +877,7 @@ body {
                 <th>Foto</th>
                 <th>NIS</th>
                 <th>Nama Lengkap</th>
+                <th>Nama Anak / Panggilan</th>
                 <th>Kelas</th>
                 <th>Gender</th>
                 <th>Smartcard</th>
@@ -952,6 +953,7 @@ body {
                     <th>Waktu</th>
                     <th>NIS</th>
                     <th>Nama Santri</th>
+                    <th>Nama Anak</th>
                     <th>Kelas</th>
                     <th>Status</th>
                   </tr>
@@ -1027,6 +1029,7 @@ body {
                     <th>Waktu</th>
                     <th>NIS</th>
                     <th>Nama Santri</th>
+                    <th>Nama Anak</th>
                     <th>Kelas</th>
                     <th>Status</th>
                   </tr>
@@ -1073,6 +1076,7 @@ body {
                 <th>Waktu</th>
                 <th>NIS</th>
                 <th>Nama Santri</th>
+                <th>Nama Anak</th>
                 <th>Kelas</th>
                 <th>Sesi Shalat</th>
                 <th>Status</th>
@@ -1080,6 +1084,28 @@ body {
             </thead>
             <tbody id="tabelRekapSholatBody"></tbody>
           </table>
+        </div>
+        <!-- Roster / Per-Student Summary Matrix for Class Selection -->
+        <div id="wrapRosterRekapSholat" style="margin-top: 24px; display: none;">
+          <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 10px; color: rgb(15, 23, 42);" id="judulRosterRekapSholat">Ringkasan Kehadiran per Anak di Kelas</h4>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>NIS</th>
+                  <th>Nama Santri</th>
+                  <th>Nama Anak / Panggilan</th>
+                  <th>Kelas</th>
+                  <th>Hadir</th>
+                  <th>Terlambat</th>
+                  <th>Izin</th>
+                  <th>Sakit</th>
+                  <th>Alpa</th>
+                </tr>
+              </thead>
+              <tbody id="tabelRosterRekapSholatBody"></tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -1118,6 +1144,7 @@ body {
                 <th>Waktu</th>
                 <th>NIS</th>
                 <th>Nama Santri</th>
+                <th>Nama Anak</th>
                 <th>Kelas</th>
                 <th>Kegiatan</th>
                 <th>Status</th>
@@ -1125,6 +1152,27 @@ body {
             </thead>
             <tbody id="tabelRekapKegiatanBody"></tbody>
           </table>
+        </div>
+        <div id="wrapRosterRekapKegiatan" style="margin-top: 24px; display: none;">
+          <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 10px; color: rgb(15, 23, 42);" id="judulRosterRekapKegiatan">Ringkasan Kehadiran per Anak di Kelas</h4>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>NIS</th>
+                  <th>Nama Santri</th>
+                  <th>Nama Anak / Panggilan</th>
+                  <th>Kelas</th>
+                  <th>Hadir</th>
+                  <th>Terlambat</th>
+                  <th>Izin</th>
+                  <th>Sakit</th>
+                  <th>Alpa</th>
+                </tr>
+              </thead>
+              <tbody id="tabelRosterRekapKegiatanBody"></tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -1202,6 +1250,29 @@ body {
             </thead>
             <tbody id="tabelPersentaseBody"></tbody>
           </table>
+        </div>
+
+        <!-- Roster / Per-Student Summary Matrix for Class Selection in Percentage View -->
+        <div id="wrapRosterPersen" style="margin-top: 24px;">
+          <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 10px; color: rgb(15, 23, 42);" id="judulRosterPersen">Ringkasan Kehadiran per Anak</h4>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>NIS</th>
+                  <th>Nama Santri</th>
+                  <th>Nama Anak / Panggilan</th>
+                  <th>Kelas</th>
+                  <th>Hadir</th>
+                  <th>Terlambat</th>
+                  <th>Izin</th>
+                  <th>Sakit</th>
+                  <th>Alpa</th>
+                </tr>
+              </thead>
+              <tbody id="tabelRosterPersenBody"></tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -1302,6 +1373,10 @@ body {
       <div class="form-group">
         <label class="form-label">Nama Lengkap Santri</label>
         <input type="text" class="form-input" id="santriNama" placeholder="Nama lengkap santri" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Nama Panggilan / Anak</label>
+        <input type="text" class="form-input" id="santriNamaPanggilan" placeholder="Contoh: Udin">
       </div>
       <div class="form-group">
         <label class="form-label">Tingkat Kelas</label>
@@ -1492,9 +1567,9 @@ var daftarPengguna = [
 ];
 
 var daftarSantri = [
-  { id: 1, nis: '2026001', nama: 'Ahmad Dahlan', kelas: '1 Diniyah', gender: 'Putra', foto: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150' },
-  { id: 2, nis: '2026002', nama: 'Muhammad Ikhsan', kelas: '2 Wustha', gender: 'Putra', foto: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=150' },
-  { id: 3, nis: '2026003', nama: 'Fatimah Az Zahra', kelas: '1 Diniyah', gender: 'Putri', foto: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150' }
+  { id: 1, nis: '2026001', nama: 'Ahmad Dahlan', namaPanggilan: 'Dahlan', kelas: '1 Diniyah', gender: 'Putra', foto: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150' },
+  { id: 2, nis: '2026002', nama: 'Muhammad Ikhsan', namaPanggilan: 'Ikhsan', kelas: '2 Wustha', gender: 'Putra', foto: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=150' },
+  { id: 3, nis: '2026003', nama: 'Fatimah Az Zahra', namaPanggilan: 'Fatimah', kelas: '1 Diniyah', gender: 'Putri', foto: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150' }
 ];
 
 var daftarSesiSholat = [
@@ -1608,10 +1683,8 @@ function updateJamLive() {
   var sekarang = new Date();
   var opsiTgl = { day: 'numeric', month: 'long', year: 'numeric' };
   var teksTgl = sekarang.toLocaleDateString('id-ID', opsiTgl);
-  var jam = String(nowHourOrReal()).padStart(2, '0');
-  var now = new Date();
-  var h = String(now.getHours()).padStart(2, '0');
-  var m = String(now.getMinutes()).padStart(2, '0');
+  var h = String(sekarang.getHours()).padStart(2, '0');
+  var m = String(sekarang.getMinutes()).padStart(2, '0');
   var el = document.getElementById('liveClockWidget');
   if (el) el.innerText = teksTgl + ' | ' + h + ':' + m;
 }
@@ -1892,6 +1965,7 @@ function bukaModalEditSantri(id) {
   document.getElementById('santriId').value = santri.id;
   document.getElementById('santriNis').value = santri.nis;
   document.getElementById('santriNama').value = santri.nama;
+  document.getElementById('santriNamaPanggilan').value = santri.namaPanggilan || '';
   document.getElementById('santriKelas').value = santri.kelas;
   document.getElementById('santriGender').value = santri.gender || 'Putra';
   document.getElementById('santriFotoLama').value = santri.foto || '';
@@ -1910,6 +1984,7 @@ function simpanSantri(event) {
   var id = document.getElementById('santriId').value;
   var nis = document.getElementById('santriNis').value.trim();
   var nama = document.getElementById('santriNama').value.trim();
+  var namaPanggilan = document.getElementById('santriNamaPanggilan').value.trim();
   var kelas = document.getElementById('santriKelas').value.trim();
   var gender = document.getElementById('santriGender').value;
   var fotoLama = document.getElementById('santriFotoLama').value;
@@ -1920,10 +1995,10 @@ function simpanSantri(event) {
     if (id) {
       var idx = daftarSantri.findIndex(function(s) { return s.id === parseInt(id); });
       if (idx !== -1) {
-        daftarSantri[idx] = { id: parseInt(id), nis: nis, nama: nama, kelas: kelas, gender: gender, foto: fotoFinal };
+        daftarSantri[idx] = { id: parseInt(id), nis: nis, nama: nama, namaPanggilan: namaPanggilan, kelas: kelas, gender: gender, foto: fotoFinal };
       }
     } else {
-      daftarSantri.push({ id: Date.now(), nis: nis, nama: nama, kelas: kelas, gender: gender, foto: fotoFinal });
+      daftarSantri.push({ id: Date.now(), nis: nis, nama: nama, namaPanggilan: namaPanggilan, kelas: kelas, gender: gender, foto: fotoFinal });
     }
     db.ref('santri').set(daftarSantri);
     tutupModalSantri();
@@ -1952,6 +2027,7 @@ function muatTabelSantri() {
       '<td><img src="' + foto + '" style="width:34px;height:34px;border-radius:50%;object-fit:cover;"></td>' +
       '<td><strong>' + s.nis + '</strong></td>' +
       '<td>' + s.nama + '</td>' +
+      '<td>' + (s.namaPanggilan || '-') + '</td>' +
       '<td>' + s.kelas + '</td>' +
       '<td>' + (s.gender || 'Putra') + '</td>' +
       '<td><button class="btn btn-info" style="padding: 4px 10px; font-size: 11px;" onclick="bukaSmartCard(' + s.id + ')">Lihat Smartcard</button></td>' +
@@ -2120,7 +2196,7 @@ function muatTabelHadirSholatDetail(namaSesi) {
     return a.kategori === 'Sholat' && a.sesi === namaSesi && a.tanggal === today;
   });
   if (dataHariIni.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:rgb(148, 163, 184); padding:16px;">Belum ada santri yang absen pada sesi ini hari ini.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:rgb(148, 163, 184); padding:16px;">Belum ada santri yang absen pada sesi ini hari ini.</td></tr>';
     return;
   }
 
@@ -2131,11 +2207,15 @@ function muatTabelHadirSholatDetail(namaSesi) {
     if (r.status === 'Sakit') badgeClass = 'badge-sakit';
     if (r.status === 'Alpa') badgeClass = 'badge-alpa';
 
+    var santriObj = daftarSantri.find(function(s) { return s.id === r.santriId; });
+    var namaPanggilan = r.santriNamaPanggilan || (santriObj ? santriObj.namaPanggilan : '-');
+
     var tr = document.createElement('tr');
     tr.innerHTML = '' +
       '<td>' + (r.jam || '-') + ' WIB</td>' +
       '<td><strong>' + (r.nis || '-') + '</strong></td>' +
       '<td>' + r.santriNama + '</td>' +
+      '<td>' + (namaPanggilan || '-') + '</td>' +
       '<td>' + (r.santriKelas || '-') + '</td>' +
       '<td><span class="badge-scan ' + badgeClass + '">' + r.status + '</span></td>';
     tbody.appendChild(tr);
@@ -2298,6 +2378,7 @@ function prosesScanSholat(decodedText) {
     id: Date.now(),
     santriId: santri.id,
     santriNama: santri.nama,
+    santriNamaPanggilan: santri.namaPanggilan || '',
     santriKelas: santri.kelas,
     tanggal: tanggalHariIni,
     jam: jamNow,
@@ -2410,7 +2491,7 @@ function muatTabelHadirKegiatanDetail(namaKegiatan) {
     return a.kategori === 'Kegiatan' && a.sesi === namaKegiatan && a.tanggal === today;
   });
   if (dataHariIni.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:rgb(148, 163, 184); padding:16px;">Belum ada santri yang absen pada kegiatan ini hari ini.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:rgb(148, 163, 184); padding:16px;">Belum ada santri yang absen pada kegiatan ini hari ini.</td></tr>';
     return;
   }
 
@@ -2421,11 +2502,15 @@ function muatTabelHadirKegiatanDetail(namaKegiatan) {
     if (r.status === 'Sakit') badgeClass = 'badge-sakit';
     if (r.status === 'Alpa') badgeClass = 'badge-alpa';
 
+    var santriObj = daftarSantri.find(function(s) { return s.id === r.santriId; });
+    var namaPanggilan = r.santriNamaPanggilan || (santriObj ? santriObj.namaPanggilan : '-');
+
     var tr = document.createElement('tr');
     tr.innerHTML = '' +
       '<td>' + (r.jam || '-') + ' WIB</td>' +
       '<td><strong>' + (r.nis || '-') + '</strong></td>' +
       '<td>' + r.santriNama + '</td>' +
+      '<td>' + (namaPanggilan || '-') + '</td>' +
       '<td>' + (r.santriKelas || '-') + '</td>' +
       '<td><span class="badge-scan ' + badgeClass + '">' + r.status + '</span></td>';
     tbody.appendChild(tr);
@@ -2583,6 +2668,7 @@ function prosesScanKegiatan(decodedText) {
     id: Date.now(),
     santriId: santri.id,
     santriNama: santri.nama,
+    santriNamaPanggilan: santri.namaPanggilan || '',
     santriKelas: santri.kelas,
     tanggal: tanggalHariIni,
     jam: jamNow,
@@ -2715,6 +2801,7 @@ function simpanPerubahanKehadiranSesi() {
         id: Date.now() + Math.random(),
         santriId: s.id,
         santriNama: s.nama,
+        santriNamaPanggilan: s.namaPanggilan || '',
         santriKelas: s.kelas,
         tanggal: tanggal,
         jam: jamNow,
@@ -2739,10 +2826,9 @@ function simpanPerubahanKehadiranSesi() {
 
 function cekRentangTgl(tglItemStr, mulaiStr, sampaiStr) {
   if (!tglItemStr) return false;
-  var itemD = tglItemStr;
   var match = true;
-  if (mulaiStr && itemD < mulaiStr) match = false;
-  if (sampaiStr && itemD > sampaiStr) match = false;
+  if (mulaiStr && tglItemStr < mulaiStr) match = false;
+  if (sampaiStr && tglItemStr > sampaiStr) match = false;
   return match;
 }
 
@@ -2764,6 +2850,50 @@ function isiFilterRekapSholat() {
     opt.value = k;
     opt.innerText = k;
     selKelas.appendChild(opt);
+  });
+}
+
+function renderRoster(kelasDipilih, tbodyId, wrapId) {
+  var wrap = document.getElementById(wrapId);
+  var tbody = document.getElementById(tbodyId);
+  if (!wrap || !tbody) return;
+
+  if (kelasDipilih === 'semua') {
+    wrap.style.display = 'none';
+    return;
+  }
+  wrap.style.display = 'block';
+  tbody.innerHTML = '';
+
+  var santriKelasIni = daftarSantri.filter(function(s) { return s.kelas === kelasDipilih; });
+  if (santriKelasIni.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; color:#94a3b8; padding:12px;">Tidak ada santri di kelas ini.</td></tr>';
+    return;
+  }
+
+  santriKelasIni.forEach(function(s) {
+    var absSantri = daftarAbsensi.filter(function(a) { return a.santriId === s.id; });
+    var h = 0, t = 0, iz = 0, sak = 0, alp = 0;
+    absSantri.forEach(function(a) {
+      if (a.status === 'Hadir') h++;
+      else if (a.status === 'Terlambat') t++;
+      else if (a.status === 'Izin') iz++;
+      else if (a.status === 'Sakit') sak++;
+      else if (a.status === 'Alpa') alp++;
+    });
+
+    var tr = document.createElement('tr');
+    tr.innerHTML = '' +
+      '<td><strong>' + s.nis + '</strong></td>' +
+      '<td>' + s.nama + '</td>' +
+      '<td>' + (s.namaPanggilan || '-') + '</td>' +
+      '<td>' + s.kelas + '</td>' +
+      '<td><span class="badge-scan badge-hadir">' + h + '</span></td>' +
+      '<td><span class="badge-scan badge-terlambat">' + t + '</span></td>' +
+      '<td><span class="badge-scan badge-izin">' + iz + '</span></td>' +
+      '<td><span class="badge-scan badge-sakit">' + sak + '</span></td>' +
+      '<td><span class="badge-scan badge-alpa">' + alp + '</span></td>';
+    tbody.appendChild(tr);
   });
 }
 
@@ -2799,6 +2929,7 @@ function muatDataRekapSholat() {
     var santriObj = daftarSantri.find(function(s) { return s.id === r.santriId; });
     var namaKelas = r.santriKelas || (santriObj ? santriObj.kelas : '-');
     var nisSantri = santriObj ? santriObj.nis : '-';
+    var namaPanggilan = r.santriNamaPanggilan || (santriObj ? santriObj.namaPanggilan : '-');
 
     var tr = document.createElement('tr');
     tr.innerHTML = '' +
@@ -2806,11 +2937,14 @@ function muatDataRekapSholat() {
       '<td>' + (r.jam || '-') + ' WIB</td>' +
       '<td><strong>' + nisSantri + '</strong></td>' +
       '<td>' + r.santriNama + '</td>' +
+      '<td>' + (namaPanggilan || '-') + '</td>' +
       '<td>' + namaKelas + '</td>' +
       '<td>' + r.sesi + '</td>' +
       '<td><span class="badge-scan ' + badgeClass + '">' + r.status + '</span></td>';
     tbody.appendChild(tr);
   });
+
+  renderRoster(kelas, 'tabelRosterRekapSholatBody', 'wrapRosterRekapSholat');
 }
 
 function isiFilterRekapKegiatan() {
@@ -2866,6 +3000,7 @@ function muatDataRekapKegiatan() {
     var santriObj = daftarSantri.find(function(s) { return s.id === r.santriId; });
     var namaKelas = r.santriKelas || (santriObj ? santriObj.kelas : '-');
     var nisSantri = santriObj ? santriObj.nis : '-';
+    var namaPanggilan = r.santriNamaPanggilan || (santriObj ? santriObj.namaPanggilan : '-');
 
     var tr = document.createElement('tr');
     tr.innerHTML = '' +
@@ -2873,11 +3008,14 @@ function muatDataRekapKegiatan() {
       '<td>' + (r.jam || '-') + ' WIB</td>' +
       '<td><strong>' + nisSantri + '</strong></td>' +
       '<td>' + r.santriNama + '</td>' +
+      '<td>' + (namaPanggilan || '-') + '</td>' +
       '<td>' + namaKelas + '</td>' +
       '<td>' + r.sesi + '</td>' +
       '<td><span class="badge-scan ' + badgeClass + '">' + r.status + '</span></td>';
     tbody.appendChild(tr);
   });
+
+  renderRoster(kelas, 'tabelRosterRekapKegiatanBody', 'wrapRosterRekapKegiatan');
 }
 
 function isiDropdownKelasPersen() {
@@ -2953,6 +3091,7 @@ function hitungPersentaseKehadiran() {
       '<tr style="background: rgb(248, 250, 252); font-weight:800;"><td>Total Catatan</td><td>' + total + '</td><td>100%</td><td>Kumulatif Kehadiran</td></tr>';
   }
 
+  renderRoster(kelas, 'tabelRosterPersenBody', 'wrapRosterPersen');
   gambarDiagramPersentase(jHadir, jTerlambat, jIzin, jSakit, jAlpa);
 }
 
